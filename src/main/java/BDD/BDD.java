@@ -9,7 +9,7 @@ public class BDD {
 
     public Connection getBDD() throws SQLException {
         this.cnx = DriverManager.getConnection(
-                "jdbc:mysql://localhost:3306/user?serverTimezone=UTC"
+                "jdbc:mysql://localhost:3306/hspjava?serverTimezone=UTC"
                 , "hspjava"
                 , "FK@dAYuHV9AUx89J");
         return cnx;

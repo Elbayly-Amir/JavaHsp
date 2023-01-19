@@ -1,4 +1,5 @@
 package modele;
+import java.sql.SQLException;
 
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
@@ -19,12 +20,13 @@ public class Secretaire {
     }
 public Secretaire(Secretaire s){
 
+
 }
     public Secretaire connexion() throws SQLException {
         Secretaire s = null;
         while(!estConnecte){
 
-            Connection maConnection = DriverManager.getConnection("jdbc:mysql://localhost:3306/hspjava?serverTimezone=UTC","root","");
+            Connection maConnection = DriverManager.getConnection("jdbc:mysql://localhost:3306/hspjava?serverTimezone=UTC","hspjava","FK@dAYuHV9AUx89J");
 
             PreparedStatement maRequete = maConnection.prepareStatement("Select * from secretaire where email=? and mdp=?");
             maRequete.setString(1,email);

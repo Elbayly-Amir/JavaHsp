@@ -1,6 +1,7 @@
 package modele;
 import java.sql.SQLException;
 
+import BDD.BDD;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 
@@ -26,9 +27,10 @@ public Secretaire(Secretaire s){
         Secretaire s = null;
         while(!estConnecte){
 
-            Connection maConnection = DriverManager.getConnection("jdbc:mysql://localhost:3306/hspjava?serverTimezone=UTC","hspjava","FK@dAYuHV9AUx89J");
 
-            PreparedStatement maRequete = maConnection.prepareStatement("Select * from secretaire where email=? and mdp=?");
+            BDD mabdd = new BDD();
+
+            PreparedStatement maRequete = mabdd.getBDD().prepareStatement("Select * from secretaire where email=? and mdp=?");
             maRequete.setString(1,email);
             maRequete.setString(2,mdp);
             ResultSet mesResultats = maRequete.executeQuery();
@@ -47,6 +49,15 @@ public Secretaire(Secretaire s){
         }
         return s;
     }
+    public void ajoutSecretaire()  throws SQLException {
+        BDD mabdd = new BDD();
+        PreparedStatement maRequete = mabdd.getBDD().prepareStatement("INSERT INTO gestionnaire (email,mdp) VALUES (?,?)");
+        maRequete.setString(1,email);
+        maRequete.setString(2,mdp);
+        int mesResultats = maRequete.executeUpdate();
+
+    }
+
     public int getId_secretaire() {
         return id_secretaire;
     }

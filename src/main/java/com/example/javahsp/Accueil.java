@@ -6,13 +6,20 @@ import javafx.fxml.FXML;
 public class Accueil {
 
     @FXML
+    void admin(ActionEvent event) {
+        CoAdmin cad = new CoAdmin();
+        HelloApplication.changeScene("coAdmin");
+    }
+
+    @FXML
     void gestionnaire(ActionEvent event) {
 
     }
 
     @FXML
     void medecin(ActionEvent event) {
-
+        ConnexionMedecin cm = new ConnexionMedecin();
+        HelloApplication.changeScene("connexionMedecin");
     }
 
     @FXML

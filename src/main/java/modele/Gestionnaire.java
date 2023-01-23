@@ -1,5 +1,6 @@
 package modele;
 
+import BDD.BDD;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 
@@ -19,47 +20,42 @@ public class Gestionnaire {
         this.mdp = mdp;
     }
 
-    public Gestionnaire(Gestionnaire g){
+    public Gestionnaire(Gestionnaire g) {
     }
 
     public Gestionnaire connexion() throws SQLException {
         Gestionnaire g = null;
-        while(!estConnecte){
+        while (!estConnecte) {
 
-            Connection maConnection = DriverManager.getConnection("jdbc:mysql://localhost:3306/hspjava?serverTimezone=UTC","hspjava","FK@dAYuHV9AUx89J");
+            BDD madd = new BDD();
 
-            PreparedStatement maRequete = maConnection.prepareStatement("Select * from gestionnaire where email=? and mdp=?");
-            maRequete.setString(1,email);
-            maRequete.setString(2,mdp);
+            PreparedStatement maRequete = madd.getBDD().prepareStatement("Select * from gestionnaire where email=? and mdp=?");
+            maRequete.setString(1, email);
+            maRequete.setString(2, mdp);
             ResultSet mesResultats = maRequete.executeQuery();
 
             TextField email = null;
             TextField mdp = null;
-            if (mesResultats.next()){
+            if (mesResultats.next()) {
                 g = new Gestionnaire(g);
-                g.setId_gestionnaire(1);
                 g.setEmail(mesResultats.getString("email"));
 
                 estConnecte = true;
-            }else{
+            } else {
                 System.out.println("erreur");
             }
         }
         return g;
     }
 
-    public TableView tableView() throws SQLException{
-
-        while(!estConnecte){
-
-            Connection maConnection = DriverManager.getConnection("jdbc:mysql://localhost:3306/hspjava?serverTimezone=UTC","hspjava","FK@dAYuHV9AUx89J");
-
-            PreparedStatement maRequete = maConnection.prepareStatement("Select * from produit where libelle = ? and description = ? and nivDanger=?");
+    public void ajoutGest()  throws SQLException {
+        BDD mabdd = new BDD();
+        PreparedStatement maRequete = mabdd.getBDD().prepareStatement("INSERT INTO gestionnaire (email,mdp) VALUES (?,?)");
+        maRequete.setString(1,email);
+        maRequete.setString(2,mdp);
+        int mesResultats = maRequete.executeUpdate();
 
     }
-
-
-
     public int getId_gestionnaire() {
         return id_gestionnaire;
     }
@@ -99,4 +95,5 @@ public class Gestionnaire {
     public void setMdp(String mdp) {
         this.mdp = mdp;
     }
+
 }

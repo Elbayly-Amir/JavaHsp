@@ -19,7 +19,7 @@ public class ConnexionSecretaire {
 
     @FXML
     void retour(ActionEvent event) {
-
-        HelloApplication.changeScene("Acceuil");
+        Accueil ac = new Accueil();
+        HelloApplication.changeScene("Accueil");
     }
 }

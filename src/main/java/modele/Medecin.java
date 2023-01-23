@@ -1,5 +1,6 @@
 package modele;
 
+import BDD.BDD;
 import javafx.scene.control.TextField;
 
 import java.sql.*;
@@ -28,9 +29,8 @@ public class Medecin {
         Medecin m = null;
         while(!estConnecte){
 
-            Connection maConnection = DriverManager.getConnection("jdbc:mysql://localhost:3306/hspjava?serverTimezone=UTC","hspjava","FK@dAYuHV9AUx89J");
-
-            PreparedStatement maRequete = maConnection.prepareStatement("Select * from medecin where email=? and mdp=?");
+            BDD mabdd = new BDD();
+            PreparedStatement maRequete = mabdd.getBDD().prepareStatement("Select * from medecin where email=? and mdp=?");
             maRequete.setString(1,email);
             maRequete.setString(2,mdp);
             ResultSet mesResultats = maRequete.executeQuery();
@@ -49,7 +49,14 @@ public class Medecin {
         }
         return m;
     }
+    public void ajoutMedecin()  throws SQLException {
+        BDD mabdd = new BDD();
+        PreparedStatement maRequete = mabdd.getBDD().prepareStatement("INSERT INTO medecin (email,mdp) VALUES (?,?)");
+        maRequete.setString(1,email);
+        maRequete.setString(2,mdp);
+        int mesResultats = maRequete.executeUpdate();
 
+    }
 
 
     public int getId_medecin() {

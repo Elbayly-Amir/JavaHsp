@@ -3,6 +3,9 @@ package com.example.javahsp;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.TextField;
+import modele.Secretaire;
+
+import java.sql.SQLException;
 
 public class AjoutSecretaire {
 
@@ -19,7 +22,10 @@ public class AjoutSecretaire {
     private TextField prenomSecretaire;
 
     @FXML
-    void ajoutSecretaire(ActionEvent event) {
-
+    void ajoutSecretaire(ActionEvent event) throws SQLException {
+    Secretaire ajout = new Secretaire(emailSecretaire.getText(), mdpSecretaire.getText());
+    ajout.ajoutSecretaire();
+    System.out.println("utilisateur ajouté !");
+    HelloApplication.changeScene("ajoutSecretaire");
     }
 }

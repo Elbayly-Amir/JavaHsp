@@ -10,7 +10,7 @@
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
-      <module name="JavaHsp" target="0" />
+      <module name="JavaHsp" target="18" />
     </bytecodeTargetLevel>
   </component>
 </project>

@@ -1,5 +1,6 @@
 package modele;
 
+import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 
 import java.sql.*;
@@ -47,6 +48,15 @@ public class Gestionnaire {
         return g;
     }
 
+    public TableView tableView() throws SQLException{
+
+        while(!estConnecte){
+
+            Connection maConnection = DriverManager.getConnection("jdbc:mysql://localhost:3306/hspjava?serverTimezone=UTC","hspjava","FK@dAYuHV9AUx89J");
+
+            PreparedStatement maRequete = maConnection.prepareStatement("Select * from produit where libelle = ? and description = ? and nivDanger=?");
+
+    }
 
 
 

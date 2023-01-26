@@ -7,22 +7,24 @@
 <?import javafx.scene.text.Text?>
 
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.javahsp.ConnexionMedecin">
-   <children>
-      <Text layoutX="197.0" layoutY="98.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Espace Medecin" textAlignment="CENTER" wrappingWidth="206.432861328125">
-         <font>
-            <Font size="24.0" />
-         </font>
-      </Text>
-      <TextField fx:id="emailMedecin" layoutX="209.0" layoutY="200.0" />
-      <TextField fx:id="mdpMedecin" layoutX="210.0" layoutY="277.0" />
-      <Text layoutX="199.0" layoutY="181.0" strokeType="OUTSIDE" strokeWidth="0.0" text="email :" />
-      <Text layoutX="199.0" layoutY="267.0" strokeType="OUTSIDE" strokeWidth="0.0" text="mdp : " />
-      <Button layoutX="216.0" layoutY="336.0" mnemonicParsing="false" onAction="#connexionMedecin" prefHeight="42.0" prefWidth="115.0" text="Connexion">
-         <font>
-            <Font size="14.0" />
-         </font>
-      </Button>
-      <Button layoutX="534.0" layoutY="366.0" mnemonicParsing="false" onAction="#retourMedecin" prefHeight="32.0" prefWidth="62.0" text="retour" />
-   </children>
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="com.example.javahsp.ConnexionMedecin">
+   <Text layoutX="197.0" layoutY="98.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Espace Medecin"
+         textAlignment="CENTER" wrappingWidth="206.432861328125">
+      <font>
+         <Font size="24.0"/>
+      </font>
+   </Text>
+   <TextField fx:id="emailMedecin" layoutX="209.0" layoutY="200.0"/>
+   <TextField fx:id="mdpMedecin" layoutX="210.0" layoutY="277.0"/>
+   <Text layoutX="199.0" layoutY="181.0" strokeType="OUTSIDE" strokeWidth="0.0" text="email :"/>
+   <Text layoutX="199.0" layoutY="267.0" strokeType="OUTSIDE" strokeWidth="0.0" text="mdp : "/>
+   <Button layoutX="216.0" layoutY="336.0" mnemonicParsing="false" onAction="#connexionMedecin" prefHeight="42.0"
+           prefWidth="115.0" text="Connexion">
+      <font>
+         <Font size="14.0"/>
+      </font>
+   </Button>
+   <Button layoutX="534.0" layoutY="366.0" mnemonicParsing="false" onAction="#retourMedecin" prefHeight="32.0"
+           prefWidth="62.0" text="retour"/>
 </AnchorPane>

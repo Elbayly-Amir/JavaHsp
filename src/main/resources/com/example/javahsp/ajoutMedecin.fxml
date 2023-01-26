@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+<AnchorPane xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml"
+            fx:controller="com.example.javahsp.AjoutMedecin"
+            prefHeight="400.0" prefWidth="600.0">
+
+    <children>
+        <Text layoutX="209.0" layoutY="67.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Ajout Medecin">
+            <font>
+                <Font size="18.0" />
+            </font>
+        </Text>
+        <TextField fx:id="nomMedecin" layoutX="205.0" layoutY="118.0" />
+        <TextField fx:id="prenomMedecin" layoutX="205.0" layoutY="174.0" />
+        <Text layoutX="205.0" layoutY="106.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Nom :" />
+        <Text layoutX="205.0" layoutY="166.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Prenom :" />
+        <Text layoutX="210.0" layoutY="222.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Email : " />
+        <TextField fx:id="emailMedecin" layoutX="202.0" layoutY="226.0" />
+        <Text layoutX="207.0" layoutY="276.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Mot de passe : " />
+        <TextField fx:id="mdpMedecin" layoutX="202.0" layoutY="287.0" />
+        <Button layoutX="236.0" layoutY="338.0" mnemonicParsing="false" onAction="#ajoutMedecin" prefHeight="36.0" prefWidth="81.0" text="Ajouter " />
+    </children>
+</AnchorPane>

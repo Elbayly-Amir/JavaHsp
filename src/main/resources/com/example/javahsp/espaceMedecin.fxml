@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.SeparatorMenuItem?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.javahsp.AjoutMedecin">
+   <children>
+      <VBox prefHeight="400.0" prefWidth="640.0">
+        <children>
+          <AnchorPane maxHeight="-1.0" maxWidth="-1.0" prefHeight="-1.0" prefWidth="-1.0" VBox.vgrow="ALWAYS">
+               <children>
+                <MenuBar fx:id="MenuMedecin" layoutY="1.0">
+                  <menus>
+                    <Menu mnemonicParsing="false" text="Patient">
+                      <items>
+                        <MenuItem fx:id="DossierPatient" mnemonicParsing="false" onAction="#DossierPatient" text="Dossier Patient" />
+                        <MenuItem mnemonicParsing="false" text="Rendez-vous Patient" />
+                              <Menu mnemonicParsing="false" text="Ordonnance">
+                                 <items>
+                                    <MenuItem mnemonicParsing="false" text="Ordonnance Papier" />
+                                    <MenuItem mnemonicParsing="false" text="Prise en Charge" />
+                                 </items>
+                              </Menu>
+                        <SeparatorMenuItem mnemonicParsing="false" />
+                        <MenuItem mnemonicParsing="false" text="Quit" />
+                      </items>
+                    </Menu>
+                    <Menu mnemonicParsing="false" text="Produit">
+                      <items>
+                        <MenuItem mnemonicParsing="false" text="Demande Produit" />
+                        <MenuItem mnemonicParsing="false" text="Redo" />
+                        <SeparatorMenuItem mnemonicParsing="false" />
+                        <MenuItem mnemonicParsing="false" text="Cut" />
+                        <MenuItem mnemonicParsing="false" text="Copy" />
+                        <MenuItem mnemonicParsing="false" text="Paste" />
+                        <MenuItem mnemonicParsing="false" text="Delete" />
+                        <SeparatorMenuItem mnemonicParsing="false" />
+                        <MenuItem mnemonicParsing="false" text="Select All" />
+                        <MenuItem mnemonicParsing="false" text="Unselect All" />
+                      </items>
+                    </Menu>
+                    <Menu mnemonicParsing="false" text="Help">
+                      <items>
+                        <MenuItem mnemonicParsing="false" text="About MyHelloApp" />
+                      </items>
+                    </Menu>
+                  </menus>
+                </MenuBar>
+              <Label alignment="CENTER" layoutX="238.0" layoutY="54.0" style="&#10;" text="Espace Médecin" textAlignment="CENTER" textFill="#9f9f9f" wrapText="false">
+                <font>
+                  <Font size="18.0" />
+                </font>
+              </Label>
+               </children>
+          </AnchorPane>
+        </children>
+      </VBox>
+   </children>
+</AnchorPane>

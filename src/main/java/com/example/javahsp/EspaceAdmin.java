@@ -31,7 +31,7 @@ public class EspaceAdmin {
 
     @FXML
     void AjoutMedecin(ActionEvent event) {
-        HelloApplication.changeScene("ajoutMeedecin");
+        HelloApplication.changeScene("ajoutMedecin");
     }
 
     @FXML

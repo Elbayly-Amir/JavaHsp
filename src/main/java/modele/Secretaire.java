@@ -19,7 +19,15 @@ public class Secretaire {
         this.email = email;
         this.mdp = mdp;
     }
-public Secretaire(Secretaire s){
+
+    public Secretaire(String nom, String prenom, String email, String mdp) {
+        this.nom = nom;
+        this.prenom = prenom;
+        this.email = email;
+        this.mdp = mdp;
+    }
+
+    public Secretaire(Secretaire s){
 
 
 }
@@ -51,9 +59,11 @@ public Secretaire(Secretaire s){
     }
     public void ajoutSecretaire()  throws SQLException {
         BDD mabdd = new BDD();
-        PreparedStatement maRequete = mabdd.getBDD().prepareStatement("INSERT INTO gestionnaire (email,mdp) VALUES (?,?)");
-        maRequete.setString(1,email);
-        maRequete.setString(2,mdp);
+        PreparedStatement maRequete = mabdd.getBDD().prepareStatement("INSERT INTO secretaire (nom,prenom,email,mdp) VALUES (?,?,?,?)");
+        maRequete.setString(1,nom);
+        maRequete.setString(2,prenom);
+        maRequete.setString(3,email);
+        maRequete.setString(4,mdp);
         int mesResultats = maRequete.executeUpdate();
 
     }

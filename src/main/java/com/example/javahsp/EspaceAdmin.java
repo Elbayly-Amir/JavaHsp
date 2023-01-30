@@ -3,11 +3,14 @@ package com.example.javahsp;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Tab;
+import javafx.scene.control.TabPane;
 import javafx.scene.control.TableView;
 
 public class EspaceAdmin {
 
 
+    @FXML
+    private TabPane admin;
     @FXML
     private Tab gestionnaire;
 

@@ -6,9 +6,15 @@
 <?import javafx.scene.text.Text?>
 
 
-<AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="com.example.javahsp.EspaceMedecin"
-            prefHeight="400.0" prefWidth="600.0">
-
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.javahsp.CrudMedecin">
+   <children>
+      <Text layoutX="244.0" layoutY="120.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Crud Medecin">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Text>
+      <Button layoutX="244.0" layoutY="179.0" mnemonicParsing="false" onAction="#ajoutMedecin" prefHeight="42.0" prefWidth="146.0" text="Ajout Medecin" />
+      <Button layoutX="244.0" layoutY="264.0" mnemonicParsing="false" onAction="#visuMedecin" prefHeight="42.0" prefWidth="146.0" text="Visualisation Medecin" />
+      <Button layoutX="534.0" layoutY="361.0" mnemonicParsing="false" onAction="#retourAccueil" text="retour" />
+   </children>
 </AnchorPane>

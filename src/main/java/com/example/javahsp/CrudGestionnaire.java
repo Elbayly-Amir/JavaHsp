@@ -7,12 +7,12 @@ public class CrudGestionnaire {
 
     @FXML
     void ajoutGestionnaire(ActionEvent event) {
-
+        HelloApplication.changeScene("ajoutGestionnaire");
     }
 
     @FXML
     void retourCrudgestionnaire(ActionEvent event) {
-
+        HelloApplication.changeScene("espaceAdmin");
     }
 
     @FXML

@@ -32,7 +32,7 @@
          </font>
       </Button>
       <Button layoutX="534.0" layoutY="14.0" mnemonicParsing="false" onAction="#retourAdmin" text="Deconnexion" />
-      <TabPane fx:id="gestionnaire" layoutY="166.0" prefHeight="234.0" prefWidth="600.0" tabClosingPolicy="UNAVAILABLE">
+      <TabPane fx:id="admin" layoutY="166.0" prefHeight="234.0" prefWidth="600.0" tabClosingPolicy="UNAVAILABLE">
         <tabs>
           <Tab fx:id="gestionnaire" text="Gestionnaire">
             <content>

@@ -24,7 +24,7 @@ public class AjoutMedecin {
 
     @FXML
     void ajoutMedecin(ActionEvent event) throws SQLException {
-        Medecin ajout = new Medecin(emailMedecin.getText(), mdpMedecin.getText());
+        Medecin ajout = new Medecin(nomMedecin.getText(), prenomMedecin.getText(),emailMedecin.getText(), mdpMedecin.getText());
         ajout.ajoutMedecin();
         System.out.println("utilisateur ajouté !");
         HelloApplication.changeScene("ajoutMedecin");

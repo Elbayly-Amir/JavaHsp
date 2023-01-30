@@ -23,7 +23,7 @@ public class AjoutSecretaire {
 
     @FXML
     void ajoutSecretaire(ActionEvent event) throws SQLException {
-    Secretaire ajout = new Secretaire(emailSecretaire.getText(), mdpSecretaire.getText());
+    Secretaire ajout = new Secretaire(nomSecretaire.getText(), prenomSecretaire.getText(),emailSecretaire.getText(), mdpSecretaire.getText());
     ajout.ajoutSecretaire();
     System.out.println("utilisateur ajouté !");
     HelloApplication.changeScene("ajoutSecretaire");

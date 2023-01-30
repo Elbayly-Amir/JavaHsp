@@ -30,6 +30,9 @@ public class AjoutMedecin {
         HelloApplication.changeScene("ajoutMedecin");
     }
 
-    public void DossierPatient(ActionEvent actionEvent) {
+
+    @FXML
+    void retourAdmin(ActionEvent event) {
+        HelloApplication.changeScene("espaceAdmin");
     }
 }

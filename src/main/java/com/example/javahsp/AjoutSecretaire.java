@@ -28,4 +28,9 @@ public class AjoutSecretaire {
     System.out.println("utilisateur ajouté !");
     HelloApplication.changeScene("ajoutSecretaire");
     }
+
+    @FXML
+    void retourAdmin(ActionEvent event) {
+            HelloApplication.changeScene("espaceAdmin");
+    }
 }

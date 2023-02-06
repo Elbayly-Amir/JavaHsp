@@ -13,7 +13,8 @@ public class Accueil {
 
     @FXML
     void gestionnaire(ActionEvent event) {
-
+        ConnexionGestionnaire cs= new ConnexionGestionnaire();
+        HelloApplication.changeScene("ConnexionGestionnaire");
     }
 
     @FXML

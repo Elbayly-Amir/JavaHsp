@@ -1,11 +1,17 @@
 package modele;
 
 import BDD.BDD;
+import javafx.fxml.Initializable;
+import javafx.scene.control.TableColumn;
 import javafx.scene.control.TextField;
+import javafx.scene.control.cell.PropertyValueFactory;
 
+import java.net.URL;
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.ResourceBundle;
 
-public class Medecin {
+public class Medecin  {
 
 
     private int id_medecin;
@@ -23,6 +29,15 @@ public class Medecin {
     public Medecin(Medecin m){
 
 
+    }
+
+    
+
+    public Medecin() {
+
+    }
+
+    public Medecin(int id_medecin, String nom, String prenom, String email, String mdp) {
     }
 
     public Medecin connexion() throws SQLException {
@@ -67,7 +82,33 @@ public class Medecin {
         int mesResultats = maRequete.executeUpdate();
 
     }
+    public Medecin getUser() throws SQLException {
+        Medecin med = null;
+        BDD madd = new BDD();
+        PreparedStatement maRequete = madd.getBDD().prepareStatement("Select * from medecin ");
 
+        ResultSet mesResultats = maRequete.executeQuery();
+
+
+        return med;
+    }
+
+
+    public ArrayList<Medecin> getUsers() throws SQLException {
+        ArrayList<Medecin> me = new ArrayList<Medecin>();
+        Medecin m;
+        BDD mabdd = new BDD();
+
+        PreparedStatement maRequete = mabdd.getBDD().prepareStatement("Select * from medecin ");
+        ResultSet mesResultats = maRequete.executeQuery();
+        while (mesResultats.next()) {
+            m = new Medecin(mesResultats.getInt("id_medecin"), mesResultats.getString("nom"), mesResultats.getString("prenom"), mesResultats.getString("email"),  mesResultats.getString("mdp"));
+            me.add(m);
+        }
+
+        System.out.println(me.size());
+        return me;
+    }
 
     public int getId_medecin() {
         return id_medecin;
@@ -108,4 +149,6 @@ public class Medecin {
     public void setMdp(String mdp) {
         this.mdp = mdp;
     }
+
+
 }

@@ -1,13 +1,20 @@
 package modele;
+import java.net.URL;
 import java.sql.SQLException;
 
 import BDD.BDD;
+import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.control.cell.PropertyValueFactory;
 
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.ResourceBundle;
 
-public class Secretaire {
+public class Secretaire  {
     private int id_secretaire;
     private String nom;
     private String prenom;
@@ -31,6 +38,14 @@ public class Secretaire {
 
 
 }
+
+    public Secretaire() {
+
+    }
+
+    public Secretaire(int id_user, String nom, String prenom, String mail, String mdp) {
+    }
+
     public Secretaire connexion() throws SQLException {
         Secretaire s = null;
         while(!estConnecte){
@@ -67,7 +82,32 @@ public class Secretaire {
         int mesResultats = maRequete.executeUpdate();
 
     }
+    public Secretaire getUser() throws SQLException {
+        Secretaire s = null;
+        BDD madd = new BDD();
+        PreparedStatement maRequete = madd.getBDD().prepareStatement("Select * from secretaire where id_secretaire=?");
 
+        ResultSet mesResultats = maRequete.executeQuery();
+
+
+        return s;
+    }
+
+    public ArrayList<Secretaire> getUsers() throws SQLException {
+        ArrayList<Secretaire> se = new ArrayList<Secretaire>();
+        Secretaire s;
+        BDD mabdd = new BDD();
+
+        PreparedStatement maRequete = mabdd.getBDD().prepareStatement("Select * from secretaire ");
+        ResultSet mesResultats = maRequete.executeQuery();
+            while (mesResultats.next()) {
+                s = new Secretaire(mesResultats.getInt("id_secretaire"), mesResultats.getString("nom"), mesResultats.getString("prenom"), mesResultats.getString("email"),  mesResultats.getString("mdp"));
+                se.add(s);
+            }
+
+
+        return se;
+    }
     public int getId_secretaire() {
         return id_secretaire;
     }
@@ -107,4 +147,6 @@ public class Secretaire {
     public void setMdp(String mdp) {
         this.mdp = mdp;
     }
+
+
 }

@@ -1,10 +1,16 @@
 package modele;
 
 import BDD.BDD;
+import javafx.fxml.Initializable;
+import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.control.cell.PropertyValueFactory;
 
+import java.net.URL;
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.ResourceBundle;
 
 public class Gestionnaire {
 
@@ -21,6 +27,15 @@ public class Gestionnaire {
     }
 
     public Gestionnaire(Gestionnaire g) {
+    }
+
+    
+
+    public Gestionnaire() {
+
+    }
+
+    public Gestionnaire(int id_gestionnaire, String nom, String prenom, String email, String mdp) {
     }
 
     public Gestionnaire connexion() throws SQLException {
@@ -65,6 +80,34 @@ public class Gestionnaire {
         int mesResultats = maRequete.executeUpdate();
 
     }
+
+    public Gestionnaire getUser() throws SQLException {
+        Gestionnaire gest = null;
+        BDD madd = new BDD();
+        PreparedStatement maRequete = madd.getBDD().prepareStatement("Select * from gestionnaire ");
+
+        ResultSet mesResultats = maRequete.executeQuery();
+
+
+        return gest;
+    }
+
+
+    public ArrayList<Gestionnaire> getUsers() throws SQLException {
+        ArrayList<Gestionnaire> ge = new ArrayList<Gestionnaire>();
+        Gestionnaire g;
+        BDD mabdd = new BDD();
+
+        PreparedStatement maRequete = mabdd.getBDD().prepareStatement("Select * from gestionnaire ");
+        ResultSet mesResultats = maRequete.executeQuery();
+        while (mesResultats.next()) {
+            g = new Gestionnaire(mesResultats.getInt("id_gestionnaire"), mesResultats.getString("nom"), mesResultats.getString("prenom"), mesResultats.getString("email"),  mesResultats.getString("mdp"));
+            ge.add(g);
+        }
+
+
+        return ge;
+    }
     public int getId_gestionnaire() {
         return id_gestionnaire;
     }
@@ -104,5 +147,6 @@ public class Gestionnaire {
     public void setMdp(String mdp) {
         this.mdp = mdp;
     }
+
 
 }

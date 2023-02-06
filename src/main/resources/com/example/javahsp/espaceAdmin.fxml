@@ -3,7 +3,6 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Tab?>
 <?import javafx.scene.control.TabPane?>
-<?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
@@ -38,12 +37,7 @@
             <content>
               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
-                        <TableView fx:id="tableViewGestionnaire" layoutX="-4.0" layoutY="-3.0" prefHeight="214.0" prefWidth="606.0">
-                          <columns>
-                            <TableColumn prefWidth="75.0" text="C1" />
-                            <TableColumn prefWidth="75.0" text="C2" />
-                          </columns>
-                        </TableView>
+                        <TableView fx:id="tableViewGestionnaire" layoutX="-4.0" layoutY="-3.0" prefHeight="214.0" prefWidth="606.0" />
                      </children>
                   </AnchorPane>
             </content>
@@ -52,12 +46,7 @@
             <content>
               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="171.0" prefWidth="216.0">
                      <children>
-                        <TableView fx:id="tableViewMedecin" layoutY="-3.0" prefHeight="212.0" prefWidth="600.0">
-                          <columns>
-                            <TableColumn prefWidth="75.0" text="C1" />
-                            <TableColumn prefWidth="75.0" text="C2" />
-                          </columns>
-                        </TableView>
+                        <TableView fx:id="tableViewMedecin" layoutY="-3.0" prefHeight="212.0" prefWidth="600.0" />
                      </children>
                   </AnchorPane>
             </content>
@@ -66,12 +55,7 @@
                <content>
                   <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="171.0" prefWidth="216.0">
                      <children>
-                        <TableView fx:id="tableViewSecretaire" layoutY="-3.0" prefHeight="213.0" prefWidth="600.0">
-                          <columns>
-                            <TableColumn prefWidth="75.0" text="C1" />
-                            <TableColumn prefWidth="75.0" text="C2" />
-                          </columns>
-                        </TableView>
+                        <TableView fx:id="tableViewSecretaire" layoutY="-3.0" prefHeight="213.0" prefWidth="600.0" />
                      </children>
                   </AnchorPane>
                </content>

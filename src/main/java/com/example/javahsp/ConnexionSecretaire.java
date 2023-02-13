@@ -2,6 +2,7 @@ package com.example.javahsp;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import modele.Medecin;
 import modele.Secretaire;
@@ -14,7 +15,7 @@ public class ConnexionSecretaire {
     private TextField email;
 
     @FXML
-    private TextField mdp;
+    private PasswordField mdp;
 
     @FXML
     void connexion(ActionEvent event) throws SQLException {

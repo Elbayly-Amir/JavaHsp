@@ -33,7 +33,7 @@ public class HelloApplication extends Application {
         try {
 
             scene = new Scene(fxmlLoader.load());
-            stage.setTitle("Connexion");
+            stage.setTitle("HSP");
             stage.setScene(scene);
             stage.show();
         } catch (IOException e) {
@@ -45,6 +45,7 @@ public class HelloApplication extends Application {
         FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource(fichierFxml+".fxml"));
         Scene scene = null;
         try {
+
 
             fxmlLoader.setController(controller);
             scene = new Scene(fxmlLoader.load());

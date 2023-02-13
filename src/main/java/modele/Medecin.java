@@ -45,7 +45,7 @@ public class Medecin  {
         while(!estConnecte){
 
             BDD mabdd = new BDD();
-            PreparedStatement maRequete = mabdd.getBDD().prepareStatement("Select * from medecin where email=? and mdp=?");
+            PreparedStatement maRequete = mabdd.getBDD().prepareStatement("Select * from medecin where email=? and mdp=md5(?)");
             maRequete.setString(1,email);
             maRequete.setString(2,mdp);
             ResultSet mesResultats = maRequete.executeQuery();
@@ -74,7 +74,7 @@ public class Medecin  {
 
     public void ajoutMedecin()  throws SQLException {
         BDD mabdd = new BDD();
-        PreparedStatement maRequete = mabdd.getBDD().prepareStatement("INSERT INTO medecin (nom,prenom,email,mdp) VALUES (?,?,?,?)");
+        PreparedStatement maRequete = mabdd.getBDD().prepareStatement("INSERT INTO medecin (nom,prenom,email,mdp) VALUES (?,?,?,md5(?))");
         maRequete.setString(1,nom);
         maRequete.setString(2,prenom);
         maRequete.setString(3,email);

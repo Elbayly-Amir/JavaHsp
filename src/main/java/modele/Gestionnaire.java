@@ -44,7 +44,7 @@ public class Gestionnaire {
 
             BDD madd = new BDD();
 
-            PreparedStatement maRequete = madd.getBDD().prepareStatement("Select * from gestionnaire where email=? and mdp=?");
+            PreparedStatement maRequete = madd.getBDD().prepareStatement("Select * from gestionnaire where email=? and mdp=md5(?)");
             maRequete.setString(1, email);
             maRequete.setString(2, mdp);
             ResultSet mesResultats = maRequete.executeQuery();
@@ -57,7 +57,7 @@ public class Gestionnaire {
 
                 estConnecte = true;
             } else {
-                System.out.println("erreur");
+                System.out.println("erreur login ou mot de passe");
             }
         }
         return g;
@@ -72,7 +72,7 @@ public class Gestionnaire {
 
     public void ajoutGest()  throws SQLException {
         BDD mabdd = new BDD();
-        PreparedStatement maRequete = mabdd.getBDD().prepareStatement("INSERT INTO gestionnaire (nom, prenom,email,mdp) VALUES (?,?,?,?)");
+        PreparedStatement maRequete = mabdd.getBDD().prepareStatement("INSERT INTO gestionnaire (nom, prenom,email,mdp) VALUES (?,?,?,md5(?))");
         maRequete.setString(1,nom);
         maRequete.setString(2,prenom);
         maRequete.setString(3,mdp);

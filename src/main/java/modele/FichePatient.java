@@ -1,5 +1,10 @@
 package modele;
 
+import BDD.BDD;
+
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+
 public class FichePatient {
 
 
@@ -12,6 +17,37 @@ public class FichePatient {
     private int cp;
     private String ville;
 
+    public FichePatient(String text, String text1, int securiteSocial, String text2, int cp, String text3) {
+        this.nom= text;
+        this.prenom=text1;
+        this.securiteSocial=securiteSocial;
+        this.rue=text2;
+        this.cp=cp;
+        this.ville=text3;
+    }
+
+    public void ajoutFichePatient()  throws SQLException {
+        BDD mabdd = new BDD();
+        PreparedStatement maRequete = mabdd.getBDD().prepareStatement("INSERT INTO fichepatient (nom,prenom,securiteSocial,email,rue,cp,ville) VALUES (?,?,?,?,?,?,?)");
+        maRequete.setString(1, nom);
+        maRequete.setString(2, prenom);
+        maRequete.setInt(3, securiteSocial);
+        maRequete.setString(4, email);
+        maRequete.setString(5, rue);
+        maRequete.setInt(6, cp);
+        maRequete.setString(7, ville);
+        int mesResultats = maRequete.executeUpdate();
+    }
+
+    public FichePatient(String nom, String prenom, int securiteSocial, String email, String rue, int cp, String ville) {
+        this.nom = nom;
+        this.prenom = prenom;
+        this.securiteSocial = securiteSocial;
+        this.email = email;
+        this.rue = rue;
+        this.cp = cp;
+        this.ville = ville;
+    }
 
     public int getId_fichepatient() {
         return id_fichepatient;

@@ -25,8 +25,8 @@ public class AjoutProduit {
     void AjoutProduit(ActionEvent event) throws SQLException {
         Produit ajout = new Produit(DescriptionProduit.getText(), LibelleProduit.getText(),parseInt(NivDangerProduit.getText()));
         ajout.ajoutProduit();
-        System.out.println("Fiche Patient ajouté !");
-        HelloApplication.changeScene("espaceSecretaire");
+        System.out.println("Produit ajouté !");
+        HelloApplication.changeScene("AjoutProduit");
 
     }
 

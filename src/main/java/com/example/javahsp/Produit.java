@@ -2,6 +2,7 @@ package com.example.javahsp;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import modele.FichePatient;
@@ -13,7 +14,7 @@ import java.util.ResourceBundle;
 
 import static java.lang.Integer.parseInt;
 
-public class Produit {
+public class Produit implements Initializable {
     @FXML
     private TableColumn<?, ?> descriptionProduit;
 

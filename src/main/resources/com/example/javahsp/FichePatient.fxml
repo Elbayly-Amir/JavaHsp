@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
+    <children>
+        <TextField layoutX="221.0" layoutY="36.0" prefHeight="55.0" prefWidth="219.0" text="Fiches Patient">
+            <font>
+                <Font size="20.0" />
+            </font>
+        </TextField>
+        <TableView fx:id="TableData" layoutY="118.0" prefHeight="281.0" prefWidth="600.0">
+            <columns>
+                <TableColumn fx:id="NomPatient" prefWidth="66.66668951511383" text="Nom" />
+                <TableColumn fx:id="PrenomPatient" prefWidth="83.99996185302734" text="Prenom" />
+                <TableColumn fx:id="SecuPatient" prefWidth="104.66667175292969" text="Securité Social" />
+                <TableColumn fx:id="MailPatient" prefWidth="70.6666259765625" text="Mail" />
+                <TableColumn fx:id="RuePatient" prefWidth="94.0" text="Rue" />
+                <TableColumn fx:id="CpPatient" prefWidth="93.33328247070312" text="Cp" />
+                <TableColumn fx:id="VillePatient" prefWidth="83.3333740234375" text="Ville" />
+            </columns>
+        </TableView>
+    </children>
+</AnchorPane>

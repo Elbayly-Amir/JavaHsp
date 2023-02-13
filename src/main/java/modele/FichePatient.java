@@ -3,6 +3,7 @@ package modele;
 import BDD.BDD;
 
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class FichePatient {
@@ -16,6 +17,10 @@ public class FichePatient {
     private String rue;
     private int cp;
     private String ville;
+
+    public FichePatient(){
+
+    }
 
     public FichePatient(String text, String text1, int securiteSocial, String text2, int cp, String text3) {
         this.nom= text;
@@ -37,6 +42,13 @@ public class FichePatient {
         maRequete.setInt(6, cp);
         maRequete.setString(7, ville);
         int mesResultats = maRequete.executeUpdate();
+    }
+
+    public ResultSet Selectpatient() throws SQLException {
+        BDD mabdd = new BDD();
+        PreparedStatement maRequete =  mabdd.getBDD().prepareStatement("SELECT * FROM fichepatient");
+        ResultSet don=maRequete.executeQuery();
+        return don;
     }
 
     public FichePatient(String nom, String prenom, int securiteSocial, String email, String rue, int cp, String ville) {

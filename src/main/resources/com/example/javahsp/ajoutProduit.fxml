@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.javahsp.AjoutProduit">
+   <children>
+      <Text layoutX="247.0" layoutY="72.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Ajout Produit">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Text>
+      <Text layoutX="191.0" layoutY="125.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Libelle :" />
+      <Text layoutX="191.0" layoutY="205.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Description :" />
+      <Text layoutX="191.0" layoutY="286.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Niveau de dangerosité" />
+      <TextField fx:id="LibelleProduit" layoutX="191.0" layoutY="149.0" />
+      <TextField fx:id="DescriptionProduit" layoutX="191.0" layoutY="229.0" />
+      <TextField fx:id="NivDangerProduit" layoutX="191.0" layoutY="309.0" />
+      <Button layoutX="251.0" layoutY="355.0" mnemonicParsing="false" onAction="#AjoutProduit" text="Ajout" />
+      <Button layoutX="517.0" layoutY="355.0" mnemonicParsing="false" onAction="#retourProduit" text="Retour" />
+   </children>
+</AnchorPane>

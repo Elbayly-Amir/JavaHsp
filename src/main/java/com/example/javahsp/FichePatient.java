@@ -55,16 +55,17 @@ public class FichePatient implements Initializable {
 
     public void ViewPatient(){
             try {
+                BDD mabdd = new BDD();
                 Connection con;
-                con = BDD.cnx();
+                //con = BDD.();
                 String sql = "SELECT * FROM fichepatient";
-                PreparedStatement stat = con.prepareStatement(sql);;
-                ResultSet rs = stat.executeQuery();
-                while (rs.next()){
-                    data.add(new FichePatient(rs.getString(1),rs.getString(2),rs.getString(3),rs.getString(4),rs.getString(5),rs.getString(6),rs.getString(7)));
+                PreparedStatement maRequete =  mabdd.getBDD().prepareStatement("SELECT * FROM fichepatient");
+                ResultSet don=maRequete.executeQuery();
+                while (don.next()){
+                    data.add(new FichePatient(don.getString(1),don.getString(2),don.getString(3),don.getString(4),don.getString(5),don.getString(6),don.getString(7)));
 
                 }
-                con.close();
+                don.close();
             } catch (Exception e){
                 e.printStackTrace();
 

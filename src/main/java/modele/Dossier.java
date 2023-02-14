@@ -10,7 +10,6 @@ import java.time.LocalDate;
 public class Dossier {
 
     private int id_dossier;
-
     private String descriprion;
     private String nivGravite;
     private int ref_fichepatient;
@@ -41,6 +40,17 @@ public class Dossier {
         maRequete.executeUpdate();
 
     }
+
+    public void updateDossierPatient() throws SQLException{
+        BDD mabdd = new BDD();
+        PreparedStatement maRequete = mabdd.getBDD().prepareStatement("UPDATE dossier SET `descriprion`=?,`nivGravite`=?,`ref_fichepatient`=? WHERE id_dossier=?");
+        maRequete.setString(1, descriprion);
+        maRequete.setString(2, nivGravite);
+        maRequete.setInt(3, ref_fichepatient);
+        maRequete.setInt(4, id_dossier);
+        maRequete.executeUpdate();
+    }
+
 
     public Dossier(int id_dossier, String descriprion, String nivGravite, int ref_fichepatient) {
         this.id_dossier = id_dossier;

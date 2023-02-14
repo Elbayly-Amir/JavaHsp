@@ -1,5 +1,10 @@
 package modele;
 
+import BDD.BDD;
+
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+
 public class Hospitalisation {
 
     private int id_hospitalisation;
@@ -7,6 +12,14 @@ public class Hospitalisation {
     private String descriptionMaladie;
     private int ref_chambre;
 
+
+    public void deleteHospitalisation() throws SQLException {
+        BDD mabdd = new BDD();
+        PreparedStatement maRequete = mabdd.getBDD().prepareStatement("DELETE FROM hospitalisation where id_hospitalisation=?");
+        maRequete.setInt(1, id_hospitalisation);
+        maRequete.executeUpdate();
+
+    }
 
     public int getId_hospitalisation() {
         return id_hospitalisation;

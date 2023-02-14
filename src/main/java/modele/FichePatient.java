@@ -58,6 +58,16 @@ public class FichePatient {
         this.ville = ville;
     }
 
+
+    public void deleteFichePatient() throws SQLException {
+        BDD mabdd = new BDD();
+        PreparedStatement maRequete = mabdd.getBDD().prepareStatement("DELETE FROM fichepatient where id_fichepatient=?");
+        maRequete.setInt(1, id_fichepatient);
+        maRequete.executeUpdate();
+
+    }
+
+
     public int getId_fichepatient() {
         return id_fichepatient;
     }

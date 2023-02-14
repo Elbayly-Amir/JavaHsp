@@ -24,10 +24,6 @@ public class Dossier {
     }
 
 
-
-
-
-
     public void ajoutDossierPatient()  throws SQLException {
         BDD mabdd = new BDD();
         PreparedStatement maRequete = mabdd.getBDD().prepareStatement("INSERT INTO dossier (description,nivGravite,ref_fichepatient) VALUES (?,?,?)");
@@ -38,7 +34,13 @@ public class Dossier {
         int mesResultats = maRequete.executeUpdate();
     }
 
+    public void deleteDossierPatient() throws SQLException {
+        BDD mabdd = new BDD();
+        PreparedStatement maRequete = mabdd.getBDD().prepareStatement("DELETE FROM dossier where id_dossier =?");
+        maRequete.setInt(1, id_dossier );
+        maRequete.executeUpdate();
 
+    }
 
     public Dossier(int id_dossier, String descriprion, String nivGravite, int ref_fichepatient) {
         this.id_dossier = id_dossier;

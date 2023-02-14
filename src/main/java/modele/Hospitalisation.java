@@ -21,6 +21,16 @@ public class Hospitalisation {
 
     }
 
+    public void updateHospitalisation() throws SQLException{
+        BDD mabdd = new BDD();
+        PreparedStatement maRequete = mabdd.getBDD().prepareStatement("UPDATE hospitalisation SET `date_hospitalisation`=?,`descriptionMaladie`=?,`ref_chambre`=? WHERE id_hospitalisation=?");
+        maRequete.setInt(1, date_hospitalisation);
+        maRequete.setString(2, descriptionMaladie);
+        maRequete.setInt(3, ref_chambre);
+        maRequete.setInt(4, id_hospitalisation);
+        maRequete.executeUpdate();
+    }
+
     public int getId_hospitalisation() {
         return id_hospitalisation;
     }

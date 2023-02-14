@@ -93,6 +93,13 @@ public class Medecin  {
         return med;
     }
 
+    public void deleteMedecin() throws SQLException {
+        BDD mabdd = new BDD();
+        PreparedStatement maRequete = mabdd.getBDD().prepareStatement("DELETE FROM medecin where id_medecin=?");
+        maRequete.setInt(1, id_medecin);
+        maRequete.executeUpdate();
+
+    }
 
     public ArrayList<Medecin> getUsers() throws SQLException {
         ArrayList<Medecin> me = new ArrayList<Medecin>();

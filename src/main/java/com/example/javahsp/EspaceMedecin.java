@@ -17,4 +17,8 @@ public class EspaceMedecin {
     }
 
 
+    public void FichePatient(ActionEvent actionEvent) {
+        System.out.println("Accès fiche patient ");
+        HelloApplication.changeScene("FichePatient");
+    }
 }

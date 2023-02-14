@@ -2,6 +2,7 @@ package com.example.javahsp;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import modele.Admin;
 
@@ -16,14 +17,7 @@ public class CoAdmin {
     private TextField emailAdmin;
 
     @FXML
-    private TextField mdpAdmin;
-
-    public CoAdmin(String text, String text1) {
-    }
-
-    public CoAdmin() {
-
-    }
+    private PasswordField mdpAdmin;
 
     @FXML
     void connexionAdmin(ActionEvent event) throws SQLException {

@@ -31,13 +31,13 @@
          </font>
       </Button>
       <Button layoutX="534.0" layoutY="14.0" mnemonicParsing="false" onAction="#retourAdmin" text="Deconnexion" />
-      <TabPane fx:id="admin" layoutY="166.0" prefHeight="234.0" prefWidth="600.0" tabClosingPolicy="UNAVAILABLE">
+      <TabPane fx:id="admin" layoutY="166.0" prefHeight="234.0" prefWidth="620.0" tabClosingPolicy="UNAVAILABLE">
         <tabs>
           <Tab fx:id="gestionnaire" text="Gestionnaire">
             <content>
               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
-                        <TableView fx:id="tableViewGestionnaire" layoutX="-4.0" layoutY="-3.0" prefHeight="214.0" prefWidth="606.0" />
+                        <TableView fx:id="tableViewGestionnaire" layoutX="-4.0" layoutY="-3.0" prefHeight="214.0" prefWidth="626.0" />
                      </children>
                   </AnchorPane>
             </content>
@@ -46,7 +46,7 @@
             <content>
               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="171.0" prefWidth="216.0">
                      <children>
-                        <TableView fx:id="tableViewMedecin" layoutY="-3.0" prefHeight="212.0" prefWidth="600.0" />
+                        <TableView fx:id="tableViewMedecin" layoutY="-3.0" prefHeight="212.0" prefWidth="620.0" />
                      </children>
                   </AnchorPane>
             </content>
@@ -55,7 +55,7 @@
                <content>
                   <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="171.0" prefWidth="216.0">
                      <children>
-                        <TableView fx:id="tableViewSecretaire" layoutY="-3.0" prefHeight="213.0" prefWidth="600.0" />
+                        <TableView fx:id="tableViewSecretaire" layoutY="-3.0" prefHeight="213.0" prefWidth="620.0" />
                      </children>
                   </AnchorPane>
                </content>

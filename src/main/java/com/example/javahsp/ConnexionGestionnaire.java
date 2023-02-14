@@ -2,6 +2,7 @@ package com.example.javahsp;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import modele.Admin;
 import modele.Gestionnaire;
@@ -16,7 +17,7 @@ public class ConnexionGestionnaire {
     private TextField emailGest;
 
     @FXML
-    private TextField mdpGest;
+    private PasswordField mdpGest;
 
     @FXML
     void ConnexionGestionnaire(ActionEvent event) throws SQLException {

@@ -45,7 +45,7 @@ public class Medecin  {
         while(!estConnecte){
 
             BDD mabdd = new BDD();
-            PreparedStatement maRequete = mabdd.getBDD().prepareStatement("Select * from medecin where email=? and mdp=?");
+            PreparedStatement maRequete = mabdd.getBDD().prepareStatement("Select * from medecin where email=? and mdp=md5(?)");
             maRequete.setString(1,email);
             maRequete.setString(2,mdp);
             ResultSet mesResultats = maRequete.executeQuery();
@@ -74,7 +74,7 @@ public class Medecin  {
 
     public void ajoutMedecin()  throws SQLException {
         BDD mabdd = new BDD();
-        PreparedStatement maRequete = mabdd.getBDD().prepareStatement("INSERT INTO medecin (nom,prenom,email,mdp) VALUES (?,?,?,?)");
+        PreparedStatement maRequete = mabdd.getBDD().prepareStatement("INSERT INTO medecin (nom,prenom,email,mdp) VALUES (?,?,?,md5(?))");
         maRequete.setString(1,nom);
         maRequete.setString(2,prenom);
         maRequete.setString(3,email);
@@ -93,6 +93,31 @@ public class Medecin  {
         return med;
     }
 
+    public void deleteMedecin() throws SQLException {
+        BDD mabdd = new BDD();
+        PreparedStatement maRequete = mabdd.getBDD().prepareStatement("DELETE FROM medecin where id_medecin=?");
+        maRequete.setInt(1, id_medecin);
+        maRequete.executeUpdate();
+
+    }
+
+    public void updateMedecin() throws SQLException{
+        BDD mabdd = new BDD();
+        PreparedStatement maRequete = mabdd.getBDD().prepareStatement("UPDATE medecin SET `nom`=?,`prenom`=?,`email`=? WHERE id_medecin=?");
+        maRequete.setString(1, nom);
+        maRequete.setString(2, prenom);
+        maRequete.setString(3, email);
+        maRequete.setInt(4, id_medecin);
+        maRequete.executeUpdate();
+    }
+
+    public void changePassword() throws SQLException {
+        BDD mabdd = new BDD();
+        PreparedStatement maRequete = mabdd.getBDD().prepareStatement("UPDATE medecin SET `mdp`=? WHERE id_medecin=?");
+        maRequete.setString(1, mdp);
+        maRequete.setInt(2, id_medecin);
+        maRequete.executeUpdate();
+    }
 
     public ArrayList<Medecin> getUsers() throws SQLException {
         ArrayList<Medecin> me = new ArrayList<Medecin>();

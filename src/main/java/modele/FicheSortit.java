@@ -1,5 +1,10 @@
 package modele;
 
+import BDD.BDD;
+
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+
 public class FicheSortit {
 
     private int id_fichesorti;
@@ -8,6 +13,26 @@ public class FicheSortit {
     private int quantiteProduit;
     private int ref_produit;
 
+
+
+    public void deleteFicheSortit() throws SQLException {
+        BDD mabdd = new BDD();
+        PreparedStatement maRequete = mabdd.getBDD().prepareStatement("DELETE FROM fichesorti where id_fichesorti=?");
+        maRequete.setInt(1, id_fichesorti);
+        maRequete.executeUpdate();
+
+    }
+
+    public void updateFicheSortit() throws SQLException{
+        BDD mabdd = new BDD();
+        PreparedStatement maRequete = mabdd.getBDD().prepareStatement("UPDATE fichesorti SET `raisonDemande`=?,`nomProduit`=?,`quantiteProduit`=?,`ref_produit`=? WHERE id_fichesorti=?");
+        maRequete.setString(1, raisonDemande);
+        maRequete.setString(2, nomProduit);
+        maRequete.setInt(3, quantiteProduit);
+        maRequete.setInt(4, ref_produit);
+        maRequete.setInt(5, id_fichesorti);
+        maRequete.executeUpdate();
+    }
 
     public int getId_fichesorti() {
         return id_fichesorti;

@@ -111,6 +111,14 @@ public class Medecin  {
         maRequete.executeUpdate();
     }
 
+    public void changePassword() throws SQLException {
+        BDD mabdd = new BDD();
+        PreparedStatement maRequete = mabdd.getBDD().prepareStatement("UPDATE medecin SET `mdp`=? WHERE id_medecin=?");
+        maRequete.setString(1, mdp);
+        maRequete.setInt(2, id_medecin);
+        maRequete.executeUpdate();
+    }
+
     public ArrayList<Medecin> getUsers() throws SQLException {
         ArrayList<Medecin> me = new ArrayList<Medecin>();
         Medecin m;

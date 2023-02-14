@@ -29,12 +29,18 @@ public class Fournisseur {
         return fournit;
     }
 
-    public void deleteGestionnaire() throws SQLException {
+    public void deleteFournisseur() throws SQLException {
         BDD mabdd = new BDD();
         PreparedStatement maRequete = mabdd.getBDD().prepareStatement("DELETE FROM fournisseur where id_fournisseur=?");
         maRequete.setInt(1, id_fournisseur);
         maRequete.executeUpdate();
+    }
 
+    public void updateFournisseur() throws SQLException{
+        BDD mabdd = new BDD();
+        PreparedStatement maRequete = mabdd.getBDD().prepareStatement("UPDATE fournisseur SET `nom`=? WHERE id_fournisseur=?");
+        maRequete.setString(1, nom);
+        maRequete.setInt(2, id_fournisseur);
     }
 
     public int getId_fournisseur() {

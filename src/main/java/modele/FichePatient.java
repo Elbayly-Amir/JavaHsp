@@ -18,17 +18,14 @@ public class FichePatient {
     private int cp;
     private String ville;
 
-    public FichePatient(){
 
-    }
-
-    public FichePatient(String text, String text1, int securiteSocial, String text2, int cp, String text3) {
-        this.nom= text;
-        this.prenom=text1;
+    public FichePatient() {
+        this.nom= nom;
+        this.prenom=prenom;
         this.securiteSocial=securiteSocial;
-        this.rue=text2;
+        this.rue=rue;
         this.cp=cp;
-        this.ville=text3;
+        this.ville=ville;
     }
 
     public void ajoutFichePatient()  throws SQLException {

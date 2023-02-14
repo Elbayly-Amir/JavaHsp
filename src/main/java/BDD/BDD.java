@@ -5,7 +5,11 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 
 public class BDD {
-    private Connection cnx;
+    private static Connection cnx;
+
+    public static Connection cnx() {
+        return cnx;
+    }
 
     public Connection getBDD() throws SQLException {
         this.cnx = DriverManager.getConnection(
@@ -15,4 +19,3 @@ public class BDD {
         return cnx;
     }
 }
-

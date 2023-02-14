@@ -4,7 +4,6 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.TextField;
 import modele.FichePatient;
-import modele.Gestionnaire;
 
 import java.sql.SQLException;
 
@@ -40,7 +39,7 @@ public class AjoutFichePatient {
     @FXML
     void ajoutFichePatient(ActionEvent event) throws SQLException {
         System.out.println(nomPatient.getText());
-        FichePatient ajout = new FichePatient(nomPatient.getText(), prenomPatient.getText(),parseInt(numSecuPatient.getText()), ruePatient.getText(), parseInt(cpPatient.getText()), villePatient.getText());
+        FichePatient ajout = new FichePatient();
         ajout.ajoutFichePatient();
         System.out.println("Fiche Patient ajouté !");
         HelloApplication.changeScene("espaceSecretaire");

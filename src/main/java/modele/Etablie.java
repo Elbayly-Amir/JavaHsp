@@ -7,23 +7,6 @@ public class Etablie {
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     public int getRef_medecin() {
         return ref_medecin;
     }

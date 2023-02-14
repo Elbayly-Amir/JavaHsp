@@ -100,6 +100,16 @@ public class Gestionnaire {
 
     }
 
+    public void updateGestionnaire() throws SQLException{
+        BDD mabdd = new BDD();
+        PreparedStatement maRequete = mabdd.getBDD().prepareStatement("UPDATE gestionnaire SET `nom`=?,`prenom`=?,`email`=? WHERE id_gestionnaire=?");
+        maRequete.setString(1, nom);
+        maRequete.setString(2, prenom);
+        maRequete.setString(3, email);
+        maRequete.setInt(4, id_gestionnaire);
+        maRequete.executeUpdate();
+    }
+
     public ArrayList<Gestionnaire> getUsers() throws SQLException {
         ArrayList<Gestionnaire> ge = new ArrayList<Gestionnaire>();
         Gestionnaire g;

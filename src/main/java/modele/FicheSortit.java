@@ -23,6 +23,16 @@ public class FicheSortit {
 
     }
 
+    public void updateFicheSortit() throws SQLException{
+        BDD mabdd = new BDD();
+        PreparedStatement maRequete = mabdd.getBDD().prepareStatement("UPDATE fichesorti SET `raisonDemande`=?,`nomProduit`=?,`quantiteProduit`=?,`ref_produit`=? WHERE id_fichesorti=?");
+        maRequete.setString(1, raisonDemande);
+        maRequete.setString(2, nomProduit);
+        maRequete.setInt(3, quantiteProduit);
+        maRequete.setInt(4, ref_produit);
+        maRequete.setInt(5, id_fichesorti);
+        maRequete.executeUpdate();
+    }
 
     public int getId_fichesorti() {
         return id_fichesorti;

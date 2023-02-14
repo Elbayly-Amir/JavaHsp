@@ -92,6 +92,13 @@ public class Gestionnaire {
         return gest;
     }
 
+    public void deleteGestionnaire() throws SQLException {
+        BDD mabdd = new BDD();
+        PreparedStatement maRequete = mabdd.getBDD().prepareStatement("DELETE FROM gestionnaire where id_gestionnaire=?");
+        maRequete.setInt(1, id_gestionnaire);
+        maRequete.executeUpdate();
+
+    }
 
     public ArrayList<Gestionnaire> getUsers() throws SQLException {
         ArrayList<Gestionnaire> ge = new ArrayList<Gestionnaire>();

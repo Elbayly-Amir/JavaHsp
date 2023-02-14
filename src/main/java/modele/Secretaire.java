@@ -85,6 +85,16 @@ public class Secretaire  {
 
     }
 
+    public void updateSecretaire() throws SQLException{
+        BDD mabdd = new BDD();
+        PreparedStatement maRequete = mabdd.getBDD().prepareStatement("UPDATE secretaire SET `nom`=?,`prenom`=?,`email`=? WHERE id_secretaire=?");
+        maRequete.setString(1, nom);
+        maRequete.setString(2, prenom);
+        maRequete.setString(3, email);
+        maRequete.setInt(4, id_secretaire);
+        maRequete.executeUpdate();
+    }
+
     public ArrayList<Secretaire> getUsers() throws SQLException {
         ArrayList<Secretaire> sec = new ArrayList<Secretaire>();
         Secretaire s;

@@ -67,6 +67,19 @@ public class FichePatient {
 
     }
 
+    public void updateFichePatient() throws SQLException{
+        BDD mabdd = new BDD();
+        PreparedStatement maRequete = mabdd.getBDD().prepareStatement("UPDATE fichepatient SET `nom`=?,`prenom`=?,`securiteSocial`=?,`email`=?,`rue`=?,`cp`=?,`ville`=? WHERE id_fichepatient=?");
+        maRequete.setString(1, nom);
+        maRequete.setString(2, prenom);
+        maRequete.setInt(3, securiteSocial);
+        maRequete.setString(4, email);
+        maRequete.setString(5, rue);
+        maRequete.setInt(6, cp);
+        maRequete.setString(7, ville);
+        maRequete.setInt(8, id_fichepatient);
+        maRequete.executeUpdate();
+    }
 
     public int getId_fichepatient() {
         return id_fichepatient;

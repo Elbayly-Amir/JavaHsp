@@ -65,6 +65,7 @@ public class Secretaire  {
         }
         return s;
     }
+
     public void ajoutSecretaire()  throws SQLException {
         BDD mabdd = new BDD();
         PreparedStatement maRequete = mabdd.getBDD().prepareStatement("INSERT INTO secretaire (nom,prenom,email,mdp) VALUES (?,?,?,md5(?))");
@@ -73,6 +74,14 @@ public class Secretaire  {
         maRequete.setString(3,email);
         maRequete.setString(4,mdp);
         int mesResultats = maRequete.executeUpdate();
+
+    }
+
+    public void deleteSecretaire() throws SQLException {
+            BDD mabdd = new BDD();
+            PreparedStatement maRequete = mabdd.getBDD().prepareStatement("DELETE FROM secretaire where id_secretaire=?");
+            maRequete.setInt(1, id_secretaire);
+            maRequete.executeUpdate();
 
     }
 

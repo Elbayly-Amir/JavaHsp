@@ -29,6 +29,14 @@ public class Fournisseur {
         return fournit;
     }
 
+    public void deleteGestionnaire() throws SQLException {
+        BDD mabdd = new BDD();
+        PreparedStatement maRequete = mabdd.getBDD().prepareStatement("DELETE FROM fournisseur where id_fournisseur=?");
+        maRequete.setInt(1, id_fournisseur);
+        maRequete.executeUpdate();
+
+    }
+
     public int getId_fournisseur() {
         return id_fournisseur;
     }

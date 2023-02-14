@@ -101,6 +101,16 @@ public class Medecin  {
 
     }
 
+    public void updateMedecin() throws SQLException{
+        BDD mabdd = new BDD();
+        PreparedStatement maRequete = mabdd.getBDD().prepareStatement("UPDATE medecin SET `nom`=?,`prenom`=?,`email`=? WHERE id_medecin=?");
+        maRequete.setString(1, nom);
+        maRequete.setString(2, prenom);
+        maRequete.setString(3, email);
+        maRequete.setInt(4, id_medecin);
+        maRequete.executeUpdate();
+    }
+
     public ArrayList<Medecin> getUsers() throws SQLException {
         ArrayList<Medecin> me = new ArrayList<Medecin>();
         Medecin m;

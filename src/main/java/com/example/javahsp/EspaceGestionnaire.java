@@ -8,7 +8,7 @@ import javafx.scene.control.TableView;
 import javafx.scene.layout.Pane;
 import javafx.scene.text.Text;
 
-public class gestionnaire_stock {
+public class EspaceGestionnaire {
 
 
         @FXML

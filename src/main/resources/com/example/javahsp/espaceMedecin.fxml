@@ -1,14 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.Menu?>
-<?import javafx.scene.control.MenuBar?>
-<?import javafx.scene.control.MenuItem?>
-<?import javafx.scene.control.SeparatorMenuItem?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TableView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
-
 
 <AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.javahsp.EspaceMedecin">
    <children>
@@ -16,48 +15,46 @@
         <children>
           <AnchorPane maxHeight="-1.0" maxWidth="-1.0" prefHeight="-1.0" prefWidth="-1.0" VBox.vgrow="ALWAYS">
                <children>
-                <MenuBar fx:id="MenuMedecin" layoutY="1.0">
-                  <menus>
-                    <Menu mnemonicParsing="false" text="Patient">
-                      <items>
-                        <MenuItem fx:id="DossierPatient" mnemonicParsing="false" onAction="#FichePatient" text="Dossier Patient" />
-                        <MenuItem mnemonicParsing="false" text="Rendez-vous Patient" />
-                              <Menu mnemonicParsing="false" text="Ordonnance">
-                                 <items>
-                                    <MenuItem mnemonicParsing="false" text="Ordonnance Papier" />
-                                    <MenuItem mnemonicParsing="false" text="Prise en Charge" />
-                                 </items>
-                              </Menu>
-                        <SeparatorMenuItem mnemonicParsing="false" />
-                        <MenuItem mnemonicParsing="false" text="Quit" />
-                      </items>
-                    </Menu>
-                    <Menu mnemonicParsing="false" text="Produit">
-                      <items>
-                        <MenuItem mnemonicParsing="false" text="Demande Produit" />
-                        <MenuItem mnemonicParsing="false" text="Redo" />
-                        <SeparatorMenuItem mnemonicParsing="false" />
-                        <MenuItem mnemonicParsing="false" text="Cut" />
-                        <MenuItem mnemonicParsing="false" text="Copy" />
-                        <MenuItem mnemonicParsing="false" text="Paste" />
-                        <MenuItem mnemonicParsing="false" text="Delete" />
-                        <SeparatorMenuItem mnemonicParsing="false" />
-                        <MenuItem mnemonicParsing="false" text="Select All" />
-                        <MenuItem mnemonicParsing="false" text="Unselect All" />
-                      </items>
-                    </Menu>
-                    <Menu mnemonicParsing="false" text="Help">
-                      <items>
-                        <MenuItem mnemonicParsing="false" text="About MyHelloApp" />
-                      </items>
-                    </Menu>
-                  </menus>
-                </MenuBar>
-              <Label alignment="CENTER" layoutX="238.0" layoutY="54.0" style="&#10;" text="Espace Médecin" textAlignment="CENTER" textFill="#9f9f9f" wrapText="false">
+              <Label alignment="CENTER" layoutX="229.0" layoutY="67.0" prefHeight="52.0" prefWidth="198.0" style="&#10;" text="Espace Médecin" textAlignment="CENTER" wrapText="false">
                 <font>
-                  <Font size="18.0" />
+                  <Font size="24.0" />
                 </font>
               </Label>
+                  <TabPane layoutX="-7.0" layoutY="207.0" prefHeight="193.0" prefWidth="647.0" tabClosingPolicy="UNAVAILABLE">
+                    <tabs>
+                      <Tab fx:id="tabHospitalisation" text="Hospitalisation">
+                        <content>
+                          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                                 <children>
+                                    <TableView fx:id="viewHospitalisation" layoutX="6.0" layoutY="-2.0" prefHeight="168.0" prefWidth="647.0" />
+                                 </children>
+                              </AnchorPane>
+                        </content>
+                      </Tab>
+                      <Tab fx:id="tabChambre" text="Chambre">
+                        <content>
+                          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                                 <children>
+                                    <TableView fx:id="viewChambre" layoutX="7.0" layoutY="-5.0" prefHeight="169.0" prefWidth="640.0" />
+                                 </children>
+                              </AnchorPane>
+                        </content>
+                      </Tab>
+                        <Tab fx:id="tabDossier" text="Dossier Patient">
+                           <content>
+                              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                                 <children>
+                                    <TableView fx:id="viewDossier" layoutX="7.0" layoutY="-5.0" prefHeight="169.0" prefWidth="640.0" />
+                                 </children>
+                              </AnchorPane>
+                           </content>
+                        </Tab>
+                    </tabs>
+                  </TabPane>
+                  <Button layoutX="546.0" layoutY="14.0" mnemonicParsing="false" onAction="#decoMedecin" text="Deconnexion" />
+                  <Button layoutX="42.0" layoutY="138.0" mnemonicParsing="false" onAction="#ajoutHospitalisation" prefHeight="37.0" prefWidth="174.0" text="Ajoutez une hospitalisation" />
+                  <Button layoutX="434.0" layoutY="138.0" mnemonicParsing="false" onAction="#ajoutOrdonnance" prefHeight="37.0" prefWidth="174.0" text="Ajoutez une ordonnace" />
+                  <Button layoutX="241.0" layoutY="138.0" mnemonicParsing="false" onAction="#ajoutFicheSortit" prefHeight="37.0" prefWidth="174.0" text="Ajoutez une fiche sortit" />
                </children>
           </AnchorPane>
         </children>

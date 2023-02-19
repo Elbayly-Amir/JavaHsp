@@ -4,21 +4,50 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.MenuBar;
 import javafx.scene.control.MenuItem;
+import javafx.scene.control.Tab;
+import javafx.scene.control.TableView;
+import modele.Chambre;
+import modele.Dossier;
+import modele.Hospitalisation;
 
 public class EspaceMedecin {
 
     @FXML
-    private MenuItem DossierPatient;
+    private Tab tabChambre;
 
     @FXML
-    private MenuBar MenuMedecin;
+    private Tab tabDossier;
 
-    public void DossierPatient(ActionEvent actionEvent) {
+    @FXML
+    private Tab tabHospitalisation;
+
+    @FXML
+    private TableView<Chambre> viewChambre;
+
+    @FXML
+    private TableView<Dossier> viewDossier;
+
+    @FXML
+    private TableView<Hospitalisation> viewHospitalisation;
+
+    @FXML
+    void ajoutHospitalisation(ActionEvent event) {
+        HelloApplication.changeScene("ajoutHospitalisation");
     }
 
+    @FXML
+    void ajoutOrdonnance(ActionEvent event) {
 
-    public void FichePatient(ActionEvent actionEvent) {
-        System.out.println("Accès fiche patient ");
-        HelloApplication.changeScene("FichePatient");
     }
+
+    @FXML
+    void decoMedecin(ActionEvent event) {
+        HelloApplication.changeScene("Accueil");
+    }
+
+    @FXML
+    void ajoutFicheSortit(ActionEvent event) {
+        HelloApplication.changeScene("ajoutFicheSortit");
+    }
+
 }

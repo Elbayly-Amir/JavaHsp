@@ -13,7 +13,22 @@ public class FicheSortit {
     private int quantiteProduit;
     private int ref_produit;
 
+    public FicheSortit(String text, String text1, int parseInt) {
+        this.raisonDemande=text;
+        this.nomProduit=text1;
+        this.quantiteProduit=parseInt;
+    }
 
+
+    public void ajoutFicheSortit()  throws SQLException {
+        BDD mabdd = new BDD();
+        PreparedStatement maRequete = mabdd.getBDD().prepareStatement("INSERT INTO fichesorti (raisonDemande,nomProduit,quantiteProduit) VALUES (?,?,?)");
+
+        maRequete.setString(1, raisonDemande);
+        maRequete.setString(2, nomProduit);
+        maRequete.setInt(3, quantiteProduit);
+        int mesResultats = maRequete.executeUpdate();
+    }
 
     public void deleteFicheSortit() throws SQLException {
         BDD mabdd = new BDD();

@@ -26,7 +26,7 @@ public class AjoutProduit {
         Produit ajout = new Produit(DescriptionProduit.getText(), LibelleProduit.getText(),parseInt(NivDangerProduit.getText()));
         ajout.ajoutProduit();
         System.out.println("Produit ajouté !");
-        HelloApplication.changeScene("AjoutProduit");
+        HelloApplication.changeScene("ajoutProduit");
 
     }
 

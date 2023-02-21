@@ -36,13 +36,15 @@ public class AjoutFichePatient {
     void retourFichePatient(ActionEvent event) {
         HelloApplication.changeScene("espaceSecretaire");
     }
+
+
     @FXML
     void ajoutFichePatient(ActionEvent event) throws SQLException {
-        System.out.println(nomPatient.getText());
-        FichePatient ajout = new FichePatient();
+
+        FichePatient ajout = new FichePatient(nomPatient.getText(),prenomPatient.getText(),parseInt(numSecuPatient.getText()),emailPatient.getText(),ruePatient.getText(),parseInt(cpPatient.getText()),villePatient.getText());
         ajout.ajoutFichePatient();
         System.out.println("Fiche Patient ajouté !");
-        HelloApplication.changeScene("espaceSecretaire");
+        HelloApplication.changeScene("ajoutFichePatient");
 
     }
 

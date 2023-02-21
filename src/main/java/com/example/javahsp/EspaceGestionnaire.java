@@ -1,48 +1,38 @@
 package com.example.javahsp;
 
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Menu;
-import javafx.scene.control.MenuBar;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
 import javafx.scene.layout.Pane;
 import javafx.scene.text.Text;
+import modele.FicheSortit;
 
 public class EspaceGestionnaire {
 
 
-        @FXML
-        private Menu deconnexion;
 
         @FXML
-        private TableColumn<?, ?> etat;
+        private Tab tabDemande;
 
         @FXML
-        private Menu ficheproduit;
+        private Tab tabProduit;
+
 
         @FXML
-        private Menu fournisseurs;
+        private TableView<FicheSortit> viewDemande;
 
         @FXML
-        private MenuBar menu;
+        private TableView<Produit> viewProduit;
 
         @FXML
-        private Pane pane;
+        void ajouterProduit(ActionEvent event) {
+                HelloApplication.changeScene("ajoutProduit");
+        }
 
         @FXML
-        private TableColumn<?, ?> produit;
-
-        @FXML
-        private TableColumn<?, ?> quantite;
-
-        @FXML
-        private TableColumn<?, ?> stock;
-
-        @FXML
-        private TableView<?> tableview;
-
-        @FXML
-        private Text text;
+        void deco(ActionEvent event) {
+                HelloApplication.changeScene("Acceuil");
+        }
 
     }
 

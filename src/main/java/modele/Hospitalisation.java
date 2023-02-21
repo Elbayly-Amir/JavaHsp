@@ -12,6 +12,20 @@ public class Hospitalisation {
     private String descriptionMaladie;
     private int ref_chambre;
 
+    public Hospitalisation(String text, int parseInt) {
+        this.descriptionMaladie=text;
+        this.ref_chambre =parseInt;
+    }
+
+
+    public void ajoutHospitalisation()  throws SQLException {
+        BDD mabdd = new BDD();
+        PreparedStatement maRequete = mabdd.getBDD().prepareStatement("INSERT INTO hospitalisation (descriptionMaladie,ref_chambre) VALUES (?,?)");
+
+        maRequete.setString(1, descriptionMaladie);
+        maRequete.setInt(2, ref_chambre);
+        int mesResultats = maRequete.executeUpdate();
+    }
 
     public void deleteHospitalisation() throws SQLException {
         BDD mabdd = new BDD();

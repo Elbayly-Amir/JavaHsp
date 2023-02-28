@@ -2,6 +2,8 @@ package com.example.javahsp;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import modele.Admin;
@@ -12,7 +14,8 @@ public class CoAdmin {
 
 
 
-
+    @FXML
+    private Label erreur;
     @FXML
     private TextField emailAdmin;
 
@@ -24,9 +27,20 @@ public class CoAdmin {
         Admin adm = new Admin(emailAdmin.getText(), mdpAdmin.getText());
         Admin a = adm.connexion();
         if(a == null){
-            System.out.println(" id introuvable");
+
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+
+            alert.setContentText("Careful with the next step!");
+            erreur.setText("erreur");
+
+            alert.showAndWait();
+
         }else{
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.setContentText("Careful with the next step!");
             System.out.println("user connecté!");
+            erreur.setText("erreur");
+
         }
         System.out.println("connexion");
         HelloApplication.changeScene("espaceAdmin");

@@ -2,6 +2,7 @@ package com.example.javahsp;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import modele.Secretaire;
 
@@ -13,7 +14,7 @@ public class AjoutSecretaire {
     private TextField emailSecretaire;
 
     @FXML
-    private TextField mdpSecretaire;
+    private PasswordField mdpSecretaire;
 
     @FXML
     private TextField nomSecretaire;

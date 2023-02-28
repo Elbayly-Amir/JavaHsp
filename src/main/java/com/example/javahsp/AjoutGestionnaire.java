@@ -2,6 +2,7 @@ package com.example.javahsp;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import modele.Gestionnaire;
 import modele.Medecin;
@@ -14,7 +15,7 @@ public class AjoutGestionnaire {
     private TextField emailGestionnaire;
 
     @FXML
-    private TextField mdpGestionnaire;
+    private PasswordField mdpGestionnaire;
 
     @FXML
     private TextField nomGestionnaire;

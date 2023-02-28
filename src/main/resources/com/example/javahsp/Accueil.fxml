@@ -7,14 +7,16 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.javahsp.Accueil">
    <children>
-      <Text layoutX="152.0" layoutY="90.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Bienvenue sur HSP">
+      <Text layoutX="152.0" layoutY="80.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Bienvenue sur HSP">
          <font>
             <Font size="36.0" />
          </font>
       </Text>
-      <Button layoutX="186.0" layoutY="195.0" mnemonicParsing="false" onAction="#medecin" prefHeight="48.0" prefWidth="97.0" text="Medecin" />
-      <Button layoutX="333.0" layoutY="195.0" mnemonicParsing="false" onAction="#gestionnaire" prefHeight="48.0" prefWidth="97.0" text="Gestionnaire" />
-      <Button layoutX="477.0" layoutY="195.0" mnemonicParsing="false" onAction="#secretaire" prefHeight="48.0" prefWidth="97.0" text="Secretaire" />
-      <Button layoutX="29.0" layoutY="195.0" mnemonicParsing="false" onAction="#admin" prefHeight="48.0" prefWidth="97.0" text="Admin" />
+      <Button layoutX="187.0" layoutY="219.0" mnemonicParsing="false" onAction="#medecin" prefHeight="48.0" prefWidth="97.0" text="Medecin" />
+      <Button layoutX="338.0" layoutY="219.0" mnemonicParsing="false" onAction="#gestionnaire" prefHeight="48.0" prefWidth="97.0" text="Gestionnaire" />
+      <Button layoutX="479.0" layoutY="219.0" mnemonicParsing="false" onAction="#secretaire" prefHeight="48.0" prefWidth="97.0" text="Secretaire" />
+      <Button layoutX="28.0" layoutY="219.0" mnemonicParsing="false" onAction="#admin" prefHeight="48.0" prefWidth="97.0" text="Admin" />
+      <Text layoutX="235.0" layoutY="369.0" strokeType="OUTSIDE" strokeWidth="0.0" text="© Copyright 2023" wrappingWidth="103.455078125" />
+      <Button layoutX="252.0" layoutY="128.0" mnemonicParsing="false" onAction="#superAdmin" prefHeight="48.0" prefWidth="97.0" text="Super Admin" />
    </children>
 </AnchorPane>

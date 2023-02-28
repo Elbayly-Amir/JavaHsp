@@ -28,5 +28,11 @@ public class Accueil {
         ConnexionSecretaire cs= new ConnexionSecretaire();
         HelloApplication.changeScene("connexionSecretaire");
     }
+
+
+    @FXML
+    void superAdmin(ActionEvent event) {
+            HelloApplication.changeScene("coSuperAdmin");
+    }
     }
 

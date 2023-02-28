@@ -47,61 +47,88 @@ public class EspaceAdmin implements Initializable {
                 {"Nom", "nom"},
                 {"Prenom", "prenom"},
                 {"Email", "email"},
+                {"Mdp", "mdp"},
         };
         for (int i = 0; i < colonnes.length; i++) {
             TableColumn<Secretaire, String> myTble = new TableColumn<>(colonnes[i][0]);
-            myTble.setCellValueFactory(new PropertyValueFactory<Secretaire,String>(colonnes[i][1]));
+            myTble.setCellValueFactory(new PropertyValueFactory<Secretaire, String>(colonnes[i][1]));
             tableViewSecretaire.getColumns().add(myTble);
         }
-        Secretaire s =  new Secretaire();
-        try {
-            tableViewSecretaire.getItems().addAll(s.getUsers());
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
+
+        // afficher les secrétaires lorsque l'onglet est sélectionné
+        secretaire.setOnSelectionChanged(event -> {
+            if (secretaire.isSelected()) {
+                afficherSecretaires();
+            }
+        });
 
         String[][] colonne = {
                 {"ID", "id_gestionnaire"},
                 {"Nom", "nom"},
                 {"Prenom", "prenom"},
                 {"Email", "email"},
+                {"Mdp", "mdp"},
         };
-        for (int i = 0; i < colonnes.length; i++) {
-            TableColumn<Gestionnaire, String> firstNameColumn = new TableColumn<>(colonnes[i][0]);
-            firstNameColumn.setCellValueFactory(new PropertyValueFactory<>(colonnes[i][1]));
+        for (int i = 0; i < colonne.length; i++) {
+            TableColumn<Gestionnaire, String> myTble = new TableColumn<>(colonne[i][0]);
+            myTble.setCellValueFactory(new PropertyValueFactory<Gestionnaire, String>(colonne[i][1]));
+            tableViewGestionnaire.getColumns().add(myTble);
+        }
 
-            tableViewGestionnaire.getColumns().add(firstNameColumn);
-        }
-        Gestionnaire g =  new Gestionnaire();
-        try {
-            tableViewGestionnaire.getItems().addAll(g.getUsers());
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
+        // afficher les secrétaires lorsque l'onglet est sélectionné
+        gestionnaire.setOnSelectionChanged(event -> {
+            if (gestionnaire.isSelected()) {
+                afficherGestionnaire();
+            }
+        });
 
         String[][] colonn = {
                 {"ID", "id_medecin"},
                 {"Nom", "nom"},
                 {"Prenom", "prenom"},
                 {"Email", "email"},
+                {"Mdp", "mdp"},
         };
-        for (int i = 0; i < colonnes.length; i++) {
-            TableColumn<Medecin, String> firstNameColumn = new TableColumn<>(colonnes[i][0]);
-            firstNameColumn.setCellValueFactory(new PropertyValueFactory<>(colonnes[i][1]));
+        for (int i = 0; i < colonne.length; i++) {
+            TableColumn<Medecin, String> myTble = new TableColumn<>(colonne[i][0]);
+            myTble.setCellValueFactory(new PropertyValueFactory<Medecin, String>(colonne[i][1]));
+            tableViewMedecin.getColumns().add(myTble);
+        }
 
-            tableViewMedecin.getColumns().add(firstNameColumn);
+        // afficher les secrétaires lorsque l'onglet est sélectionné
+        medecin.setOnSelectionChanged(event -> {
+            if (medecin.isSelected()) {
+                afficherMedecin();
+            }
+        });
     }
-        Medecin m =  new Medecin();
+
+    private void afficherMedecin() {
+        Medecin g = new Medecin();
         try {
-            tableViewMedecin.getItems().addAll(m.getUsers());
+            tableViewMedecin.getItems().addAll(g.getUsers());
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
-
-
-
-
     }
+    private void afficherGestionnaire() {
+        Gestionnaire g = new Gestionnaire();
+        try {
+            tableViewGestionnaire.getItems().addAll(g.getUsers());
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    private void afficherSecretaires() {
+        Secretaire s = new Secretaire();
+        try {
+            tableViewSecretaire.getItems().addAll(s.getUsers());
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
     @FXML
     void AjoutMedecin(ActionEvent event) {
         HelloApplication.changeScene("ajoutMedecin");

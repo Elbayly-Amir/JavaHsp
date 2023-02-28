@@ -107,23 +107,21 @@ public class Secretaire  {
         ArrayList<Secretaire> sec = new ArrayList<Secretaire>();
         Secretaire s;
         BDD madd = new BDD();
-        PreparedStatement maRequete = madd.getBDD().prepareStatement("Select * from secretaire where id_secretaire=?");
-        maRequete.setInt(1,id_secretaire);
+        PreparedStatement maRequete = madd.getBDD().prepareStatement("Select * from secretaire ");
         ResultSet mesResultats = maRequete.executeQuery();
 
         try {
-
             while (mesResultats.next()) {
-                s = new Secretaire( mesResultats.getInt("id_secretaire"), mesResultats.getString("nom"), mesResultats.getString("prenom"), mesResultats.getString("email"),  mesResultats.getString("mdp"));
+                s = new Secretaire(mesResultats.getInt("id_secretaire"), mesResultats.getString("nom"), mesResultats.getString("prenom"), mesResultats.getString("email"),  mesResultats.getString("mdp"));
                 sec.add(s);
             }
         } catch (SQLException e) {
-// TODO Auto-generated catch block
             e.printStackTrace();
         }
 
         return sec;
     }
+
 
 
     public int getId_secretaire() {

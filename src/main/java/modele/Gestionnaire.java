@@ -75,7 +75,7 @@ public class Gestionnaire {
         PreparedStatement maRequete = mabdd.getBDD().prepareStatement("INSERT INTO gestionnaire (nom, prenom,email,mdp) VALUES (?,?,?,md5(?))");
         maRequete.setString(1,nom);
         maRequete.setString(2,prenom);
-        maRequete.setString(3,mdp);
+        maRequete.setString(3,email);
         maRequete.setString(4,mdp);
         int mesResultats = maRequete.executeUpdate();
 
@@ -119,20 +119,24 @@ public class Gestionnaire {
     }
 
     public ArrayList<Gestionnaire> getUsers() throws SQLException {
-        ArrayList<Gestionnaire> ge = new ArrayList<Gestionnaire>();
+        ArrayList<Gestionnaire> sec = new ArrayList<Gestionnaire>();
         Gestionnaire g;
-        BDD mabdd = new BDD();
-
-        PreparedStatement maRequete = mabdd.getBDD().prepareStatement("Select * from gestionnaire ");
+        BDD madd = new BDD();
+        PreparedStatement maRequete = madd.getBDD().prepareStatement("Select * from gestionnaire ");
         ResultSet mesResultats = maRequete.executeQuery();
-        while (mesResultats.next()) {
-            g = new Gestionnaire(mesResultats.getInt("id_gestionnaire"), mesResultats.getString("nom"), mesResultats.getString("prenom"), mesResultats.getString("email"),  mesResultats.getString("mdp"));
-            ge.add(g);
+
+        try {
+            while (mesResultats.next()) {
+                g = new Gestionnaire(mesResultats.getInt("id_gestionnaire"), mesResultats.getString("nom"), mesResultats.getString("prenom"), mesResultats.getString("email"),  mesResultats.getString("mdp"));
+                sec.add(g);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
 
-
-        return ge;
+        return sec;
     }
+
     public int getId_gestionnaire() {
         return id_gestionnaire;
     }

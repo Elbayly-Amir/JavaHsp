@@ -10,8 +10,6 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 public class Admin {
 
-
-
     private String email;
     private String mdp;
     private int id_admin;
@@ -54,6 +52,16 @@ public class Admin {
             }
         }
         return a;
+    }
+
+    public void ajoutAdmin()  throws SQLException {
+        BDD mabdd = new BDD();
+        PreparedStatement maRequete = mabdd.getBDD().prepareStatement("INSERT INTO admin (email, mdp) VALUES (?,md5(?))");
+        maRequete.setString(1,email);
+        maRequete.setString(2,mdp);
+
+        int mesResultats = maRequete.executeUpdate();
+
     }
 
 

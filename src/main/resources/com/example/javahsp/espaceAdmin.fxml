@@ -10,26 +10,11 @@
 
 <AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.javahsp.EspaceAdmin">
    <children>
-      <Text layoutX="265.0" layoutY="83.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Admin">
+      <Text layoutX="236.0" layoutY="53.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Espace Admin">
          <font>
             <Font size="24.0" />
          </font>
       </Text>
-      <Button layoutX="24.0" layoutY="120.0" mnemonicParsing="false" onAction="#Ajoutgestionnaire" text="Ajout Gestionnaire">
-         <font>
-            <Font size="18.0" />
-         </font>
-      </Button>
-      <Button layoutX="237.0" layoutY="120.0" mnemonicParsing="false" onAction="#AjoutMedecin" prefHeight="40.0" prefWidth="146.0" text="Ajout Medecin">
-         <font>
-            <Font size="18.0" />
-         </font>
-      </Button>
-      <Button layoutX="419.0" layoutY="120.0" mnemonicParsing="false" onAction="#AjoutSecretaire" prefHeight="40.0" prefWidth="157.0" text="Ajout Secretaire">
-         <font>
-            <Font size="18.0" />
-         </font>
-      </Button>
       <Button layoutX="534.0" layoutY="14.0" mnemonicParsing="false" onAction="#retourAdmin" text="Deconnexion" />
       <TabPane fx:id="admin" layoutY="166.0" prefHeight="234.0" prefWidth="620.0" tabClosingPolicy="UNAVAILABLE">
         <tabs>
@@ -62,5 +47,10 @@
             </Tab>
         </tabs>
       </TabPane>
+      <Button layoutX="245.0" layoutY="95.0" mnemonicParsing="false" onAction="#ajoutUser" prefHeight="45.0" prefWidth="112.0" text="Ajout Utilisateur">
+         <font>
+            <Font size="13.0" />
+         </font>
+      </Button>
    </children>
 </AnchorPane>

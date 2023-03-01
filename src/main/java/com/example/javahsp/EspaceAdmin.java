@@ -8,9 +8,7 @@ import javafx.scene.control.TabPane;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
-import modele.Gestionnaire;
-import modele.Medecin;
-import modele.Secretaire;
+import modele.User;
 
 import java.net.URL;
 import java.sql.SQLException;
@@ -19,8 +17,7 @@ import java.util.ResourceBundle;
 public class EspaceAdmin implements Initializable {
 
 
-    @FXML
-    private TabPane admin;
+
     @FXML
     private Tab gestionnaire;
 
@@ -31,13 +28,13 @@ public class EspaceAdmin implements Initializable {
     private Tab secretaire;
 
     @FXML
-    private TableView<Gestionnaire> tableViewGestionnaire;
+    private TableView<User> tableViewGestionnaire;
 
     @FXML
-    private TableView<Medecin> tableViewMedecin;
+    private TableView<User> tableViewMedecin;
 
     @FXML
-    private TableView<Secretaire> tableViewSecretaire;
+    private TableView<User> tableViewSecretaire;
 
 
     @Override
@@ -50,8 +47,8 @@ public class EspaceAdmin implements Initializable {
                 {"Mdp", "mdp"},
         };
         for (int i = 0; i < colonnes.length; i++) {
-            TableColumn<Secretaire, String> myTble = new TableColumn<>(colonnes[i][0]);
-            myTble.setCellValueFactory(new PropertyValueFactory<Secretaire, String>(colonnes[i][1]));
+            TableColumn<User, String> myTble = new TableColumn<>(colonnes[i][0]);
+            myTble.setCellValueFactory(new PropertyValueFactory<User, String>(colonnes[i][1]));
             tableViewSecretaire.getColumns().add(myTble);
         }
 
@@ -63,15 +60,15 @@ public class EspaceAdmin implements Initializable {
         });
 
         String[][] colonne = {
-                {"ID", "id_gestionnaire"},
+                {"ID", "id_user"},
                 {"Nom", "nom"},
                 {"Prenom", "prenom"},
                 {"Email", "email"},
                 {"Mdp", "mdp"},
         };
         for (int i = 0; i < colonne.length; i++) {
-            TableColumn<Gestionnaire, String> myTble = new TableColumn<>(colonne[i][0]);
-            myTble.setCellValueFactory(new PropertyValueFactory<Gestionnaire, String>(colonne[i][1]));
+            TableColumn<User, String> myTble = new TableColumn<>(colonne[i][0]);
+            myTble.setCellValueFactory(new PropertyValueFactory<User, String>(colonne[i][1]));
             tableViewGestionnaire.getColumns().add(myTble);
         }
 
@@ -83,15 +80,15 @@ public class EspaceAdmin implements Initializable {
         });
 
         String[][] colonn = {
-                {"ID", "id_medecin"},
+                {"ID", "id_user"},
                 {"Nom", "nom"},
                 {"Prenom", "prenom"},
                 {"Email", "email"},
                 {"Mdp", "mdp"},
         };
         for (int i = 0; i < colonne.length; i++) {
-            TableColumn<Medecin, String> myTble = new TableColumn<>(colonne[i][0]);
-            myTble.setCellValueFactory(new PropertyValueFactory<Medecin, String>(colonne[i][1]));
+            TableColumn<User, String> myTble = new TableColumn<>(colonne[i][0]);
+            myTble.setCellValueFactory(new PropertyValueFactory<User, String>(colonne[i][1]));
             tableViewMedecin.getColumns().add(myTble);
         }
 
@@ -104,48 +101,38 @@ public class EspaceAdmin implements Initializable {
     }
 
     private void afficherMedecin() {
-        Medecin g = new Medecin();
+        User m = new User();
         try {
-            tableViewMedecin.getItems().addAll(g.getUsers());
+            tableViewMedecin.getItems().addAll(m.getUsersMedecin());
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
     }
     private void afficherGestionnaire() {
-        Gestionnaire g = new Gestionnaire();
+        User g =  new User();
         try {
-            tableViewGestionnaire.getItems().addAll(g.getUsers());
+            tableViewGestionnaire.getItems().addAll(g.getUsersGestionnaiere());
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
     }
 
     private void afficherSecretaires() {
-        Secretaire s = new Secretaire();
+        User s = new User();
         try {
-            tableViewSecretaire.getItems().addAll(s.getUsers());
+            tableViewSecretaire.getItems().addAll(s.getUsersSecretaire());
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
     }
 
     @FXML
-    void AjoutMedecin(ActionEvent event) {
-        HelloApplication.changeScene("ajoutMedecin");
-    }
+    void ajoutUser(ActionEvent event) {
 
-    @FXML
-    void AjoutSecretaire(ActionEvent event) {
-        HelloApplication.changeScene("ajoutSecretaire");
-    }
-
-    @FXML
-    void Ajoutgestionnaire(ActionEvent event) {
-        HelloApplication.changeScene("ajoutGestionnaire");
     }
 
     @FXML
     void retourAdmin(ActionEvent event) {
-        HelloApplication.changeScene("Accueil");
+        HelloApplication.changeScene("connexionUser");
     }
 }

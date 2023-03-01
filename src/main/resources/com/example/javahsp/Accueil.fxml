@@ -12,11 +12,10 @@
             <Font size="36.0" />
          </font>
       </Text>
-      <Button layoutX="187.0" layoutY="219.0" mnemonicParsing="false" onAction="#medecin" prefHeight="48.0" prefWidth="97.0" text="Medecin" />
-      <Button layoutX="338.0" layoutY="219.0" mnemonicParsing="false" onAction="#gestionnaire" prefHeight="48.0" prefWidth="97.0" text="Gestionnaire" />
-      <Button layoutX="479.0" layoutY="219.0" mnemonicParsing="false" onAction="#secretaire" prefHeight="48.0" prefWidth="97.0" text="Secretaire" />
-      <Button layoutX="28.0" layoutY="219.0" mnemonicParsing="false" onAction="#admin" prefHeight="48.0" prefWidth="97.0" text="Admin" />
+      <Button layoutX="205.0" layoutY="162.0" mnemonicParsing="false" onAction="#connexion" prefHeight="75.0" prefWidth="164.0" text="Connexion">
+         <font>
+            <Font size="18.0" />
+         </font></Button>
       <Text layoutX="235.0" layoutY="369.0" strokeType="OUTSIDE" strokeWidth="0.0" text="© Copyright 2023" wrappingWidth="103.455078125" />
-      <Button layoutX="252.0" layoutY="128.0" mnemonicParsing="false" onAction="#superAdmin" prefHeight="48.0" prefWidth="97.0" text="Super Admin" />
    </children>
 </AnchorPane>

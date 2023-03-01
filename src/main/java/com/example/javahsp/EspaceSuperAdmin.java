@@ -4,10 +4,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TableView;
-import modele.Admin;
-import modele.Gestionnaire;
-import modele.Medecin;
-import modele.Secretaire;
+import modele.User;
 
 public class EspaceSuperAdmin {
 
@@ -24,16 +21,16 @@ public class EspaceSuperAdmin {
     private Tab tabSecretaire;
 
     @FXML
-    private TableView<Admin> viewAdmin;
+    private TableView<User> viewAdmin;
 
     @FXML
-    private TableView<Gestionnaire> viewGest;
+    private TableView<User> viewGest;
 
     @FXML
-    private TableView<Medecin> viewMedecin;
+    private TableView<User> viewMedecin;
 
     @FXML
-    private TableView<Secretaire> viewSecretaire;
+    private TableView<User> viewSecretaire;
 
     @FXML
     void ajoutAdmin(ActionEvent event) {

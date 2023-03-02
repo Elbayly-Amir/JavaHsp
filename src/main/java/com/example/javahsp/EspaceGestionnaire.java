@@ -8,6 +8,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.Pane;
 import javafx.scene.text.Text;
 import modele.FicheSortit;
+import modele.Produit;
 import modele.User;
 
 import java.net.URL;
@@ -54,10 +55,28 @@ public class EspaceGestionnaire implements Initializable {
                         myTble.setCellValueFactory(new PropertyValueFactory<FicheSortit, String>(colonne[i][1]));
                         viewDemande.getColumns().add(myTble);
                 }
-                // afficher les secrétaires lorsque l'onglet est sélectionné
+                // afficher les
                 tabDemande.setOnSelectionChanged(event -> {
                         if (tabDemande.isSelected()) {
                                 afficherFicheSortit();
+                        }
+                });
+
+                String[][] colonnee = {
+                        {"Id", "id_produit"},
+                        {"Libelle", "libelle"},
+                        {"Description", "description"},
+                        {"NivDanger", "nivDanger"},
+                };
+                for (int i = 0; i < colonnee.length; i++) {
+                        TableColumn<Produit, String> myTbles = new TableColumn<>(colonnee[i][0]);
+                        myTbles.setCellValueFactory(new PropertyValueFactory<Produit, String>(colonnee[i][1]));
+                        viewProduit.getColumns().add(myTbles);
+                }
+                // afficher les secrétaires lorsque l'onglet est sélectionné
+                tabProduit.setOnSelectionChanged(event -> {
+                        if (tabProduit.isSelected()) {
+                                afficherProduit();
                         }
                 });
         }
@@ -72,4 +91,12 @@ public class EspaceGestionnaire implements Initializable {
                 }
         }
 
+        private void afficherProduit() {
+                Produit p = new Produit();
+                try {
+                        viewProduit.getItems().addAll(p.getProduit());
+                } catch (SQLException e) {
+                        throw new RuntimeException(e);
+                }
+        }
 }

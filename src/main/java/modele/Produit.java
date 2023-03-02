@@ -5,6 +5,7 @@ import BDD.BDD;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 public class Produit {
 
@@ -13,14 +14,12 @@ public class Produit {
     private String description;
     private int nivDanger;
 
-
-    public Produit(String text, String text1, int nivDanger) {
-        this.libelle= text;
-        this.description=text1;
+    public Produit(int idProduit, String libelle, String description, int nivDanger) {
+        this.id_produit = idProduit;
+        this.libelle=libelle;
+        this.description=description;
         this.nivDanger=nivDanger;
-
     }
-
 
     public void AjoutProduit()  throws SQLException {
         BDD mabdd = new BDD();
@@ -39,13 +38,27 @@ public class Produit {
     }
 
     public Produit() {
-        this.libelle= libelle;
-        this.description=description;
-        this.nivDanger=nivDanger;
+
     }
 
+    public ArrayList<Produit> getProduit() throws SQLException {
+        ArrayList<Produit> produit = new ArrayList<Produit>();
+        Produit p;
+        BDD mabdd = new BDD();
+        PreparedStatement maRequete = mabdd.getBDD().prepareStatement("SELECT * FROM produit");
+        ResultSet mesResultats = maRequete.executeQuery();
 
+        try {
+            while (mesResultats.next()) {
+                p = new Produit(mesResultats.getInt("id_produit"), mesResultats.getString("libelle"), mesResultats.getString("description"), mesResultats.getInt("nivDanger"));
+                produit.add(p);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
 
+        return produit;
+    }
     public int getId_produit() {
         return id_produit;
     }

@@ -27,7 +27,7 @@ public class ConnexionUser {
 
     @FXML
     void mdpOublie(ActionEvent event) {
-        HelloApplication.changeScene("");
+        HelloApplication.changeScene("resetPassword");
     }
 
 

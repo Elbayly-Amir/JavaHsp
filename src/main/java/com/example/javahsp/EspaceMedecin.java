@@ -2,13 +2,17 @@ package com.example.javahsp;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.MenuBar;
-import javafx.scene.control.MenuItem;
-import javafx.scene.control.Tab;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
 import modele.Chambre;
 import modele.Dossier;
+import modele.FichePatient;
+import modele.FicheSortit;
 import modele.Hospitalisation;
+
+import java.net.URL;
+import java.sql.SQLException;
+import java.util.ResourceBundle;
 
 public class EspaceMedecin {
 
@@ -49,5 +53,6 @@ public class EspaceMedecin {
     void ajoutFicheSortit(ActionEvent event) {
         HelloApplication.changeScene("ajoutFicheSortit");
     }
+
 
 }

@@ -5,6 +5,7 @@ import BDD.BDD;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 public class FichePatient {
 
@@ -19,6 +20,16 @@ public class FichePatient {
     private String ville;
 
 
+    public FichePatient(int id_fichepatient, String nom, String prenom, int securiteSocial, String email, String rue, int cp, String ville) {
+        this.id_fichepatient = id_fichepatient;
+        this.nom= nom;
+        this.prenom=prenom;
+        this.securiteSocial=securiteSocial;
+        this.rue=rue;
+        this.cp=cp;
+        this.ville=ville;
+    }
+
     public FichePatient() {
         this.nom= nom;
         this.prenom=prenom;
@@ -27,6 +38,7 @@ public class FichePatient {
         this.cp=cp;
         this.ville=ville;
     }
+
 
     public void ajoutFichePatient()  throws SQLException {
         BDD mabdd = new BDD();
@@ -79,6 +91,25 @@ public class FichePatient {
         maRequete.setString(7, ville);
         maRequete.setInt(8, id_fichepatient);
         maRequete.executeUpdate();
+    }
+
+    public ArrayList<FichePatient>getFichePatient() throws SQLException {
+        ArrayList<FichePatient> fichePatients = new ArrayList<FichePatient>();
+        FichePatient f;
+        BDD madd = new BDD();
+        PreparedStatement maRequete = madd.getBDD().prepareStatement("SELECT * FROM fichepatient");
+        ResultSet mesResultats = maRequete.executeQuery();
+
+        try {
+            while (mesResultats.next()) {
+                f = new FichePatient(mesResultats.getInt("id_fichepatient"), mesResultats.getString("nom"), mesResultats.getString("prenom"), mesResultats.getInt("securiteSocial"), mesResultats.getString("email"), mesResultats.getString("rue"), mesResultats.getInt("cp"), mesResultats.getString("ville"));
+                fichePatients.add(f);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return fichePatients;
     }
 
     public int getId_fichepatient() {

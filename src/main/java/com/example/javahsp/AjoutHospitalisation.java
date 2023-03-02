@@ -3,7 +3,6 @@ package com.example.javahsp;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.TextField;
-import modele.Gestionnaire;
 import modele.Hospitalisation;
 
 import java.sql.SQLException;

@@ -49,7 +49,7 @@ public class User {
     public void connexionUser() throws SQLException {
         BDD mabdd = new BDD();
 
-        PreparedStatement maRequete = mabdd.getBDD().prepareStatement("SELECT * FROM user WHERE email = ? AND mdp = ?");
+        PreparedStatement maRequete = mabdd.getBDD().prepareStatement("SELECT * FROM user WHERE email = ? AND mdp = md5(?)");
         maRequete.setString(1, email);
         maRequete.setString(2, mdp);
 

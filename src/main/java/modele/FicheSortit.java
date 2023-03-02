@@ -3,7 +3,9 @@ package modele;
 import BDD.BDD;
 
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 public class FicheSortit {
 
@@ -13,10 +15,25 @@ public class FicheSortit {
     private int quantiteProduit;
     private int ref_produit;
 
+    public FicheSortit() {
+        this.id_fichesorti = id_fichesorti;
+        this.raisonDemande = raisonDemande;
+        this.nomProduit = nomProduit;
+        this.quantiteProduit = quantiteProduit;
+        this.ref_produit = ref_produit;
+    }
     public FicheSortit(String text, String text1, int parseInt) {
+
         this.raisonDemande=text;
         this.nomProduit=text1;
         this.quantiteProduit=parseInt;
+    }
+
+    public FicheSortit(int idFichesorti, String raisonDemande, String nomProduit, int quantiteProduit) {
+        this.id_fichesorti = idFichesorti;
+        this.raisonDemande = raisonDemande;
+        this.nomProduit = nomProduit;
+        this.quantiteProduit = quantiteProduit;
     }
 
 
@@ -48,6 +65,25 @@ public class FicheSortit {
         maRequete.setInt(5, id_fichesorti);
         maRequete.executeUpdate();
     }
+    public ArrayList<FicheSortit> getFicheSortit() throws SQLException {
+        ArrayList<FicheSortit> fichesortit = new ArrayList<FicheSortit>();
+        FicheSortit f;
+        BDD madd = new BDD();
+        PreparedStatement maRequete = madd.getBDD().prepareStatement("SELECT * FROM fichesorti");
+        ResultSet mesResultats = maRequete.executeQuery();
+
+        try {
+            while (mesResultats.next()) {
+                f = new FicheSortit(mesResultats.getInt("id_fichesorti"), mesResultats.getString("raisonDemande"), mesResultats.getString("nomProduit"), mesResultats.getInt("quantiteProduit"));
+                fichesortit.add(f);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return fichesortit;
+    }
+
 
     public int getId_fichesorti() {
         return id_fichesorti;

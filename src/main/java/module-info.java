@@ -14,4 +14,8 @@ module com.example.javahsp {
 
     opens com.example.javahsp to javafx.fxml;
     exports com.example.javahsp;
+    opens modele to javafx.base;
+    requires java.mail;
+    requires activation;
+
 }

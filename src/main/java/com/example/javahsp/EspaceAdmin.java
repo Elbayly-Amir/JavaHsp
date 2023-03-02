@@ -3,10 +3,7 @@ package com.example.javahsp;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Tab;
-import javafx.scene.control.TabPane;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import modele.User;
 
@@ -128,11 +125,16 @@ public class EspaceAdmin implements Initializable {
 
     @FXML
     void ajoutUser(ActionEvent event) {
-
+        HelloApplication.changeScene("ajoutUser");
     }
 
     @FXML
     void retourAdmin(ActionEvent event) {
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("Déconnexion");
+        alert.setHeaderText(null);
+        alert.setContentText("Vous avez été déconnecté.");
+        alert.showAndWait();
         HelloApplication.changeScene("connexionUser");
     }
 }

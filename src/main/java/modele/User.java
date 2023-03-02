@@ -75,7 +75,7 @@ public class User {
                     HelloApplication.changeScene("espaceAdmin");
                     System.out.println("Connexion réussie en tant qu'administrateur.");
                     break;
-                case "superAdmin":
+                case "superadmin":
                     HelloApplication.changeScene("espaceSuperAdmin");
                     System.out.println("Connexion réussie en tant que super-administrateur.");
                     break;
@@ -91,8 +91,6 @@ public class User {
             alert.showAndWait();
             System.out.println("Votre email et/ou mot de passe est incorrect.");
         }
-
-
     }
 
 
@@ -163,7 +161,6 @@ public class User {
         return user;
     }
 
-
     public ArrayList<User> getUsersGestionnaiere() throws SQLException {
         ArrayList<User> user = new ArrayList<User>();
         User u;
@@ -219,10 +216,10 @@ public class User {
         return user;
     }
 
-    public User getUserByMail(String text) throws SQLException {
+    public User getUserByMail(String email) throws SQLException {
         User user = null;
         BDD madd = new BDD();
-        PreparedStatement maRequete = madd.getBDD().prepareStatement("Select * from user where mail = ?");
+        PreparedStatement maRequete = madd.getBDD().prepareStatement("Select * from user where email = ?");
 
         try {
             maRequete.setString(1, email);

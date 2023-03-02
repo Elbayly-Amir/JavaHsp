@@ -41,14 +41,17 @@ public class AjoutUser {
         String email = emailUser.getText();
         String mdp = mdpUser.getText();
 
-        // Récupération du rôle choisi dans le menu déroulant
         String role = "";
-        if (gestionnaire.getText().equals("Gestionnaire")) {
-            role = "gestionnaire";
-        } if (medecin.getText().equals("Médecin")) {
-            role = "medecin";
-        } if (secretaire.getText().equals("Secrétaire")) {
-            role = "secretaire";
+        switch (gestionnaire.getText()) {
+            case "Gestionnaire":
+                role = "gestionnaire";
+                break;
+            case "Médecin":
+                role = "medecin";
+                break;
+            case "Secrétaire":
+                role = "secretaire";
+                break;
         }
 
         // Création d'un nouvel utilisateur

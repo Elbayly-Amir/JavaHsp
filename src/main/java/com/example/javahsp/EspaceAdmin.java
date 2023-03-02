@@ -37,11 +37,11 @@ public class EspaceAdmin implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         String[][] colonnes = {
-                {"ID", "id_secretaire"},
+                {"ID", "id_user"},
                 {"Nom", "nom"},
                 {"Prenom", "prenom"},
                 {"Email", "email"},
-                {"Mdp", "mdp"},
+
         };
         for (int i = 0; i < colonnes.length; i++) {
             TableColumn<User, String> myTble = new TableColumn<>(colonnes[i][0]);
@@ -61,7 +61,7 @@ public class EspaceAdmin implements Initializable {
                 {"Nom", "nom"},
                 {"Prenom", "prenom"},
                 {"Email", "email"},
-                {"Mdp", "mdp"},
+
         };
         for (int i = 0; i < colonne.length; i++) {
             TableColumn<User, String> myTble = new TableColumn<>(colonne[i][0]);
@@ -81,7 +81,7 @@ public class EspaceAdmin implements Initializable {
                 {"Nom", "nom"},
                 {"Prenom", "prenom"},
                 {"Email", "email"},
-                {"Mdp", "mdp"},
+
         };
         for (int i = 0; i < colonne.length; i++) {
             TableColumn<User, String> myTble = new TableColumn<>(colonne[i][0]);

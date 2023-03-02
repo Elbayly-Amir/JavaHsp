@@ -15,10 +15,6 @@
             <Font size="24.0" />
          </font>
       </Text>
-      <Button layoutX="29.0" layoutY="168.0" mnemonicParsing="false" onAction="#ajoutAdmin" prefHeight="39.0" prefWidth="130.0" text="Ajout Admin" />
-      <Button layoutX="170.0" layoutY="168.0" mnemonicParsing="false" onAction="#ajoutGestionnaire" prefHeight="39.0" prefWidth="130.0" text="Ajout Gestionnaire " />
-      <Button layoutX="313.0" layoutY="168.0" mnemonicParsing="false" onAction="#ajoutMedecin" prefHeight="39.0" prefWidth="130.0" text="Ajout Medecin" />
-      <Button layoutX="456.0" layoutY="168.0" mnemonicParsing="false" onAction="#ajoutSecretaire" prefHeight="39.0" prefWidth="130.0" text="Ajout Secretaire" />
       <TabPane layoutY="220.0" prefHeight="198.0" prefWidth="600.0" tabClosingPolicy="UNAVAILABLE">
         <tabs>
           <Tab fx:id="tabAdmin" text="Admin">
@@ -60,5 +56,6 @@
         </tabs>
       </TabPane>
       <Button layoutX="521.0" layoutY="14.0" mnemonicParsing="false" onAction="#decoSuperAdmin" text="Deconnexion" />
+      <Button layoutX="252.0" layoutY="144.0" mnemonicParsing="false" onAction="#ajoutUser" prefHeight="46.0" prefWidth="120.0" text="Ajout Utilisateur" />
    </children>
 </AnchorPane>

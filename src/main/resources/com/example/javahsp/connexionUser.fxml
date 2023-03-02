@@ -19,6 +19,7 @@
       <TextField fx:id="email" layoutX="216.0" layoutY="188.0" />
       <PasswordField fx:id="mdp" layoutX="216.0" layoutY="264.0" />
       <Button layoutX="238.0" layoutY="323.0" mnemonicParsing="false" onAction="#connexion" prefHeight="43.0" prefWidth="99.0" text="Connexion" />
-      <Button layoutX="527.0" layoutY="21.0" mnemonicParsing="false" onAction="#retour" text="Retour" />
+      <Button layoutX="589.0" layoutY="14.0" mnemonicParsing="false" onAction="#retour" text="Retour" />
+      <Button layoutX="534.0" layoutY="366.0" mnemonicParsing="false" onAction="#mdpOublie" text="Mot de passe oubliè ?" />
    </children>
 </AnchorPane>

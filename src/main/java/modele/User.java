@@ -134,11 +134,11 @@ public class User {
         }
     }
 
-    public void changePassword() throws SQLException {
+    public void changePassword(User user) throws SQLException {
         BDD mabdd = new BDD();
-        PreparedStatement maRequete = mabdd.getBDD().prepareStatement("UPDATE user SET `mdp`=? WHERE id_user=?");
-        maRequete.setString(1, mdp);
-        maRequete.setInt(2, id_user);
+        PreparedStatement maRequete = mabdd.getBDD().prepareStatement("UPDATE user SET `mdp`= md5(?) WHERE id_user=?");
+        maRequete.setString(1, user.getMdp());
+        maRequete.setInt(2, user.getId_user());
         maRequete.executeUpdate();
     }
 
@@ -234,6 +234,18 @@ public class User {
         }
 
         return user;
+    }
+
+    public int getUserIdByEmail(String email) throws SQLException {
+        BDD mabdd = new BDD();
+        PreparedStatement maRequete = mabdd.getBDD().prepareStatement("SELECT id_user FROM user WHERE email=?");
+        maRequete.setString(1, email);
+        ResultSet resultat = maRequete.executeQuery();
+        if (resultat.next()) {
+            return resultat.getInt("id_user");
+        } else {
+            return -1; // l'email n'est pas associé à un utilisateur existant
+        }
     }
 
     public int getId_user() {

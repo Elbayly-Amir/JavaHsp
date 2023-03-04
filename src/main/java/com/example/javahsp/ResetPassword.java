@@ -34,9 +34,9 @@ public class ResetPassword {
         User user = new User();
         userSelected = user.getUserByMail(mailMdpOublie.getText());
         if (userSelected != null) {
-            //email
+
             Random rand = new Random();
-            userSelected.setCode(rand.nextInt(100000, 1000000));
+            userSelected.setCode(rand.nextInt(900000) + 100000);
             System.out.println(userSelected.getCode());
 
             final String fromEmail = "fantome.pirateh@gmail.com"; //requires valid gmail id
@@ -95,7 +95,7 @@ public class ResetPassword {
     @FXML
     void verifCode(ActionEvent event) {
         if (codeMail.getText().equals(String.valueOf(userSelected.getCode())))
-            HelloApplication.changeScene("updatePassword");
+            HelloApplication.changeScene("updatePassword",new UpdatePassword(this.userSelected, false));
         else {
             System.out.println("erreur");
         }

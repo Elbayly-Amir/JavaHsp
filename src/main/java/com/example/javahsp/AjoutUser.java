@@ -33,6 +33,14 @@ public class AjoutUser {
     @FXML
     private MenuItem secretaire;
 
+
+    @FXML
+    private void initialize() {
+        // Ajouter des gestionnaires d'événements aux éléments du menu
+        gestionnaire.setOnAction(e -> choix.setText("Gestionnaire"));
+        secretaire.setOnAction(e -> choix.setText("Secrétaire"));
+        medecin.setOnAction(e -> choix.setText("Médecin"));
+    }
     @FXML
     void ajoutUser(ActionEvent event) throws SQLException {
         // Récupération des valeurs des champs de l'interface utilisateur
@@ -41,18 +49,12 @@ public class AjoutUser {
         String email = emailUser.getText();
         String mdp = mdpUser.getText();
 
-        String role = "";
-        switch (gestionnaire.getText()) {
-            case "Gestionnaire":
-                role = "gestionnaire";
-                break;
-            case "Médecin":
-                role = "medecin";
-                break;
-            case "Secrétaire":
-                role = "secretaire";
-                break;
-        }
+        String role = switch ((choix.getText())) {
+            case "Gestionnaire" -> "gestionnaire";
+            case "Médecin" -> "medecin";
+            case "Secrétaire" -> "secretaire";
+            default -> "";
+        };
 
         // Création d'un nouvel utilisateur
         User nouveauUser = new User(nom, prenom, email, mdp, role);

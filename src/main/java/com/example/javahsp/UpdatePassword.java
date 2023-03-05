@@ -46,7 +46,7 @@ public class UpdatePassword {
                 alert.setHeaderText(null);
                 alert.setContentText("Les mots de passe ne correspondent pas ou le mot de passe est trop court !");
                 alert.showAndWait();
-                return;
+
             }
         }
 

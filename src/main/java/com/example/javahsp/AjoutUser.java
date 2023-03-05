@@ -59,14 +59,23 @@ public class AjoutUser {
         // Création d'un nouvel utilisateur
         User nouveauUser = new User(nom, prenom, email, mdp, role);
 
-        nouveauUser.ajoutUser();
 
-        // Affichage d'un message de confirmation
-        Alert alert = new Alert(Alert.AlertType.INFORMATION);
-        alert.setTitle("Ajout d'utilisateur");
-        alert.setHeaderText(null);
-        alert.setContentText("L'utilisateur a été ajouté avec succès !");
-        alert.showAndWait();
+if (mdpUser.getText().length() > 8 ) {
+    nouveauUser.ajoutUser();
+// Affichage d'un message de confirmation
+    Alert alert = new Alert(Alert.AlertType.INFORMATION);
+    alert.setTitle("Ajout d'utilisateur");
+    alert.setHeaderText(null);
+    alert.setContentText("L'utilisateur a été ajouté avec succès !");
+    alert.showAndWait();
+}else{
+    Alert alert = new Alert(Alert.AlertType.WARNING);
+    alert.setTitle("Mots de passe trop court  !");
+    alert.setHeaderText(null);
+    alert.setContentText("Veuillez indérer un mot de passe de minimum 8 caractères !");
+    alert.showAndWait();
+}
+
 
         // Réinitialisation des champs de l'interface utilisateur
         nomUser.setText("");

@@ -124,7 +124,7 @@ public class User {
     public void updateUser(User user) throws SQLException{
         if (user.getId_user() >0) {
             BDD mabdd = new BDD();
-            PreparedStatement maRequete = mabdd.getBDD().prepareStatement("UPDATE user SET `nom`=?,`prenom`=?,`email`=?,`mdp`=?,`role`=? WHERE id_user=?");
+            PreparedStatement maRequete = mabdd.getBDD().prepareStatement("UPDATE user SET `nom`=?,`prenom`=?,`email`=?,`mdp`=md5(?),`role`=? WHERE id_user=?");
             maRequete.setString(1, nom);
             maRequete.setString(2, prenom);
             maRequete.setString(3, email);

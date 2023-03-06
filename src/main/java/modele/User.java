@@ -96,15 +96,29 @@ public class User {
 
     public void ajoutUser() throws SQLException {
         BDD mabdd = new BDD();
-        PreparedStatement maRequete = mabdd.getBDD().prepareStatement("INSERT INTO user (nom, prenom, email, mdp, role) VALUES (?, ?, ?, md5(?), ?)");
-        maRequete.setString(1, nom);
-        maRequete.setString(2, prenom);
-        maRequete.setString(3, email);
-        maRequete.setString(4, mdp);
-        maRequete.setString(5, role);
+        PreparedStatement maRequeteVerification = mabdd.getBDD().prepareStatement("SELECT COUNT(*) FROM user WHERE email = ?");
+        maRequeteVerification.setString(1, email);
+        ResultSet resultat = maRequeteVerification.executeQuery();
+        resultat.next();
+        int count = resultat.getInt(1);
+
+        if (count > 0) {
+            // L'email existe déjà, renvoyer une exception ou afficher un message d'erreur
+
+            throw new SQLException("L'email existe déjà dans la base de données.");
+
+        }
+
+// L'email n'existe pas encore, effectuer l'opération d'insertion
+        PreparedStatement maRequeteInsertion = mabdd.getBDD().prepareStatement("INSERT INTO user (nom, prenom, email, mdp, role) VALUES (?, ?, ?, md5(?), ?)");
+        maRequeteInsertion.setString(1, nom);
+        maRequeteInsertion.setString(2, prenom);
+        maRequeteInsertion.setString(3, email);
+        maRequeteInsertion.setString(4, mdp);
+        maRequeteInsertion.setString(5, role);
 
         try {
-            int mesResultats = maRequete.executeUpdate();
+            int mesResultats = maRequeteInsertion.executeUpdate();
             System.out.println("User ajouté avec succès!");
         } catch (SQLException e) {
             System.out.println("Erreur lors de l'ajout de l'utilisateur: " + e.getMessage());
@@ -112,7 +126,7 @@ public class User {
     }
 
 
-    public void deleteUser(User user) throws SQLException {
+        public void deleteUser(User user) throws SQLException {
         if (user.getId_user() >0){
             BDD mabdd = new BDD();
             PreparedStatement maRequete = mabdd.getBDD().prepareStatement("DELETE FROM user where id_user=?");
@@ -124,7 +138,7 @@ public class User {
     public void updateUser(User user) throws SQLException{
         if (user.getId_user() >0) {
             BDD mabdd = new BDD();
-            PreparedStatement maRequete = mabdd.getBDD().prepareStatement("UPDATE user SET `nom`=?,`prenom`=?,`email`=?,`mdp`=?,`role`=? WHERE id_user=?");
+            PreparedStatement maRequete = mabdd.getBDD().prepareStatement("UPDATE user SET `nom`=?,`prenom`=?,`email`=?,`mdp`=md5(?),`role`=? WHERE id_user=?");
             maRequete.setString(1, nom);
             maRequete.setString(2, prenom);
             maRequete.setString(3, email);
@@ -134,11 +148,11 @@ public class User {
         }
     }
 
-    public void changePassword() throws SQLException {
+    public void changePassword(User user) throws SQLException {
         BDD mabdd = new BDD();
-        PreparedStatement maRequete = mabdd.getBDD().prepareStatement("UPDATE user SET `mdp`=? WHERE id_user=?");
-        maRequete.setString(1, mdp);
-        maRequete.setInt(2, id_user);
+        PreparedStatement maRequete = mabdd.getBDD().prepareStatement("UPDATE user SET `mdp`= md5(?) WHERE id_user=?");
+        maRequete.setString(1, user.getMdp());
+        maRequete.setInt(2, user.getId_user());
         maRequete.executeUpdate();
     }
 
@@ -234,6 +248,18 @@ public class User {
         }
 
         return user;
+    }
+
+    public int getUserIdByEmail(String email) throws SQLException {
+        BDD mabdd = new BDD();
+        PreparedStatement maRequete = mabdd.getBDD().prepareStatement("SELECT id_user FROM user WHERE email=?");
+        maRequete.setString(1, email);
+        ResultSet resultat = maRequete.executeQuery();
+        if (resultat.next()) {
+            return resultat.getInt("id_user");
+        } else {
+            return -1; // l'email n'est pas associé à un utilisateur existant
+        }
     }
 
     public int getId_user() {

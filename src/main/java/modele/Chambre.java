@@ -3,12 +3,23 @@ package modele;
 import BDD.BDD;
 
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 public class Chambre {
 
     private int id_chambre;
     private String occupation;
+
+    public Chambre(int id_chambre, String occupation) {
+        this.id_chambre= id_chambre;
+        this.occupation=occupation;
+    }
+
+    public Chambre() {
+
+    }
 
 
     public void deleteChambre() throws SQLException {
@@ -28,6 +39,25 @@ public class Chambre {
         maRequete.executeUpdate();
     }
 
+
+    public ArrayList<Chambre> getChambre() throws SQLException {
+        ArrayList<Chambre> dossiers = new ArrayList<Chambre>();
+        Chambre c;
+        BDD madd = new BDD();
+        PreparedStatement maRequete = madd.getBDD().prepareStatement("Select * from chambre ");
+        ResultSet mesResultats = maRequete.executeQuery();
+
+        try {
+            while (mesResultats.next()) {
+                c = new Chambre(mesResultats.getInt("id_chambre"), mesResultats.getString("occupation"));
+                dossiers.add(c);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return dossiers;
+    }
     public int getId_chambre() {
         return id_chambre;
     }

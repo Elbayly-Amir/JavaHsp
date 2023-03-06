@@ -4,12 +4,17 @@ import BDD.BDD;
 import javafx.util.StringConverter;
 
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.Date;
 
 public class Dossier {
 
     private int id_dossier;
+
+    private Date dateDossier;
     private String descriprion;
     private String nivGravite;
     private int ref_fichepatient;
@@ -20,6 +25,20 @@ public class Dossier {
         this.descriprion=text;
         this.nivGravite=text1;
         this.ref_fichepatient= ref_fichepatient;
+    }
+
+
+
+    public Dossier() {
+
+    }
+
+    public Dossier(int id_dossier, java.sql.Date dateDossier, String description, String nivGravite, int ref_fichepatient) {
+        this.id_dossier = id_dossier;
+        this.dateDossier = dateDossier;
+        this.descriprion = description;
+        this.nivGravite = nivGravite;
+        this.ref_fichepatient = ref_fichepatient;
     }
 
 
@@ -59,6 +78,25 @@ public class Dossier {
         this.ref_fichepatient = ref_fichepatient;
     }
 
+    public ArrayList<Dossier> getDossier() throws SQLException {
+        ArrayList<Dossier> dossiers = new ArrayList<Dossier>();
+        Dossier d;
+        BDD madd = new BDD();
+        PreparedStatement maRequete = madd.getBDD().prepareStatement("Select * from dossier ");
+        ResultSet mesResultats = maRequete.executeQuery();
+
+        try {
+            while (mesResultats.next()) {
+                d = new Dossier(mesResultats.getInt("id_dossier"), mesResultats.getDate("dateDossier"), mesResultats.getString("description"),mesResultats.getString("nivGravite"), mesResultats.getInt("ref_fichepatient"));
+                dossiers.add(d);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return dossiers;
+    }
+
     public int getId_dossier() {
         return id_dossier;
     }
@@ -68,7 +106,13 @@ public class Dossier {
     }
 
 
+    public Date getDateDossier() {
+        return dateDossier;
+    }
 
+    public void setDateDossier(Date dateDossier) {
+        this.dateDossier = dateDossier;
+    }
 
 
     public String getDescriprion() {

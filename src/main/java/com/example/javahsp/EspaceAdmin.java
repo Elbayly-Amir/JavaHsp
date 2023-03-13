@@ -6,9 +6,11 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import modele.User;
+import org.w3c.dom.events.MouseEvent;
 
 import java.net.URL;
 import java.sql.SQLException;
+import java.util.Optional;
 import java.util.ResourceBundle;
 
 public class EspaceAdmin implements Initializable {
@@ -33,6 +35,28 @@ public class EspaceAdmin implements Initializable {
     @FXML
     private TableView<User> tableViewSecretaire;
 
+    @FXML
+    private Button suppBtn;
+
+    @FXML
+    private MenuItem suppGest;
+
+    @FXML
+    private MenuItem suppMed;
+
+    @FXML
+    private MenuItem suppSecre;
+
+    @FXML
+    private MenuButton suppUser;
+    @FXML
+    private Button mdfButton;
+
+    private User user;
+
+    private User userSelected;
+
+    public EspaceAdmin() {}
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -136,5 +160,93 @@ public class EspaceAdmin implements Initializable {
         alert.setContentText("Vous avez été déconnecté.");
         alert.showAndWait();
         HelloApplication.changeScene("connexionUser");
+    }
+
+    @FXML
+    void modifier(ActionEvent event) {
+        HelloApplication.changeScene("");
+    }
+
+    @FXML
+    void suppGest(ActionEvent event) {
+        User user = tableViewGestionnaire.getSelectionModel().getSelectedItem();
+        if (user != null) {
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+            alert.setTitle("Confirmation de suppression");
+            alert.setHeaderText(null);
+            alert.setContentText("Êtes-vous sûr de vouloir supprimer cet utilisateur ?");
+            Optional<ButtonType> result = alert.showAndWait();
+            if (result.isPresent() && result.get() == ButtonType.OK) {
+                try {
+                    user.deleteUser(user);
+                    tableViewGestionnaire.getItems().remove(user);
+                } catch (SQLException e) {
+                    throw new RuntimeException(e);
+                }
+            }
+        } else {
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.setTitle("Aucune sélection");
+            alert.setHeaderText(null);
+            alert.setContentText("Veuillez sélectionner un gestionnaire à supprimer.");
+            alert.showAndWait();
+        }
+
+    }
+
+
+    @FXML
+    void suppMed(ActionEvent event) {
+        User user = tableViewMedecin.getSelectionModel().getSelectedItem();
+        if (user != null) {
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+            alert.setTitle("Confirmation de suppression");
+            alert.setHeaderText(null);
+            alert.setContentText("Êtes-vous sûr de vouloir supprimer cet utilisateur ?");
+            Optional<ButtonType> result = alert.showAndWait();
+            if (result.isPresent() && result.get() == ButtonType.OK) {
+                try {
+                    user.deleteUser(user);
+                    tableViewMedecin.getItems().remove(user);
+                } catch (SQLException e) {
+                    throw new RuntimeException(e);
+                }
+            }
+        } else {
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.setTitle("Aucune sélection");
+            alert.setHeaderText(null);
+            alert.setContentText("Veuillez sélectionner un médecin à supprimer.");
+            alert.showAndWait();
+        }
+
+    }
+
+
+    @FXML
+    void suppSecre(ActionEvent event) {
+        User user = tableViewSecretaire.getSelectionModel().getSelectedItem();
+        if (user != null) {
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+            alert.setTitle("Confirmation de suppression");
+            alert.setHeaderText(null);
+            alert.setContentText("Êtes-vous sûr de vouloir supprimer cet utilisateur ?");
+            Optional<ButtonType> result = alert.showAndWait();
+            if (result.isPresent() && result.get() == ButtonType.OK) {
+                try {
+                    user.deleteUser(user);
+                    tableViewSecretaire.getItems().remove(user);
+                } catch (SQLException e) {
+                    throw new RuntimeException(e);
+                }
+            }
+        } else {
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.setTitle("Aucune sélection");
+            alert.setHeaderText(null);
+            alert.setContentText("Veuillez sélectionner une secrétaire à supprimer.");
+            alert.showAndWait();
+        }
+
     }
 }

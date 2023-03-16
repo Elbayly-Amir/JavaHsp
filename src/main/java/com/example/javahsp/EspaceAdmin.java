@@ -56,7 +56,14 @@ public class EspaceAdmin implements Initializable {
 
     private User userSelected;
 
-    public EspaceAdmin() {}
+    public static int selectedUserId;
+
+    public EspaceAdmin(int selectedUserId){
+        EspaceAdmin.selectedUserId = selectedUserId;
+    }
+
+    public EspaceAdmin() {
+    }
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -164,7 +171,34 @@ public class EspaceAdmin implements Initializable {
 
     @FXML
     void modifier(ActionEvent event) {
-        HelloApplication.changeScene("");
+
+        User user = new User();
+        TableView<User> tableView = null;
+        if (secretaire.isSelected()) {
+            tableView = tableViewSecretaire;
+        } else if (gestionnaire.isSelected()) {
+            tableView = tableViewGestionnaire;
+        } else if (medecin.isSelected()) {
+            tableView = tableViewMedecin;
+        }
+        if (tableView != null) {
+            user = tableView.getSelectionModel().getSelectedItem();
+        }
+
+        // Vérifier si un utilisateur a été sélectionné
+        if (user.getId_user() == 0) {
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.setTitle("Sélectionner un utilisateur");
+            alert.setHeaderText(null);
+            alert.setContentText("Veuillez sélectionner un utilisateur à modifier.");
+            alert.showAndWait();
+            return;
+        }else{
+            selectedUserId = user.getId_user();
+            System.out.println(user.getId_user());
+            HelloApplication.changeScene("updateUser", user.getId_user());
+        }
+
     }
 
     @FXML

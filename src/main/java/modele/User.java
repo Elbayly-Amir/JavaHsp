@@ -1,6 +1,7 @@
 package modele;
 
 import BDD.BDD;
+import com.example.javahsp.EspaceAdmin;
 import com.example.javahsp.HelloApplication;
 import javafx.scene.control.Alert;
 
@@ -45,6 +46,19 @@ public class User {
         this.role = role;
     }
 
+    public User(String text, String text1, String text2) {
+        this.nom = text;
+        this.prenom = text1;
+        this.email = text2;
+    }
+
+    public User(int id_user, String nom, String prenom, String email) {
+        this.id_user=id_user;
+        this.nom = nom;
+        this.prenom=prenom;
+        this.email= email;
+    }
+
 
     public void connexionUser() throws SQLException {
         BDD mabdd = new BDD();
@@ -56,9 +70,18 @@ public class User {
         ResultSet mesResultats = maRequete.executeQuery();
 
         if (mesResultats.next()) {
-            String role = mesResultats.getString("role");
+            String roleUtilisateur = mesResultats.getString("role");
+            String nomUtilisateur = mesResultats.getString("nom");
+            String prenomUtilisateur = mesResultats.getString("prenom");
 
-            switch (role) {
+            PreparedStatement maRequeteInsert = mabdd.getBDD().prepareStatement("INSERT INTO infocouser ( nomUtilisateur, prenomUtilisateur, roleUtilisateur) VALUES (?, ?, ?)");
+            maRequeteInsert.setString(1, nomUtilisateur);
+            maRequeteInsert.setString(2, prenomUtilisateur);
+            maRequeteInsert.setString(3, roleUtilisateur);
+            maRequeteInsert.executeUpdate();
+
+
+            switch (roleUtilisateur) {
                 case "medecin":
                     HelloApplication.changeScene("espaceMedecin");
                     System.out.println("Connexion réussie en tant que médecin.");
@@ -72,15 +95,11 @@ public class User {
                     System.out.println("Connexion réussie en tant que gestionnaire.");
                     break;
                 case "admin":
-                    HelloApplication.changeScene("espaceAdmin");
+                    HelloApplication.changeScene("espaceAdmin", new EspaceAdmin());
                     System.out.println("Connexion réussie en tant qu'administrateur.");
                     break;
-                case "superadmin":
-                    HelloApplication.changeScene("espaceSuperAdmin");
-                    System.out.println("Connexion réussie en tant que super-administrateur.");
-                    break;
                 default:
-                    System.out.println("Rôle inconnu : " + role);
+                    System.out.println("Rôle inconnu : " + roleUtilisateur);
                     break;
             }
         } else {
@@ -92,6 +111,7 @@ public class User {
             System.out.println("Votre email et/ou mot de passe est incorrect.");
         }
     }
+
 
 
     public void ajoutUser() throws SQLException {
@@ -138,12 +158,11 @@ public class User {
     public void updateUser(User user) throws SQLException{
         if (user.getId_user() >0) {
             BDD mabdd = new BDD();
-            PreparedStatement maRequete = mabdd.getBDD().prepareStatement("UPDATE user SET `nom`=?,`prenom`=?,`email`=?,`mdp`=md5(?),`role`=? WHERE id_user=?");
-            maRequete.setString(1, nom);
-            maRequete.setString(2, prenom);
-            maRequete.setString(3, email);
-            maRequete.setString(4, role);
-            maRequete.setInt(5, id_user);
+            PreparedStatement maRequete = mabdd.getBDD().prepareStatement("UPDATE user SET `nom`=?,`prenom`=?,`email`=? WHERE id_user=?");
+            maRequete.setString(1, user.getNom());
+            maRequete.setString(2, user.getPrenom());
+            maRequete.setString(3, user.getEmail());
+            maRequete.setInt(4, user.getId_user());
             maRequete.executeUpdate();
         }
     }

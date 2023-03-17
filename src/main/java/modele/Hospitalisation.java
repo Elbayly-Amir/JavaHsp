@@ -32,22 +32,29 @@ public class Hospitalisation {
 
     }
 
+    public Hospitalisation(String text) {
+        this.descriptionMaladie= text;
 
-    public void ajoutHospitalisation()  throws SQLException {
+    }
+
+    public void ajoutHospitalisation(int idChambre) throws SQLException {
         BDD mabdd = new BDD();
-        PreparedStatement maRequete = mabdd.getBDD().prepareStatement("INSERT INTO hospitalisation (descriptionMaladie,ref_chambre) VALUES (?,?)");
+        PreparedStatement maRequete = mabdd.getBDD().prepareStatement("INSERT INTO hospitalisation (descriptionMaladie, ref_chambre) VALUES (?, ?)");
 
         maRequete.setString(1, descriptionMaladie);
-        maRequete.setInt(2, ref_chambre);
+        maRequete.setInt(2, idChambre);
         int mesResultats = maRequete.executeUpdate();
     }
 
-    public void deleteHospitalisation() throws SQLException {
-        BDD mabdd = new BDD();
-        PreparedStatement maRequete = mabdd.getBDD().prepareStatement("DELETE FROM hospitalisation where id_hospitalisation=?");
-        maRequete.setInt(1, id_hospitalisation);
-        maRequete.executeUpdate();
 
+
+    public void deleteHospitalisation(Hospitalisation hosp) throws SQLException {
+        if (hosp.getId_hospitalisation()>0) {
+            BDD mabdd = new BDD();
+            PreparedStatement maRequete = mabdd.getBDD().prepareStatement("DELETE FROM hospitalisation where id_hospitalisation=?");
+            maRequete.setInt(1, id_hospitalisation);
+            maRequete.executeUpdate();
+        }
     }
 
     public void updateHospitalisation() throws SQLException{

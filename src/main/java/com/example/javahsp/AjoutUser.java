@@ -62,7 +62,7 @@ public class AjoutUser {
 
 if (mdpUser.getText().length() > 8 ) {
     nouveauUser.ajoutUser();
-// Affichage d'un message de confirmation
+
     Alert alert = new Alert(Alert.AlertType.INFORMATION);
     alert.setTitle("Ajout d'utilisateur");
     alert.setHeaderText(null);
@@ -89,7 +89,7 @@ if (mdpUser.getText().length() > 8 ) {
 
     @FXML
     void retour(ActionEvent event) {
-        HelloApplication.changeScene("espaceAdmin");
+        HelloApplication.changeScene("espaceAdmin", new EspaceAdmin());
     }
 
 }

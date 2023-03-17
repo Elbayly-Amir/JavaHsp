@@ -16,7 +16,8 @@ import java.util.ResourceBundle;
 public class EspaceAdmin implements Initializable {
 
 
-
+    @FXML
+    private MenuButton ajout;
     @FXML
     private Tab gestionnaire;
 
@@ -154,6 +155,10 @@ public class EspaceAdmin implements Initializable {
         }
     }
 
+    @FXML
+    void ajoutChambre(ActionEvent event) {
+       HelloApplication.changeScene("ajoutChambre");
+    }
     @FXML
     void ajoutUser(ActionEvent event) {
         HelloApplication.changeScene("ajoutUser");

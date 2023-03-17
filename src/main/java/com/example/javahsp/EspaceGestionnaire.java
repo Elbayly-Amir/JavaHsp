@@ -38,7 +38,12 @@ public class EspaceGestionnaire implements Initializable {
 
         @FXML
         void deco(ActionEvent event) {
-                HelloApplication.changeScene("Acceuil");
+                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.setTitle("Déconnexion");
+                alert.setHeaderText(null);
+                alert.setContentText("Vous avez été déconnecté.");
+                alert.showAndWait();
+                HelloApplication.changeScene("connexionUser");
         }
 
 

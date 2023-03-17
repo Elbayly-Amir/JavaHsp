@@ -3,6 +3,7 @@ package com.example.javahsp;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -41,7 +42,12 @@ public class EspaceSecretaire implements Initializable {
 
     @FXML
     void decoSec(ActionEvent event) {
-        HelloApplication.changeScene("Accueil");
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("Déconnexion");
+        alert.setHeaderText(null);
+        alert.setContentText("Vous avez été déconnecté.");
+        alert.showAndWait();
+        HelloApplication.changeScene("connexionUser");
     }
 
     @Override

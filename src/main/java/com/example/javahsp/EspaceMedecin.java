@@ -7,12 +7,21 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import modele.*;
 import modele.FichePatient;
 import javafx.fxml.Initializable;
+
+import java.util.Optional;
 import java.util.ResourceBundle;
 import java.net.URL;
 import java.sql.SQLException;
 
 
 public class EspaceMedecin implements Initializable{
+
+
+    @FXML
+    private MenuButton ajouter;
+
+    @FXML
+    private MenuButton suppression;
 
     @FXML
     private Tab tabChambre;
@@ -32,10 +41,6 @@ public class EspaceMedecin implements Initializable{
     @FXML
     private TableView<Hospitalisation> viewHospitalisation;
 
-    @FXML
-    void ajoutHospitalisation(ActionEvent event) {
-        HelloApplication.changeScene("ajoutHospitalisation");
-    }
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         String[][] colonnes = {
@@ -127,27 +132,49 @@ public class EspaceMedecin implements Initializable{
         }
     }
 
-
-
-
-
-
-
-
-    @FXML
-    void ajoutOrdonnance(ActionEvent event) {
-
-    }
-
-    @FXML
-    void decoMedecin(ActionEvent event) {
-        HelloApplication.changeScene("Accueil");
-    }
-
     @FXML
     void ajoutFicheSortit(ActionEvent event) {
         HelloApplication.changeScene("ajoutFicheSortit");
     }
 
+    @FXML
+    void ajoutHospitalisation(ActionEvent event) {
+        HelloApplication.changeScene("ajoutHospitalisation");
+    }
 
+    @FXML
+    void suppressionHospitalisation(ActionEvent event) {
+        Hospitalisation hosp = viewHospitalisation.getSelectionModel().getSelectedItem();
+        if (hosp != null) {
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+            alert.setTitle("Confirmation de suppression");
+            alert.setHeaderText(null);
+            alert.setContentText("Êtes-vous sûr de vouloir supprimer cet utilisateur ?");
+            Optional<ButtonType> result = alert.showAndWait();
+            if (result.isPresent() && result.get() == ButtonType.OK) {
+                try {
+                    hosp.deleteHospitalisation(hosp);
+                    viewHospitalisation.getItems().remove(hosp);
+                } catch (SQLException e) {
+                    throw new RuntimeException(e);
+                }
+            }
+        } else {
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.setTitle("Aucune sélection");
+            alert.setHeaderText(null);
+            alert.setContentText("Veuillez sélectionner une hospitalisation à supprimer.");
+            alert.showAndWait();
+        }
+    }
+
+    @FXML
+    void decoMedecin(ActionEvent event) {
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("Déconnexion");
+        alert.setHeaderText(null);
+        alert.setContentText("Vous avez été déconnecté.");
+        alert.showAndWait();
+        HelloApplication.changeScene("connexionUser");
+    }
 }

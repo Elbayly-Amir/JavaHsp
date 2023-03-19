@@ -22,7 +22,7 @@
       <Button layoutX="521.0" layoutY="14.0" mnemonicParsing="false" onAction="#retour" text="Retour" />
       <SplitMenuButton fx:id="dispo" layoutX="214.0" layoutY="252.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="150.0" text="Disponibilité">
         <items>
-          <MenuItem fx:id="nonOccupe" mnemonicParsing="false" text="Oui" />
+          <MenuItem fx:id="nonOccupe" mnemonicParsing="false" text="Libre" />
         </items>
       </SplitMenuButton>
    </children>

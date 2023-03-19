@@ -32,7 +32,6 @@ public class AjoutChambre {
         alert.setContentText("La chambre a été ajouté avec succée !!");
         alert.showAndWait();
 
-
     }
 
 

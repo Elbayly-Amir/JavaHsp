@@ -41,13 +41,15 @@ public class EspaceMedecin implements Initializable{
     @FXML
     private TableView<Hospitalisation> viewHospitalisation;
 
+    public EspaceMedecin(){}
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         String[][] colonnes = {
                 {"ID", "id_hospitalisation"},
                 {"Date Hospitalisation", "date_hospitalisation"},
                 {"Description de la maladie", "descriptionMaladie"},
-                {"Chambre", "Ref_chambre"},
+                {"Chambre", "ref_chambre"},
 
         };
         for (int i = 0; i < colonnes.length; i++) {
@@ -65,12 +67,13 @@ public class EspaceMedecin implements Initializable{
 
         String[][] colonne= {
                 {"ID", "id_chambre"},
+                {"Nom de la chambre", "nomChambre"},
                 {"Occupation", "occupation"},
 
         };
-        for (int i = 0; i < colonnes.length; i++) {
-            TableColumn<Chambre, String> myTble = new TableColumn<>(colonnes[i][0]);
-            myTble.setCellValueFactory(new PropertyValueFactory<Chambre, String>(colonnes[i][1]));
+        for (int i = 0; i < colonne.length; i++) {
+            TableColumn<Chambre, String> myTble = new TableColumn<>(colonne[i][0]);
+            myTble.setCellValueFactory(new PropertyValueFactory<Chambre, String>(colonne[i][1]));
             viewChambre.getColumns().add(myTble);
         }
 
@@ -86,12 +89,12 @@ public class EspaceMedecin implements Initializable{
                 {"Date Dossier", "dateDossier"},
                 {"Description de la maladie", "description"},
                 {"Gravité", "nivGravite"},
-                {"FichePatient", "refFichepatient"},
+                {"FichePatient", "ref_fichepatient"},
 
         };
-        for (int i = 0; i < colonnes.length; i++) {
-            TableColumn<Dossier, String> myTble = new TableColumn<>(colonnes[i][0]);
-            myTble.setCellValueFactory(new PropertyValueFactory<Dossier, String>(colonnes[i][1]));
+        for (int i = 0; i < colonn.length; i++) {
+            TableColumn<Dossier, String> myTble = new TableColumn<>(colonn[i][0]);
+            myTble.setCellValueFactory(new PropertyValueFactory<Dossier, String>(colonn[i][1]));
             viewDossier.getColumns().add(myTble);
         }
 

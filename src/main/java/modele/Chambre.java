@@ -32,7 +32,7 @@ public class Chambre {
         this.nomChambre = nomChambre;
     }
 
-    public void ajoutChambre()  throws SQLException {
+    public void ajoutChambre() throws SQLException {
         BDD mabdd = new BDD();
         PreparedStatement maRequete = mabdd.getBDD().prepareStatement("INSERT INTO chambre (nomChambre,occupation) VALUES (?,?)");
 
@@ -44,16 +44,24 @@ public class Chambre {
     public void deleteChambre() throws SQLException {
         BDD mabdd = new BDD();
         PreparedStatement maRequete = mabdd.getBDD().prepareStatement("DELETE FROM chambre where id_chambre =?");
-        maRequete.setInt(1, id_chambre );
+        maRequete.setInt(1, id_chambre);
         maRequete.executeUpdate();
     }
 
 
-    public void updateChambre() throws SQLException{
+    public void updateChambre() throws SQLException {
         BDD mabdd = new BDD();
         PreparedStatement maRequete = mabdd.getBDD().prepareStatement("UPDATE chambre SET `occupation`=? WHERE id_chambre=?");
         maRequete.setString(1, occupation);
         maRequete.setInt(2, id_chambre);
+        maRequete.executeUpdate();
+    }
+
+    public void updateOccupation(String occupe, int idChambre) throws SQLException {
+        BDD mabdd = new BDD();
+        PreparedStatement maRequete = mabdd.getBDD().prepareStatement("UPDATE chambre SET `occupation`=? WHERE id_chambre=?");
+        maRequete.setString(1, occupe);
+        maRequete.setInt(2, idChambre);
         maRequete.executeUpdate();
     }
 
@@ -80,7 +88,7 @@ public class Chambre {
         ArrayList<Chambre> chambre = new ArrayList<Chambre>();
         Chambre c;
         BDD madd = new BDD();
-        PreparedStatement maRequete = madd.getBDD().prepareStatement("Select nomChambre from chambre where occupation = 'Oui' ");
+        PreparedStatement maRequete = madd.getBDD().prepareStatement("Select nomChambre from chambre where occupation = 'Libre' ");
         ResultSet mesResultats = maRequete.executeQuery();
 
         try {
@@ -131,4 +139,6 @@ public class Chambre {
     public void setNomChambre(String nomChambre) {
         this.nomChambre = nomChambre;
     }
+
+
 }

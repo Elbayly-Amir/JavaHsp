@@ -24,19 +24,19 @@ public class FichePatient {
         this.id_fichepatient = id_fichepatient;
         this.nom= nom;
         this.prenom=prenom;
-        this.securiteSocial=securiteSocial;
+        this.securiteSocial= securiteSocial;
         this.rue=rue;
         this.cp=cp;
         this.ville=ville;
     }
 
+
+
+    public FichePatient(String nom) {
+        this.nom = nom;
+    }
+
     public FichePatient() {
-        this.nom= nom;
-        this.prenom=prenom;
-        this.securiteSocial=securiteSocial;
-        this.rue=rue;
-        this.cp=cp;
-        this.ville=ville;
     }
 
 
@@ -71,12 +71,13 @@ public class FichePatient {
     }
 
 
-    public void deleteFichePatient() throws SQLException {
-        BDD mabdd = new BDD();
-        PreparedStatement maRequete = mabdd.getBDD().prepareStatement("DELETE FROM fichepatient where id_fichepatient=?");
-        maRequete.setInt(1, id_fichepatient);
-        maRequete.executeUpdate();
-
+    public void deleteFichePatient(FichePatient fiche) throws SQLException {
+        if(fiche.getId_fichepatient() > 0) {
+            BDD mabdd = new BDD();
+            PreparedStatement maRequete = mabdd.getBDD().prepareStatement("DELETE FROM fichepatient where id_fichepatient=?");
+            maRequete.setInt(1, id_fichepatient);
+            maRequete.executeUpdate();
+        }
     }
 
     public void updateFichePatient() throws SQLException{
@@ -93,23 +94,52 @@ public class FichePatient {
         maRequete.executeUpdate();
     }
 
-    public ArrayList<FichePatient>getFichePatient() throws SQLException {
+    public ArrayList<FichePatient> getFichePatient() throws SQLException {
         ArrayList<FichePatient> fichePatients = new ArrayList<FichePatient>();
         FichePatient f;
+        try (BDD madd = new BDD();
+             PreparedStatement maRequete = madd.getBDD().prepareStatement("SELECT * FROM fichepatient");
+             ResultSet mesResultats = maRequete.executeQuery()) {
+            while (mesResultats.next()) {
+                f = new FichePatient(mesResultats.getInt("id_fichepatient"), mesResultats.getString("nom"), mesResultats.getString("prenom"), mesResultats.getInt("securiteSocial"), mesResultats.getString("email"), mesResultats.getString("rue"), mesResultats.getInt("cp"), mesResultats.getString("ville"));
+                fichePatients.add(f);
+            }
+        } catch (Exception  e) {
+            e.printStackTrace();
+        }
+        return fichePatients;
+    }
+
+
+    public ArrayList<FichePatient> selectNomFichePatient() throws SQLException {
+        ArrayList<FichePatient> fiche = new ArrayList<FichePatient>();
+        FichePatient f;
         BDD madd = new BDD();
-        PreparedStatement maRequete = madd.getBDD().prepareStatement("SELECT * FROM fichepatient");
+        PreparedStatement maRequete = madd.getBDD().prepareStatement("Select nom from fichepatient ");
         ResultSet mesResultats = maRequete.executeQuery();
 
         try {
             while (mesResultats.next()) {
-                f = new FichePatient(mesResultats.getInt("id_fichepatient"), mesResultats.getString("nom"), mesResultats.getString("prenom"), mesResultats.getInt("securiteSocial"), mesResultats.getString("email"), mesResultats.getString("rue"), mesResultats.getInt("cp"), mesResultats.getString("ville"));
-                fichePatients.add(f);
+                f = new FichePatient(mesResultats.getString("nom"));
+                fiche.add(f);
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
 
-        return fichePatients;
+        return fiche;
+    }
+
+    public int getIdFichePatient(String nom) throws SQLException {
+        BDD mabdd = new BDD();
+        PreparedStatement maRequete = mabdd.getBDD().prepareStatement("SELECT id_fichepatient FROM fichepatient WHERE nom = ?");
+        maRequete.setString(1, nom);
+        ResultSet mesResultats = maRequete.executeQuery();
+        if (mesResultats.next()) {
+            return mesResultats.getInt("id_fichepatient");
+        } else {
+            return 0;
+        }
     }
 
     public int getId_fichepatient() {

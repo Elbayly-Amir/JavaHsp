@@ -29,12 +29,17 @@ public class AjoutHospitalisation {
         System.out.println("ID de la chambre correspondante : " + idChambre);
         Hospitalisation ajout = new Hospitalisation(maladie.getText(), idChambre);
         ajout.ajoutHospitalisation(idChambre);
+
+        // Mettre à jour l'occupation de la chambre en "Occupe"
+        chambre.updateOccupation("Occupe", idChambre);
+
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle("Ajout de l'hospitalisation");
         alert.setHeaderText(null);
         alert.setContentText("L'hospitalisation a été ajoutée avec succès !");
         alert.showAndWait();
     }
+
 
 
     @FXML

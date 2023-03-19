@@ -25,11 +25,9 @@ public class Hospitalisation {
         this.date_hospitalisation = date_hospitalisation;
         this.descriptionMaladie = descriptionMaladie;
         this.ref_chambre = ref_chambre;
-
     }
 
     public Hospitalisation() {
-
     }
 
     public Hospitalisation(String text) {

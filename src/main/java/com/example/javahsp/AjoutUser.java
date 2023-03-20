@@ -63,11 +63,8 @@ public class AjoutUser {
 if (mdpUser.getText().length() > 8 ) {
     nouveauUser.ajoutUser();
 
-    Alert alert = new Alert(Alert.AlertType.INFORMATION);
-    alert.setTitle("Ajout d'utilisateur");
-    alert.setHeaderText(null);
-    alert.setContentText("L'utilisateur a été ajouté avec succès !");
-    alert.showAndWait();
+
+
 }else{
     Alert alert = new Alert(Alert.AlertType.WARNING);
     alert.setTitle("Mots de passe trop court  !");

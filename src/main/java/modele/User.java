@@ -125,9 +125,15 @@ public class User {
         if (count > 0) {
             // L'email existe déjà, renvoyer une exception ou afficher un message d'erreur
 
-            throw new SQLException("L'email existe déjà dans la base de données.");
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Erreur d'ajout");
+            alert.setHeaderText(null);
+            alert.setContentText("Email déjà existant dans la base de données!");
+            alert.showAndWait();
+            System.out.println("L'Email existe déjà dans la base de données.");
 
         }
+        else {
 
 // L'email n'existe pas encore, effectuer l'opération d'insertion
         PreparedStatement maRequeteInsertion = mabdd.getBDD().prepareStatement("INSERT INTO user (nom, prenom, email, mdp, role) VALUES (?, ?, ?, md5(?), ?)");
@@ -140,13 +146,18 @@ public class User {
         try {
             int mesResultats = maRequeteInsertion.executeUpdate();
             System.out.println("User ajouté avec succès!");
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Ajout d'utilisateur");
+            alert.setHeaderText(null);
+            alert.setContentText("L'utilisateur a été ajouté avec succès !");
+            alert.showAndWait();
         } catch (SQLException e) {
             System.out.println("Erreur lors de l'ajout de l'utilisateur: " + e.getMessage());
         }
     }
+    }
 
-
-        public void deleteUser(User user) throws SQLException {
+    public void deleteUser(User user) throws SQLException {
         if (user.getId_user() >0){
             BDD mabdd = new BDD();
             PreparedStatement maRequete = mabdd.getBDD().prepareStatement("DELETE FROM user where id_user=?");

@@ -35,6 +35,9 @@ public class EspaceSecretaire implements Initializable {
     @FXML
     private Tab patient;
 
+    @FXML
+    private MenuButton modification;
+
 
     @FXML
     void ajoutDossierPatient(ActionEvent event) {
@@ -97,16 +100,19 @@ public class EspaceSecretaire implements Initializable {
     private void afficherFichePatient() {
         FichePatient f = new FichePatient();
         try {
+            fichePatient.getItems().clear();
             fichePatient.getItems().addAll(f.getFichePatient());
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
     }
 
+
     private void afficherDossier() {
         Dossier d = new Dossier();
         try {
-            dossierPatient.getItems().addAll(d.getDossier());
+            dossierPatient.getItems().clear();
+            dossierPatient.getItems().addAll(d.getDossiers());
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
@@ -161,6 +167,68 @@ public class EspaceSecretaire implements Initializable {
             alert.setHeaderText(null);
             alert.setContentText("Veuillez sélectionner un gestionnaire à supprimer.");
             alert.showAndWait();
+        }
+    }
+
+    @FXML
+    void modifDossier(ActionEvent event) throws SQLException {
+// récupérer l'utilisateur sélectionné
+        Dossier doss = null;
+        TableView<Dossier> tableView = null;
+        if (dossier.isSelected()) {
+            tableView = dossierPatient;
+        }
+        if (tableView != null) {
+            doss = tableView.getSelectionModel().getSelectedItem();
+        }
+
+        // Vérifier si un utilisateur a été sélectionné
+        if (doss == null) {
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.setTitle("Sélectionner un utilisateur");
+            alert.setHeaderText(null);
+            alert.setContentText("Veuillez sélectionner un utilisateur à modifier.");
+            alert.showAndWait();
+            return;
+        } else {
+            // Récupérer l'ID de l'utilisateur sélectionné
+            int dossId = doss.getId_dossier();
+
+            if (dossId > 0) {
+                System.out.println(dossId);
+                UpdateDossier updateDossier = new UpdateDossier(dossId);
+                HelloApplication.changeScene("updateDossier", new UpdateDossier(dossId));
+            }
+        }
+    }
+
+    @FXML
+    void modifPatient(ActionEvent event) throws SQLException {
+// récupérer l'utilisateur sélectionné
+        FichePatient fiche = null;
+        TableView<FichePatient> tableView = null;
+        if (patient.isSelected()) {
+            tableView = fichePatient;
+        }
+        if (tableView != null) {
+            fiche = tableView.getSelectionModel().getSelectedItem();
+        }
+
+        // Vérifier si un utilisateur a été sélectionné
+        if (fiche == null) {
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.setTitle("Sélectionner un utilisateur");
+            alert.setHeaderText(null);
+            alert.setContentText("Veuillez sélectionner un utilisateur à modifier.");
+            alert.showAndWait();
+            return;
+        } else {
+            // Récupérer l'ID de l'utilisateur sélectionné
+            int fichePatientId = fiche.getId_fichepatient();
+
+            // Passer l'ID de l'utilisateur sélectionné à votre formulaire de modification
+            UpdateFichePatient updateFichePatient = new UpdateFichePatient(fichePatientId);
+            HelloApplication.changeScene("updateFichePatient", new UpdateFichePatient(fichePatientId));
         }
     }
 

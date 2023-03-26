@@ -22,6 +22,7 @@ public class FicheSortit {
         this.quantiteProduit = quantiteProduit;
         this.ref_produit = ref_produit;
     }
+
     public FicheSortit(String text, String text1, int parseInt) {
 
         this.raisonDemande=text;
@@ -82,6 +83,24 @@ public class FicheSortit {
         }
 
         return fichesortit;
+    }
+
+    public static FicheSortit getFicheSortitById(int id_fichesorti) throws SQLException {
+        FicheSortit ficheSortit = null;
+        BDD madd = new BDD();
+        PreparedStatement maRequete = madd.getBDD().prepareStatement("SELECT * FROM fichesorti WHERE id_fichesorti = ?");
+
+        try {
+            maRequete.setInt(1, id_fichesorti);
+            ResultSet mesResultats = maRequete.executeQuery();
+            if (mesResultats.next()) {
+                ficheSortit = new FicheSortit(mesResultats.getInt("id_fichesorti"), mesResultats.getString("raisonDemande"), mesResultats.getString("nomProduit"), mesResultats.getInt("quantiteProduit"));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return ficheSortit;
     }
 
 

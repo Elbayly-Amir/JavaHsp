@@ -2,6 +2,7 @@ package modele;
 
 import BDD.BDD;
 import com.example.javahsp.EspaceAdmin;
+import com.example.javahsp.EspaceMedecin;
 import com.example.javahsp.HelloApplication;
 import javafx.scene.control.Alert;
 
@@ -123,7 +124,6 @@ public class User {
         int count = resultat.getInt(1);
 
         if (count > 0) {
-            // L'email existe déjà, renvoyer une exception ou afficher un message d'erreur
 
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Erreur d'ajout");
@@ -135,7 +135,7 @@ public class User {
         }
         else {
 
-// L'email n'existe pas encore, effectuer l'opération d'insertion
+
         PreparedStatement maRequeteInsertion = mabdd.getBDD().prepareStatement("INSERT INTO user (nom, prenom, email, mdp, role) VALUES (?, ?, ?, md5(?), ?)");
         maRequeteInsertion.setString(1, nom);
         maRequeteInsertion.setString(2, prenom);
@@ -279,6 +279,26 @@ public class User {
 
         return user;
     }
+
+
+    public static User getUserById(int id_user) throws SQLException {
+        User user = null;
+        BDD madd = new BDD();
+        PreparedStatement maRequete = madd.getBDD().prepareStatement("SELECT * FROM user WHERE id_user = ?");
+
+        try {
+            maRequete.setInt(1, id_user);
+            ResultSet mesResultats = maRequete.executeQuery();
+            if (mesResultats.next()) {
+                user = new User(mesResultats.getInt("id_user"), mesResultats.getString("nom"), mesResultats.getString("prenom"), mesResultats.getString("email"));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return user;
+    }
+
 
     public int getUserIdByEmail(String email) throws SQLException {
         BDD mabdd = new BDD();

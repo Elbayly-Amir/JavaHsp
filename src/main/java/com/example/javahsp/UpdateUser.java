@@ -19,15 +19,34 @@ public class UpdateUser {
     @FXML
     private TextField prenomUpdate;
 
-    public static int selectedUserId;
+
+    public User user;
+    public int selectedUserId;
+
+    public UpdateUser(int userId) throws SQLException {
+        user = User.getUserById(userId);
+        selectedUserId = userId;
+    }
+
+    @FXML
+    void initialize() throws SQLException {
+
+        User user = User.getUserById(selectedUserId);
+        nomUpdate.setText(user.getNom());
+        prenomUpdate.setText(user.getPrenom());
+        emailUpdate.setText(user.getEmail());
+    }
 
     @FXML
     void modification(ActionEvent event) throws SQLException {
-        User user = new User(nomUpdate.getText(),prenomUpdate.getText(),emailUpdate.getText());
-        selectedUserId = user.getId_user();
+        String nom = nomUpdate.getText();
+        String prenom = prenomUpdate.getText();
+        String email = emailUpdate.getText();
 
+        user.setNom(nom);
+        user.setPrenom(prenom);
+        user.setEmail(email);
 
-        System.out.println(user.getId_user());
         user.updateUser(user);
 
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
@@ -41,7 +60,7 @@ public class UpdateUser {
 
     @FXML
     void retour(ActionEvent event) {
-        HelloApplication.changeScene("espaceAdmin");
+        HelloApplication.changeScene("espaceAdmin",new EspaceAdmin());
     }
 
 }

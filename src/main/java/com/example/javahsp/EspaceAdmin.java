@@ -132,6 +132,7 @@ public class EspaceAdmin implements Initializable {
     private void afficherMedecin() {
         User m = new User();
         try {
+            tableViewMedecin.getItems().clear();
             tableViewMedecin.getItems().addAll(m.getUsersMedecin());
         } catch (SQLException e) {
             throw new RuntimeException(e);
@@ -140,6 +141,7 @@ public class EspaceAdmin implements Initializable {
     private void afficherGestionnaire() {
         User g =  new User();
         try {
+            tableViewGestionnaire.getItems().clear();
             tableViewGestionnaire.getItems().addAll(g.getUsersGestionnaiere());
         } catch (SQLException e) {
             throw new RuntimeException(e);
@@ -149,6 +151,7 @@ public class EspaceAdmin implements Initializable {
     private void afficherSecretaires() {
         User s = new User();
         try {
+            tableViewSecretaire.getItems().clear();
             tableViewSecretaire.getItems().addAll(s.getUsersSecretaire());
         } catch (SQLException e) {
             throw new RuntimeException(e);
@@ -175,9 +178,9 @@ public class EspaceAdmin implements Initializable {
     }
 
     @FXML
-    void modifier(ActionEvent event) {
-
-        User user = new User();
+    void modifier(ActionEvent event) throws SQLException {
+        // récupérer l'utilisateur sélectionné
+        User user = null;
         TableView<User> tableView = null;
         if (secretaire.isSelected()) {
             tableView = tableViewSecretaire;
@@ -191,20 +194,26 @@ public class EspaceAdmin implements Initializable {
         }
 
         // Vérifier si un utilisateur a été sélectionné
-        if (user.getId_user() == 0) {
+        if (user == null) {
             Alert alert = new Alert(Alert.AlertType.WARNING);
             alert.setTitle("Sélectionner un utilisateur");
             alert.setHeaderText(null);
             alert.setContentText("Veuillez sélectionner un utilisateur à modifier.");
             alert.showAndWait();
             return;
-        }else{
-            selectedUserId = user.getId_user();
-            System.out.println(user.getId_user());
-            HelloApplication.changeScene("updateUser", user.getId_user());
+        } else {
+            // Récupérer l'ID de l'utilisateur sélectionné
+            int userId = user.getId_user();
+
+            // Passer l'ID de l'utilisateur sélectionné à votre formulaire de modification
+            UpdateUser updateUser = new UpdateUser(userId);
+            HelloApplication.changeScene("updateUser", new UpdateUser(userId));
         }
 
     }
+
+
+
 
     @FXML
     void suppGest(ActionEvent event) {

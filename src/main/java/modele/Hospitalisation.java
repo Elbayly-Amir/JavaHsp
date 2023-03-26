@@ -35,6 +35,12 @@ public class Hospitalisation {
 
     }
 
+    public Hospitalisation(java.sql.Date date_hospitalisation, String descriptionMaladie, int ref_chambre) {
+        this.date_hospitalisation = date_hospitalisation;
+        this.descriptionMaladie = descriptionMaladie;
+        this.ref_chambre = ref_chambre;
+    }
+
     public void ajoutHospitalisation(int idChambre) throws SQLException {
         BDD mabdd = new BDD();
         PreparedStatement maRequete = mabdd.getBDD().prepareStatement("INSERT INTO hospitalisation (descriptionMaladie, ref_chambre) VALUES (?, ?)");
@@ -82,6 +88,25 @@ public class Hospitalisation {
         }
 
         return hospitalisations;
+    }
+
+
+    public static Hospitalisation getHospitalisationById(int id_hospitalisation) throws SQLException {
+        Hospitalisation hospitalisation = null;
+        BDD madd = new BDD();
+        PreparedStatement maRequete = madd.getBDD().prepareStatement("SELECT * FROM hospitalisation WHERE id_hospitalisation = ?");
+
+        try {
+            maRequete.setInt(1, id_hospitalisation);
+            ResultSet mesResultats = maRequete.executeQuery();
+            if (mesResultats.next()) {
+                hospitalisation = new Hospitalisation(mesResultats.getInt("id_hospitalisation"), mesResultats.getDate("date_hospitalisation"), mesResultats.getString("descriptionMaladie"), mesResultats.getInt("ref_chambre"));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return hospitalisation;
     }
 
 

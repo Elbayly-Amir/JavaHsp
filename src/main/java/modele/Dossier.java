@@ -46,6 +46,13 @@ public class Dossier {
         this.nivGravite =text1;
     }
 
+    public Dossier(java.sql.Date dateDossier, String description, String nivGravite, int ref_fichepatient) {
+        this.dateDossier = dateDossier;
+        this.description = description;
+        this.nivGravite = nivGravite;
+        this.ref_fichepatient = ref_fichepatient;
+    }
+
 
     public void ajoutDossierPatient(int idFichePatient)  throws SQLException {
         BDD mabdd = new BDD();
@@ -93,7 +100,7 @@ public class Dossier {
 
         try {
             while (mesResultats.next()) {
-                d = new Dossier(mesResultats.getInt("id_dossier"), mesResultats.getDate("dateDossier"), mesResultats.getString("description"),mesResultats.getString("nivGravite"), mesResultats.getInt("ref_fichepatient"));
+                d = new Dossier( mesResultats.getDate("dateDossier"), mesResultats.getString("description"),mesResultats.getString("nivGravite"), mesResultats.getInt("ref_fichepatient"));
                 dossiers.add(d);
             }
         } catch (SQLException e) {
@@ -102,6 +109,47 @@ public class Dossier {
 
         return dossiers;
     }
+
+
+    public ArrayList<Dossier> getDossiers() throws SQLException {
+        ArrayList<Dossier> dossiers = new ArrayList<Dossier>();
+        Dossier d;
+        BDD madd = new BDD();
+        PreparedStatement maRequete = madd.getBDD().prepareStatement("Select * from dossier ");
+        ResultSet mesResultats = maRequete.executeQuery();
+
+        try {
+            while (mesResultats.next()) {
+                d = new Dossier( mesResultats.getInt("id_dossier"), mesResultats.getDate("dateDossier"), mesResultats.getString("description"),mesResultats.getString("nivGravite"), mesResultats.getInt("ref_fichepatient"));
+                dossiers.add(d);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return dossiers;
+    }
+
+
+    public static Dossier getDossierById(int id_dossier) throws SQLException {
+        Dossier dossier = null;
+        BDD madd = new BDD();
+        PreparedStatement maRequete = madd.getBDD().prepareStatement("SELECT * FROM dossier WHERE id_dossier = ?");
+
+        try {
+            maRequete.setInt(1, id_dossier);
+            ResultSet mesResultats = maRequete.executeQuery();
+            if (mesResultats.next()) {
+                dossier = new Dossier(mesResultats.getInt("id_dossier"), mesResultats.getDate("dateDossier"), mesResultats.getString("description"), mesResultats.getString("nivGravite"), mesResultats.getInt("ref_fichepatient"));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return dossier;
+    }
+
+
 
     public int getId_dossier() {
         return id_dossier;

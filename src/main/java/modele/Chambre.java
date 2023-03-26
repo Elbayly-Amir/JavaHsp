@@ -74,7 +74,7 @@ public class Chambre {
 
         try {
             while (mesResultats.next()) {
-                c = new Chambre(mesResultats.getInt("id_chambre"), mesResultats.getString("nomChambre"), mesResultats.getString("occupation"));
+                c = new Chambre(mesResultats.getString("nomChambre"), mesResultats.getString("occupation"));
                 chambre.add(c);
             }
         } catch (SQLException e) {
@@ -114,6 +114,27 @@ public class Chambre {
             return 0;
         }
     }
+
+
+
+    public static Chambre getChambreById(int id_chambre) throws SQLException {
+        Chambre chambre = null;
+        BDD madd = new BDD();
+        PreparedStatement maRequete = madd.getBDD().prepareStatement("SELECT * FROM chambre WHERE id_chambre = ?");
+
+        try {
+            maRequete.setInt(1, id_chambre);
+            ResultSet mesResultats = maRequete.executeQuery();
+            if (mesResultats.next()) {
+                chambre = new Chambre(mesResultats.getInt("id_chambre"), mesResultats.getString("nomChambre"), mesResultats.getString("occupation"));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return chambre;
+    }
+
 
 
     public int getId_chambre(String text) {

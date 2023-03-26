@@ -65,6 +65,11 @@
                       <MenuItem mnemonicParsing="false" onAction="#ajoutFicheSortit" text="Fiche Sortit " />
                     </items>
                   </MenuButton>
+                  <MenuButton fx:id="modif" layoutX="253.0" layoutY="121.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="129.0" text="Modifier">
+                    <items>
+                      <MenuItem mnemonicParsing="false" onAction="#modifHospitalisation" text="Hospitalisation" />
+                    </items>
+                  </MenuButton>
                </children>
           </AnchorPane>
         </children>

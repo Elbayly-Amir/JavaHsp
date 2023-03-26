@@ -80,7 +80,7 @@ public class FichePatient {
         }
     }
 
-    public void updateFichePatient() throws SQLException{
+    public void updateFichePatient(FichePatient fichePatient) throws SQLException{
         BDD mabdd = new BDD();
         PreparedStatement maRequete = mabdd.getBDD().prepareStatement("UPDATE fichepatient SET `nom`=?,`prenom`=?,`securiteSocial`=?,`email`=?,`rue`=?,`cp`=?,`ville`=? WHERE id_fichepatient=?");
         maRequete.setString(1, nom);
@@ -141,6 +141,27 @@ public class FichePatient {
             return 0;
         }
     }
+
+
+    public static FichePatient getFichePatientById(int id_fichepatient) throws SQLException {
+        FichePatient fichePatient = null;
+        BDD madd = new BDD();
+        PreparedStatement maRequete = madd.getBDD().prepareStatement("SELECT * FROM fichepatient WHERE id_fichepatient = ?");
+
+        try {
+            maRequete.setInt(1, id_fichepatient);
+            ResultSet mesResultats = maRequete.executeQuery();
+            if (mesResultats.next()) {
+                fichePatient = new FichePatient(mesResultats.getInt("id_fichepatient"), mesResultats.getString("nom"), mesResultats.getString("prenom"), mesResultats.getInt("securiteSocial"), mesResultats.getString("email"), mesResultats.getString("rue"), mesResultats.getInt("cp"), mesResultats.getString("ville") );
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return fichePatient;
+    }
+
+
 
     public int getId_fichepatient() {
         return id_fichepatient;
@@ -205,4 +226,6 @@ public class FichePatient {
     public void setVille(String ville) {
         this.ville = ville;
     }
+
+
 }

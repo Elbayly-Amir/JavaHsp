@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.MenuButton?>
+<?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.control.Tab?>
 <?import javafx.scene.control.TabPane?>
 <?import javafx.scene.control.TableView?>
@@ -11,7 +13,7 @@
 
 <Pane fx:id="pane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.javahsp.EspaceGestionnaire">
    <children>
-      <Text fx:id="text" layoutX="196.0" layoutY="88.0" strokeType="OUTSIDE" strokeWidth="0.0" text="GESTIONNAIRE DE STOCK">
+      <Text fx:id="text" layoutX="193.0" layoutY="66.0" strokeType="OUTSIDE" strokeWidth="0.0" text="GESTIONNAIRE DE STOCK">
          <font>
             <Font size="18.0" />
          </font>
@@ -39,6 +41,20 @@
         </tabs>
       </TabPane>
       <Button layoutX="500.0" layoutY="22.0" mnemonicParsing="false" onAction="#deco" text="Deconnexion" />
-      <Button layoutX="42.0" layoutY="127.0" mnemonicParsing="false" onAction="#ajouterProduit" prefHeight="48.0" prefWidth="119.0" text="Ajouter un produit" />
+      <MenuButton fx:id="ajout" layoutX="52.0" layoutY="115.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="108.0" text="Ajout">
+        <items>
+          <MenuItem mnemonicParsing="false" onAction="#ajoutProduit" text="Produit " />
+        </items>
+      </MenuButton>
+      <MenuButton fx:id="supp" layoutX="451.0" layoutY="115.0" mnemonicParsing="false" text="Suppression">
+        <items>
+          <MenuItem mnemonicParsing="false" onAction="#suppression" text="Produit" />
+        </items>
+      </MenuButton>
+      <MenuButton fx:id="modif" layoutX="251.0" layoutY="115.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="108.0" text="Modification">
+        <items>
+          <MenuItem mnemonicParsing="false" onAction="#modifProduit" text="Produit" />
+        </items>
+      </MenuButton>
    </children>
 </Pane>

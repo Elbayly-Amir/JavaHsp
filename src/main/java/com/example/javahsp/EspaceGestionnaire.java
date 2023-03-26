@@ -8,43 +8,32 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.Pane;
 import javafx.scene.text.Text;
 import modele.FicheSortit;
+import modele.Hospitalisation;
 import modele.Produit;
 import modele.User;
 
 import java.net.URL;
 import java.sql.SQLException;
+import java.util.Optional;
 import java.util.ResourceBundle;
 
 public class EspaceGestionnaire implements Initializable {
 
+        @FXML
+        private MenuButton ajout;
 
+        @FXML
+        private MenuButton modif;
         @FXML
         private Tab tabDemande;
-
         @FXML
         private Tab tabProduit;
-
-
+        @FXML
+        private MenuButton supp;
         @FXML
         private TableView<FicheSortit> viewDemande;
-
         @FXML
         private TableView<Produit> viewProduit;
-
-        @FXML
-        void ajouterProduit(ActionEvent event) {
-                HelloApplication.changeScene("ajoutProduit");
-        }
-
-        @FXML
-        void deco(ActionEvent event) {
-                Alert alert = new Alert(Alert.AlertType.INFORMATION);
-                alert.setTitle("Déconnexion");
-                alert.setHeaderText(null);
-                alert.setContentText("Vous avez été déconnecté.");
-                alert.showAndWait();
-                HelloApplication.changeScene("connexionUser");
-        }
 
 
         @Override
@@ -86,10 +75,72 @@ public class EspaceGestionnaire implements Initializable {
                 });
         }
 
+        @FXML
+        void modifProduit(ActionEvent event) throws SQLException {
+                Produit produit = null;
+                TableView<Produit> tableView = null;
+                if (tabProduit.isSelected()) {
+                        tableView = viewProduit;
+                }
+                if (tableView != null) {
+                        produit = tableView.getSelectionModel().getSelectedItem();
+                }
+
+                // Vérifier si un utilisateur a été sélectionné
+                if (produit == null) {
+                        Alert alert = new Alert(Alert.AlertType.WARNING);
+                        alert.setTitle("Sélectionner un utilisateur");
+                        alert.setHeaderText(null);
+                        alert.setContentText("Veuillez sélectionner un produit à modifier.");
+                        alert.showAndWait();
+                        return;
+                } else {
+                        // Récupérer l'ID de l'utilisateur sélectionné
+                        int produitId = produit.getId_produit();
+
+                        // Passer l'ID de l'utilisateur sélectionné à votre formulaire de modification
+                        UpdateProduit updateProduit = new UpdateProduit(produitId);
+                        HelloApplication.changeScene("updateProduit", new UpdateProduit(produitId));
+                }
+        }
+
+        @FXML
+        void suppression(ActionEvent event) {
+                Produit produit = viewProduit.getSelectionModel().getSelectedItem();
+                if (produit != null) {
+                        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+                        alert.setTitle("Confirmation de suppression");
+                        alert.setHeaderText(null);
+                        alert.setContentText("Êtes-vous sûr de vouloir supprimer ce produit ?");
+                        Optional<ButtonType> result = alert.showAndWait();
+                        if (result.isPresent() && result.get() == ButtonType.OK) {
+                                try {
+                                        produit.deleteProduit(produit);
+                                        viewProduit.getItems().remove(produit);
+                                } catch (SQLException e) {
+                                        throw new RuntimeException(e);
+                                }
+                        }
+                } else {
+                        Alert alert = new Alert(Alert.AlertType.WARNING);
+                        alert.setTitle("Aucune sélection");
+                        alert.setHeaderText(null);
+                        alert.setContentText("Veuillez sélectionner un produit à supprimer.");
+                        alert.showAndWait();
+                }
+        }
+
+        @FXML
+        void ajoutProduit(ActionEvent event) {
+
+                HelloApplication.changeScene("ajoutProduit");
+        }
+
 
         private void afficherFicheSortit() {
                 FicheSortit f = new FicheSortit();
                 try {
+                        viewDemande.getItems().clear();
                         viewDemande.getItems().addAll(f.getFicheSortit());
                 } catch (SQLException e) {
                         throw new RuntimeException(e);
@@ -99,9 +150,23 @@ public class EspaceGestionnaire implements Initializable {
         private void afficherProduit() {
                 Produit p = new Produit();
                 try {
+                        viewProduit.getItems().clear();
                         viewProduit.getItems().addAll(p.getProduit());
                 } catch (SQLException e) {
                         throw new RuntimeException(e);
                 }
         }
+
+
+        @FXML
+        void deco(ActionEvent event) {
+                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.setTitle("Déconnexion");
+                alert.setHeaderText(null);
+                alert.setContentText("Vous avez été déconnecté.");
+                alert.showAndWait();
+                HelloApplication.changeScene("connexionUser");
+        }
+
+
 }

@@ -7,6 +7,8 @@ import javafx.scene.control.MenuItem;
 import javafx.scene.control.SplitMenuButton;
 import javafx.scene.control.TextField;
 import modele.Produit;
+import modele.SuivieProduit;
+import modele.User;
 
 import java.sql.SQLException;
 
@@ -33,13 +35,24 @@ public class AjoutProduit {
     @FXML
     private MenuItem moyen;
 
+    private int id_user;
+
+    public AjoutProduit(int id_user) {
+        this.id_user= id_user;
+    }
+
+    public AjoutProduit() {
+
+    }
 
     @FXML
     void AjoutProduit(ActionEvent event) throws SQLException {
+        User user = new User(id_user);
         Produit ajout = new Produit(DescriptionProduit.getText(), LibelleProduit.getText(), nivDanger.getText());
-        ajout.AjoutProduit();
+        SuivieProduit sp = new SuivieProduit();
+        int id_produit = ajout.AjoutProduit(id_user);
+        sp.AjoutSuivieProduit(id_user,id_produit);
         System.out.println("Produit ajouté !");
-        HelloApplication.changeScene("ajoutProduit");
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle("Ajout du produit");
         alert.setHeaderText(null);
@@ -59,7 +72,7 @@ public class AjoutProduit {
 
     @FXML
     void retourProduit(ActionEvent event) {
-        HelloApplication.changeScene("espaceGestionnaire");
+        HelloApplication.changeScene("espaceGestionnaire",new EspaceGestionnaire());
     }
 
 }

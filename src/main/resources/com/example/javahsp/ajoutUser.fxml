@@ -32,6 +32,7 @@
           <MenuItem fx:id="medecin" mnemonicParsing="false" text="Médecin" />
           <MenuItem fx:id="gestionnaire" mnemonicParsing="false" text="Gestionnaire" />
             <MenuItem fx:id="secretaire" mnemonicParsing="false" text="Secrétaire" />
+            <MenuItem fx:id="admin" mnemonicParsing="false" text="Admin" />
         </items>
       </SplitMenuButton>
    </children>

@@ -5,6 +5,7 @@ import BDD.BDD;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 
 public class FichePatient {
@@ -40,9 +41,10 @@ public class FichePatient {
     }
 
 
-    public void ajoutFichePatient()  throws SQLException {
+    public int ajoutFichePatient(int id_user) throws SQLException {
         BDD mabdd = new BDD();
-        PreparedStatement maRequete = mabdd.getBDD().prepareStatement("INSERT INTO fichepatient (nom,prenom,securiteSocial,email,rue,cp,ville) VALUES (?,?,?,?,?,?,?)");
+        User user = new User();
+        PreparedStatement maRequete = mabdd.getBDD().prepareStatement("INSERT INTO fichepatient (nom,prenom,securiteSocial,email,rue,cp,ville) VALUES (?,?,?,?,?,?,?)", Statement.RETURN_GENERATED_KEYS);
         maRequete.setString(1, nom);
         maRequete.setString(2, prenom);
         maRequete.setInt(3, securiteSocial);
@@ -51,7 +53,22 @@ public class FichePatient {
         maRequete.setInt(6, cp);
         maRequete.setString(7, ville);
         int mesResultats = maRequete.executeUpdate();
+
+        ResultSet generatedKeys = maRequete.getGeneratedKeys();
+        if (generatedKeys.next()) {
+            int id_fiche = generatedKeys.getInt(1);
+            SuivieFichePatient sfp = new SuivieFichePatient();
+            sfp.AjoutSuivieFichePatient(id_user, id_fiche);
+            return id_fiche;
+        } else {
+            throw new SQLException("La création de la fiche patient a échoué, aucun ID généré.");
+        }
+
     }
+
+
+
+
 
     public ResultSet Selectpatient() throws SQLException {
         BDD mabdd = new BDD();

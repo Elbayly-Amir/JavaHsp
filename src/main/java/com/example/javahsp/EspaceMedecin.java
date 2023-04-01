@@ -44,7 +44,14 @@ public class EspaceMedecin implements Initializable{
     @FXML
     private MenuButton modif;
 
-    public EspaceMedecin(){}
+    private int id_user;
+
+    public EspaceMedecin(int id_user){
+        this.id_user = id_user;
+    }
+
+    public EspaceMedecin() {
+    }
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -141,12 +148,14 @@ public class EspaceMedecin implements Initializable{
 
     @FXML
     void ajoutFicheSortit(ActionEvent event) {
-        HelloApplication.changeScene("ajoutFicheSortit");
+        int id_user = this.id_user;
+        HelloApplication.changeScene("ajoutFicheSortit", new AjoutFicheSortit(id_user));
     }
 
     @FXML
     void ajoutHospitalisation(ActionEvent event) {
-        HelloApplication.changeScene("ajoutHospitalisation");
+        int id_user = this.id_user;
+        HelloApplication.changeScene("ajoutHospitalisation", new AjoutHospitalisation(id_user));
     }
 
     @FXML

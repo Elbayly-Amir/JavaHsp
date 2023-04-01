@@ -6,8 +6,7 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.SplitMenuButton;
 import javafx.scene.control.TextField;
-import modele.Chambre;
-import modele.Dossier;
+import modele.*;
 import modele.FichePatient;
 
 import java.sql.SQLException;
@@ -37,11 +36,19 @@ public class AjoutDossier {
     @FXML
     private SplitMenuButton liste;
 
+    private int id_user;
+
+    public AjoutDossier(int id_user) {
+        this.id_user = id_user;
+    }
 
 
     @FXML
     void ajoutDossier(ActionEvent event) throws SQLException {
+
+        User user = new User(id_user);
         FichePatient fiche = new FichePatient();
+
         int idFichePatient = fiche.getIdFichePatient(liste.getText());
         System.out.println("Nom de la fiche patient : " + liste.getText());
         System.out.println("ID de la fiche patient correspondante : " + idFichePatient);
@@ -50,6 +57,8 @@ public class AjoutDossier {
         Dossier doss = new Dossier(descriptionDossier.getText(), choixGravite, idFichePatient);
 
         doss.ajoutDossierPatient(idFichePatient);
+        SuivieDossier svd = new SuivieDossier();
+        svd.AjoutSuivieDossier(id_user, idFichePatient);
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle("Ajout de l'hospitalisation");
         alert.setHeaderText(null);
@@ -58,9 +67,9 @@ public class AjoutDossier {
     }
 
     @FXML
-    void retourDossier(ActionEvent event) {
+    void retourDossier(ActionEvent event) throws SQLException {
 
-        HelloApplication.changeScene("espaceSecretaire");
+        HelloApplication.changeScene("espaceSecretaire", new EspaceSecretaire());
     }
     @FXML
     void initialize() throws SQLException {

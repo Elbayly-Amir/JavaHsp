@@ -33,6 +33,9 @@ public class AjoutUser {
     @FXML
     private MenuItem secretaire;
 
+    @FXML
+    private MenuItem admin;
+
 
     @FXML
     private void initialize() {
@@ -40,6 +43,7 @@ public class AjoutUser {
         gestionnaire.setOnAction(e -> choix.setText("Gestionnaire"));
         secretaire.setOnAction(e -> choix.setText("Secrétaire"));
         medecin.setOnAction(e -> choix.setText("Médecin"));
+        admin.setOnAction(e -> choix.setText("Admin"));
     }
     @FXML
     void ajoutUser(ActionEvent event) throws SQLException {
@@ -53,6 +57,7 @@ public class AjoutUser {
             case "Gestionnaire" -> "gestionnaire";
             case "Médecin" -> "medecin";
             case "Secrétaire" -> "secretaire";
+            case "Admin" -> "admin";
             default -> "";
         };
 

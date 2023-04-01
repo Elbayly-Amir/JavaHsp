@@ -5,6 +5,7 @@ import BDD.BDD;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 
 public class Produit {
@@ -29,13 +30,23 @@ public class Produit {
         this.nivDanger = text2;
     }
 
-    public void AjoutProduit()  throws SQLException {
+    public int AjoutProduit(int id_user)  throws SQLException {
         BDD mabdd = new BDD();
-        PreparedStatement maRequete = mabdd.getBDD().prepareStatement("INSERT INTO produit (libelle,description,nivDanger) VALUES (?,?,?)");
+        PreparedStatement maRequete = mabdd.getBDD().prepareStatement("INSERT INTO produit (libelle,description,nivDanger) VALUES (?,?,?)", Statement.RETURN_GENERATED_KEYS);
         maRequete.setString(1, libelle);
         maRequete.setString(2, description);
         maRequete.setString(3, nivDanger);
         int mesResultats = maRequete.executeUpdate();
+
+        ResultSet generatedKeys = maRequete.getGeneratedKeys();
+        if (generatedKeys.next()) {
+            int id_produit= generatedKeys.getInt(1);
+            SuivieFichePatient sfp = new SuivieFichePatient();
+            sfp.AjoutSuivieFichePatient(id_user, id_produit);
+            return id_produit;
+        } else {
+            throw new SQLException("La création de la fiche patient a échoué, aucun ID généré.");
+        }
     }
 
     public void updateProduit(Produit produit) throws SQLException{

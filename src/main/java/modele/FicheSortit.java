@@ -5,6 +5,7 @@ import BDD.BDD;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 
 public class FicheSortit {
@@ -38,14 +39,24 @@ public class FicheSortit {
     }
 
 
-    public void ajoutFicheSortit()  throws SQLException {
+    public int ajoutFicheSortit(int id_user)  throws SQLException {
         BDD mabdd = new BDD();
-        PreparedStatement maRequete = mabdd.getBDD().prepareStatement("INSERT INTO fichesorti (raisonDemande,nomProduit,quantiteProduit) VALUES (?,?,?)");
+        PreparedStatement maRequete = mabdd.getBDD().prepareStatement("INSERT INTO fichesorti (raisonDemande,nomProduit,quantiteProduit) VALUES (?,?,?)", Statement.RETURN_GENERATED_KEYS);
 
         maRequete.setString(1, raisonDemande);
         maRequete.setString(2, nomProduit);
         maRequete.setInt(3, quantiteProduit);
         int mesResultats = maRequete.executeUpdate();
+
+        ResultSet generatedKeys = maRequete.getGeneratedKeys();
+        if (generatedKeys.next()) {
+            int id_fichesortit= generatedKeys.getInt(1);
+            SuivieFichePatient sfp = new SuivieFichePatient();
+            sfp.AjoutSuivieFichePatient(id_user, id_fichesortit);
+            return id_fichesortit;
+        } else {
+            throw new SQLException("La création de la fiche patient a échoué, aucun ID généré.");
+        }
     }
 
     public void deleteFicheSortit() throws SQLException {

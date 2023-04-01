@@ -1,9 +1,7 @@
 package modele;
 
 import BDD.BDD;
-import com.example.javahsp.EspaceAdmin;
-import com.example.javahsp.EspaceMedecin;
-import com.example.javahsp.HelloApplication;
+import com.example.javahsp.*;
 import javafx.scene.control.Alert;
 
 import java.sql.PreparedStatement;
@@ -60,6 +58,10 @@ public class User {
         this.email= email;
     }
 
+    public User(int id_user) {
+        this.id_user = id_user;
+    }
+
 
     public void connexionUser() throws SQLException {
         BDD mabdd = new BDD();
@@ -71,9 +73,16 @@ public class User {
         ResultSet mesResultats = maRequete.executeQuery();
 
         if (mesResultats.next()) {
+            int id_user = mesResultats.getInt("id_user"); // récupération de l'id de l'utilisateur connecté
             String roleUtilisateur = mesResultats.getString("role");
             String nomUtilisateur = mesResultats.getString("nom");
             String prenomUtilisateur = mesResultats.getString("prenom");
+
+            this.id_user = id_user;
+
+            // création d'une instance de User avec les informations récupérées
+            User user = new User(id_user, nomUtilisateur, prenomUtilisateur, roleUtilisateur);
+
 
             PreparedStatement maRequeteInsert = mabdd.getBDD().prepareStatement("INSERT INTO infocouser ( nomUtilisateur, prenomUtilisateur, roleUtilisateur) VALUES (?, ?, ?)");
             maRequeteInsert.setString(1, nomUtilisateur);
@@ -81,18 +90,18 @@ public class User {
             maRequeteInsert.setString(3, roleUtilisateur);
             maRequeteInsert.executeUpdate();
 
-
             switch (roleUtilisateur) {
                 case "medecin":
-                    HelloApplication.changeScene("espaceMedecin");
+                    HelloApplication.changeScene("espaceMedecin", new EspaceMedecin(user.getId_user()));
                     System.out.println("Connexion réussie en tant que médecin.");
                     break;
                 case "secretaire":
-                    HelloApplication.changeScene("espaceSecretaire");
+                    HelloApplication.changeScene("espaceSecretaire", new EspaceSecretaire(user.getId_user()));
                     System.out.println("Connexion réussie en tant que secrétaire.");
+                    System.out.println(user.getId_user());
                     break;
                 case "gestionnaire":
-                    HelloApplication.changeScene("espaceGestionnaire");
+                    HelloApplication.changeScene("espaceGestionnaire", new EspaceGestionnaire(user.getId_user()));
                     System.out.println("Connexion réussie en tant que gestionnaire.");
                     break;
                 case "admin":
@@ -112,6 +121,7 @@ public class User {
             System.out.println("Votre email et/ou mot de passe est incorrect.");
         }
     }
+
 
 
 

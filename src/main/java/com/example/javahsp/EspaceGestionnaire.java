@@ -35,6 +35,17 @@ public class EspaceGestionnaire implements Initializable {
         @FXML
         private TableView<Produit> viewProduit;
 
+        private int id_user;
+
+        public EspaceGestionnaire(int id_user) {
+
+                this.id_user = id_user;
+    }
+
+        public EspaceGestionnaire() {
+
+        }
+
 
         @Override
         public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -132,8 +143,8 @@ public class EspaceGestionnaire implements Initializable {
 
         @FXML
         void ajoutProduit(ActionEvent event) {
-
-                HelloApplication.changeScene("ajoutProduit");
+                int id_user = this.id_user;
+                HelloApplication.changeScene("ajoutProduit", new AjoutProduit(id_user));
         }
 
 

@@ -49,10 +49,10 @@ public class Chambre {
     }
 
 
-    public void updateChambre() throws SQLException {
+    public void updateChambre(Chambre chambre) throws SQLException {
         BDD mabdd = new BDD();
         PreparedStatement maRequete = mabdd.getBDD().prepareStatement("UPDATE chambre SET `occupation`=? WHERE id_chambre=?");
-        maRequete.setString(1, occupation);
+        maRequete.setString(1, "Libre");
         maRequete.setInt(2, id_chambre);
         maRequete.executeUpdate();
     }
@@ -83,6 +83,27 @@ public class Chambre {
 
         return chambre;
     }
+
+    public ArrayList<Chambre> getChambree() throws SQLException {
+        ArrayList<Chambre> chambre = new ArrayList<Chambre>();
+        Chambre c;
+        BDD madd = new BDD();
+        PreparedStatement maRequete = madd.getBDD().prepareStatement("Select * from chambre ");
+        ResultSet mesResultats = maRequete.executeQuery();
+
+        try {
+            while (mesResultats.next()) {
+                c = new Chambre(mesResultats.getInt("id_chambre"), mesResultats.getString("nomChambre"), mesResultats.getString("occupation"));
+                chambre.add(c);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return chambre;
+    }
+
+
 
     public ArrayList<Chambre> selectNomChambre() throws SQLException {
         ArrayList<Chambre> chambre = new ArrayList<Chambre>();

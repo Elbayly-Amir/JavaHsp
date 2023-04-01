@@ -18,7 +18,7 @@
          </font>
       </Text>
       <Button layoutX="534.0" layoutY="14.0" mnemonicParsing="false" onAction="#retourAdmin" text="Deconnexion" />
-      <TabPane fx:id="admin" layoutY="166.0" prefHeight="234.0" prefWidth="620.0" tabClosingPolicy="UNAVAILABLE">
+      <TabPane fx:id="visu" layoutY="166.0" prefHeight="234.0" prefWidth="620.0" tabClosingPolicy="UNAVAILABLE">
         <tabs>
           <Tab fx:id="gestionnaire" text="Gestionnaire">
             <content>
@@ -47,20 +47,44 @@
                   </AnchorPane>
                </content>
             </Tab>
+            <Tab fx:id="adminPan" text="Admin">
+               <content>
+                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="171.0" prefWidth="216.0">
+                     <children>
+                        <TableView fx:id="viewAdmin" layoutY="-3.0" prefHeight="213.0" prefWidth="620.0" />
+                     </children>
+                  </AnchorPane>
+               </content>
+            </Tab>
+            <Tab fx:id="chambreP" text="Chambre">
+               <content>
+                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="171.0" prefWidth="216.0">
+                     <children>
+                        <TableView fx:id="chambrView" layoutY="-3.0" prefHeight="213.0" prefWidth="620.0" />
+                     </children>
+                  </AnchorPane>
+               </content>
+            </Tab>
         </tabs>
       </TabPane>
-      <Button fx:id="mdfButton" layoutX="271.0" layoutY="106.0" mnemonicParsing="false" onAction="#modifier" prefHeight="26.0" prefWidth="78.0" text="Modifier" />
       <MenuButton fx:id="suppUser" layoutX="446.0" layoutY="107.0" mnemonicParsing="false" text="Supprimer un utilisateur">
         <items>
           <MenuItem fx:id="suppSecre" mnemonicParsing="false" onAction="#suppSecre" text="Secretaire" />
           <MenuItem fx:id="suppGest" mnemonicParsing="false" onAction="#suppGest" text="Gestionnaire" />
             <MenuItem fx:id="suppMed" mnemonicParsing="false" onAction="#suppMed" text="Medecin" />
+            <MenuItem fx:id="suppAdmin" mnemonicParsing="false" onAction="#suppAdmin" text="Admin" />
         </items>
       </MenuButton>
       <MenuButton fx:id="ajout" layoutX="36.0" layoutY="107.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="160.0" text="Ajout pour l'admin">
         <items>
           <MenuItem mnemonicParsing="false" onAction="#ajoutChambre" text="Chambre" />
           <MenuItem mnemonicParsing="false" onAction="#ajoutUser" text="User" />
+        </items>
+      </MenuButton>
+      <MenuButton layoutX="250.0" layoutY="107.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="160.0" text="Modification">
+        <items>
+          <MenuItem mnemonicParsing="false" onAction="#modifUser" text="Utilisateur " />
+          <MenuItem fx:id="champUpdate" mnemonicParsing="false" onAction="#modifChambre" text="Mofifier L'occupation" />
         </items>
       </MenuButton>
    </children>

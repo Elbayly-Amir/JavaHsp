@@ -5,6 +5,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import modele.Chambre;
 import modele.User;
 import org.w3c.dom.events.MouseEvent;
 
@@ -18,6 +19,7 @@ public class EspaceAdmin implements Initializable {
 
     @FXML
     private MenuButton ajout;
+
     @FXML
     private Tab gestionnaire;
 
@@ -28,6 +30,12 @@ public class EspaceAdmin implements Initializable {
     private Tab secretaire;
 
     @FXML
+    private Tab adminPan;
+
+    @FXML
+    private Tab chambreP;
+
+    @FXML
     private TableView<User> tableViewGestionnaire;
 
     @FXML
@@ -35,6 +43,12 @@ public class EspaceAdmin implements Initializable {
 
     @FXML
     private TableView<User> tableViewSecretaire;
+
+    @FXML
+    private TableView<User> viewAdmin;
+
+    @FXML
+    private TableView<Chambre> chambrView;
 
     @FXML
     private Button suppBtn;
@@ -47,6 +61,9 @@ public class EspaceAdmin implements Initializable {
 
     @FXML
     private MenuItem suppSecre;
+
+    @FXML
+    private MenuItem suppAdmin;
 
     @FXML
     private MenuButton suppUser;
@@ -69,7 +86,7 @@ public class EspaceAdmin implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         String[][] colonnes = {
-                {"ID", "id_user"},
+
                 {"Nom", "nom"},
                 {"Prenom", "prenom"},
                 {"Email", "email"},
@@ -89,7 +106,7 @@ public class EspaceAdmin implements Initializable {
         });
 
         String[][] colonne = {
-                {"ID", "id_user"},
+
                 {"Nom", "nom"},
                 {"Prenom", "prenom"},
                 {"Email", "email"},
@@ -101,7 +118,7 @@ public class EspaceAdmin implements Initializable {
             tableViewGestionnaire.getColumns().add(myTble);
         }
 
-        // afficher les secrétaires lorsque l'onglet est sélectionné
+
         gestionnaire.setOnSelectionChanged(event -> {
             if (gestionnaire.isSelected()) {
                 afficherGestionnaire();
@@ -109,22 +126,60 @@ public class EspaceAdmin implements Initializable {
         });
 
         String[][] colonn = {
-                {"ID", "id_user"},
+
                 {"Nom", "nom"},
                 {"Prenom", "prenom"},
                 {"Email", "email"},
 
         };
-        for (int i = 0; i < colonne.length; i++) {
-            TableColumn<User, String> myTble = new TableColumn<>(colonne[i][0]);
-            myTble.setCellValueFactory(new PropertyValueFactory<User, String>(colonne[i][1]));
+        for (int i = 0; i < colonn.length; i++) {
+            TableColumn<User, String> myTble = new TableColumn<>(colonn[i][0]);
+            myTble.setCellValueFactory(new PropertyValueFactory<User, String>(colonn[i][1]));
             tableViewMedecin.getColumns().add(myTble);
         }
 
-        // afficher les secrétaires lorsque l'onglet est sélectionné
+
         medecin.setOnSelectionChanged(event -> {
             if (medecin.isSelected()) {
                 afficherMedecin();
+            }
+        });
+        String[][] colon = {
+
+                {"Nom", "nom"},
+                {"Prenom", "prenom"},
+                {"Email", "email"},
+
+        };
+        for (int i = 0; i < colon.length; i++) {
+            TableColumn<User, String> myTble = new TableColumn<>(colon[i][0]);
+            myTble.setCellValueFactory(new PropertyValueFactory<User, String>(colon[i][1]));
+            viewAdmin.getColumns().add(myTble);
+        }
+
+
+        adminPan.setOnSelectionChanged(event -> {
+            if (adminPan.isSelected()) {
+                afficherAdmin();
+            }
+        });
+
+        String[][] colo = {
+
+                {"Nom de la chambre", "nomChambre"},
+                {"Occupation", "occupation"},
+
+        };
+        for (int i = 0; i < colo.length; i++) {
+            TableColumn<Chambre, String> myTble = new TableColumn<>(colo[i][0]);
+            myTble.setCellValueFactory(new PropertyValueFactory<Chambre, String>(colo[i][1]));
+            chambrView.getColumns().add(myTble);
+        }
+
+
+        chambreP.setOnSelectionChanged(event -> {
+            if (chambreP.isSelected()) {
+                afficherChambre();
             }
         });
     }
@@ -158,28 +213,65 @@ public class EspaceAdmin implements Initializable {
         }
     }
 
+    private void afficherAdmin() {
+        User a =  new User();
+        try {
+            viewAdmin.getItems().clear();
+            viewAdmin.getItems().addAll(a.getUsersAdmin());
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    private void afficherChambre(){
+        Chambre c = new Chambre();
+        try {
+            chambrView.getItems().clear();
+            chambrView.getItems().addAll(c.getChambree());
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
     @FXML
     void ajoutChambre(ActionEvent event) {
        HelloApplication.changeScene("ajoutChambre");
     }
+
     @FXML
     void ajoutUser(ActionEvent event) {
         HelloApplication.changeScene("ajoutUser");
     }
 
     @FXML
-    void retourAdmin(ActionEvent event) {
-        Alert alert = new Alert(Alert.AlertType.INFORMATION);
-        alert.setTitle("Déconnexion");
-        alert.setHeaderText(null);
-        alert.setContentText("Vous avez été déconnecté.");
-        alert.showAndWait();
-        HelloApplication.changeScene("connexionUser");
+    void modifChambre(ActionEvent event) {
+        Chambre chambre = chambrView.getSelectionModel().getSelectedItem();
+        if (chambre != null) {
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+            alert.setTitle("Confirmation de modification");
+            alert.setHeaderText(null);
+            alert.setContentText("Êtes-vous sûr de vouloir modifier l'occupation de cette chambre ?");
+            Optional<ButtonType> result = alert.showAndWait();
+            if (result.isPresent() && result.get() == ButtonType.OK) {
+                try {
+                    chambre.updateChambre(chambre);
+                } catch (SQLException e) {
+                    throw new RuntimeException(e);
+                }
+            }
+        } else {
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.setTitle("Aucune sélection");
+            alert.setHeaderText(null);
+            alert.setContentText("Veuillez sélectionner une chambre à mofifier.");
+            alert.showAndWait();
+        }
     }
 
+
     @FXML
-    void modifier(ActionEvent event) throws SQLException {
-        // récupérer l'utilisateur sélectionné
+    void modifUser(ActionEvent event) throws SQLException {
+// récupérer l'utilisateur sélectionné
         User user = null;
         TableView<User> tableView = null;
         if (secretaire.isSelected()) {
@@ -188,6 +280,8 @@ public class EspaceAdmin implements Initializable {
             tableView = tableViewGestionnaire;
         } else if (medecin.isSelected()) {
             tableView = tableViewMedecin;
+        }else if (adminPan.isSelected()){
+            tableView = viewAdmin;
         }
         if (tableView != null) {
             user = tableView.getSelectionModel().getSelectedItem();
@@ -209,8 +303,8 @@ public class EspaceAdmin implements Initializable {
             UpdateUser updateUser = new UpdateUser(userId);
             HelloApplication.changeScene("updateUser", new UpdateUser(userId));
         }
-
     }
+
 
 
 
@@ -296,5 +390,42 @@ public class EspaceAdmin implements Initializable {
             alert.showAndWait();
         }
 
+    }
+
+
+    @FXML
+    void suppAdmin(ActionEvent event) {
+        User user = viewAdmin.getSelectionModel().getSelectedItem();
+        if (user != null) {
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+            alert.setTitle("Confirmation de suppression");
+            alert.setHeaderText(null);
+            alert.setContentText("Êtes-vous sûr de vouloir supprimer cet utilisateur ?");
+            Optional<ButtonType> result = alert.showAndWait();
+            if (result.isPresent() && result.get() == ButtonType.OK) {
+                try {
+                    user.deleteUser(user);
+                    viewAdmin.getItems().remove(user);
+                } catch (SQLException e) {
+                    throw new RuntimeException(e);
+                }
+            }
+        } else {
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.setTitle("Aucune sélection");
+            alert.setHeaderText(null);
+            alert.setContentText("Veuillez sélectionner un admin à supprimer.");
+            alert.showAndWait();
+        }
+    }
+
+    @FXML
+    void retourAdmin(ActionEvent event) {
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("Déconnexion");
+        alert.setHeaderText(null);
+        alert.setContentText("Vous avez été déconnecté.");
+        alert.showAndWait();
+        HelloApplication.changeScene("connexionUser");
     }
 }

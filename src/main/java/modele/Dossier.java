@@ -1,12 +1,11 @@
 package modele;
 
 import BDD.BDD;
-import javafx.util.StringConverter;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.time.LocalDate;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -54,14 +53,24 @@ public class Dossier {
     }
 
 
-    public void ajoutDossierPatient(int idFichePatient)  throws SQLException {
+    public int ajoutDossierPatient(int id_user)  throws SQLException {
         BDD mabdd = new BDD();
-        PreparedStatement maRequete = mabdd.getBDD().prepareStatement("INSERT INTO dossier (description,nivGravite,ref_fichepatient) VALUES (?,?,?)");
+        PreparedStatement maRequete = mabdd.getBDD().prepareStatement("INSERT INTO dossier (description,nivGravite,ref_fichepatient) VALUES (?,?,?)", Statement.RETURN_GENERATED_KEYS);
 
         maRequete.setString(1, description);
         maRequete.setString(2, nivGravite);
         maRequete.setInt(3, ref_fichepatient);
         int mesResultats = maRequete.executeUpdate();
+
+        ResultSet generatedKeys = maRequete.getGeneratedKeys();
+        if (generatedKeys.next()) {
+            int id_doss = generatedKeys.getInt(1);
+            SuivieFichePatient sfp = new SuivieFichePatient();
+            sfp.AjoutSuivieFichePatient(id_user, id_doss);
+            return id_doss;
+        } else {
+            throw new SQLException("La création de la fiche patient a échoué, aucun ID généré.");
+        }
     }
 
     public void deleteDossierPatient(Dossier doss) throws SQLException {

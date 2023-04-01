@@ -38,16 +38,30 @@ public class EspaceSecretaire implements Initializable {
     @FXML
     private MenuButton modification;
 
+    private int id_user;
+
+
+    public EspaceSecretaire(int id_user) throws SQLException {
+        this.id_user = id_user;
+    }
+
+    public EspaceSecretaire() {
+
+    }
+
 
     @FXML
     void ajoutDossierPatient(ActionEvent event) {
-        HelloApplication.changeScene("ajoutDossier");
+        int id_user = this.id_user;
+        HelloApplication.changeScene("ajoutDossier",new AjoutDossier(id_user));
     }
 
     @FXML
-    void ajoutFichePatient(ActionEvent event) {
-        HelloApplication.changeScene("ajoutFichePatient");
+    void ajoutFichePatient(ActionEvent event) throws SQLException {
+        int id_user = this.id_user;
+        HelloApplication.changeScene("ajoutFichePatient", new AjoutFichePatient(id_user));
     }
+
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {

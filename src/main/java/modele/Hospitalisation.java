@@ -5,6 +5,7 @@ import BDD.BDD;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -41,13 +42,24 @@ public class Hospitalisation {
         this.ref_chambre = ref_chambre;
     }
 
-    public void ajoutHospitalisation(int idChambre) throws SQLException {
+    public int ajoutHospitalisation(int idChambre, int id_user) throws SQLException {
         BDD mabdd = new BDD();
-        PreparedStatement maRequete = mabdd.getBDD().prepareStatement("INSERT INTO hospitalisation (descriptionMaladie, ref_chambre) VALUES (?, ?)");
+        PreparedStatement maRequete = mabdd.getBDD().prepareStatement("INSERT INTO hospitalisation (descriptionMaladie, ref_chambre) VALUES (?, ?)", Statement.RETURN_GENERATED_KEYS);
 
         maRequete.setString(1, descriptionMaladie);
         maRequete.setInt(2, idChambre);
         int mesResultats = maRequete.executeUpdate();
+
+        ResultSet generatedKeys = maRequete.getGeneratedKeys();
+        if (generatedKeys.next()) {
+            int id_hospitalisation= generatedKeys.getInt(1);
+            SuivieFichePatient sfp = new SuivieFichePatient();
+            sfp.AjoutSuivieFichePatient(id_user, id_hospitalisation);
+            return id_hospitalisation;
+        } else {
+            throw new SQLException("La création de la fiche patient a échoué, aucun ID généré.");
+        }
+
     }
 
 

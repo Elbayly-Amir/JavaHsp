@@ -41,7 +41,7 @@ public class Chambre {
         int mesResultats = maRequete.executeUpdate();
     }
 
-    public void deleteChambre() throws SQLException {
+    public void deleteChambre(Chambre chambre) throws SQLException {
         BDD mabdd = new BDD();
         PreparedStatement maRequete = mabdd.getBDD().prepareStatement("DELETE FROM chambre where id_chambre =?");
         maRequete.setInt(1, id_chambre);

@@ -126,12 +126,12 @@ public class User {
 
 
     public void ajoutUser() throws SQLException {
-        BDD mabdd = new BDD();
-        PreparedStatement maRequeteVerification = mabdd.getBDD().prepareStatement("SELECT COUNT(*) FROM user WHERE email = ?");
-        maRequeteVerification.setString(1, email);
-        ResultSet resultat = maRequeteVerification.executeQuery();
-        resultat.next();
-        int count = resultat.getInt(1);
+            BDD mabdd = new BDD();
+            PreparedStatement maRequeteVerification = mabdd.getBDD().prepareStatement("SELECT COUNT(*) FROM user WHERE email = ?");
+            maRequeteVerification.setString(1, email);
+            ResultSet resultat = maRequeteVerification.executeQuery();
+            resultat.next();
+            int count = resultat.getInt(1);
 
         if (count > 0) {
 
@@ -142,16 +142,15 @@ public class User {
             alert.showAndWait();
             System.out.println("L'Email existe déjà dans la base de données.");
 
+
         }
         else {
-
-
-        PreparedStatement maRequeteInsertion = mabdd.getBDD().prepareStatement("INSERT INTO user (nom, prenom, email, mdp, role) VALUES (?, ?, ?, md5(?), ?)");
-        maRequeteInsertion.setString(1, nom);
-        maRequeteInsertion.setString(2, prenom);
-        maRequeteInsertion.setString(3, email);
-        maRequeteInsertion.setString(4, mdp);
-        maRequeteInsertion.setString(5, role);
+            PreparedStatement maRequeteInsertion = mabdd.getBDD().prepareStatement("INSERT INTO user (nom, prenom, email, mdp, role) VALUES (?, ?, ?, md5(?), ?)");
+            maRequeteInsertion.setString(1, nom);
+            maRequeteInsertion.setString(2, prenom);
+            maRequeteInsertion.setString(3, email);
+            maRequeteInsertion.setString(4, mdp);
+            maRequeteInsertion.setString(5, role);
 
         try {
             int mesResultats = maRequeteInsertion.executeUpdate();

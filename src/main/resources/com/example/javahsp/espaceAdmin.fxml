@@ -73,6 +73,7 @@
           <MenuItem fx:id="suppGest" mnemonicParsing="false" onAction="#suppGest" text="Gestionnaire" />
             <MenuItem fx:id="suppMed" mnemonicParsing="false" onAction="#suppMed" text="Medecin" />
             <MenuItem fx:id="suppAdmin" mnemonicParsing="false" onAction="#suppAdmin" text="Admin" />
+            <MenuItem fx:id="suppChambre" mnemonicParsing="false" onAction="#suppChambre" text="Chambre" />
         </items>
       </MenuButton>
       <MenuButton fx:id="ajout" layoutX="36.0" layoutY="107.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="160.0" text="Ajout pour l'admin">

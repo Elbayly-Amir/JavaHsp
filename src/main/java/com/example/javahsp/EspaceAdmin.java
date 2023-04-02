@@ -66,6 +66,9 @@ public class EspaceAdmin implements Initializable {
     private MenuItem suppAdmin;
 
     @FXML
+    private MenuItem suppChambre;
+
+    @FXML
     private MenuButton suppUser;
     @FXML
     private Button mdfButton;
@@ -390,6 +393,32 @@ public class EspaceAdmin implements Initializable {
             alert.showAndWait();
         }
 
+    }
+
+    @FXML
+    void suppChambre(ActionEvent event) {
+        Chambre chambre = chambrView.getSelectionModel().getSelectedItem();
+        if (chambre != null) {
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+            alert.setTitle("Confirmation de suppression");
+            alert.setHeaderText(null);
+            alert.setContentText("Êtes-vous sûr de vouloir supprimer cette chambre ?");
+            Optional<ButtonType> result = alert.showAndWait();
+            if (result.isPresent() && result.get() == ButtonType.OK) {
+                try {
+                    chambre.deleteChambre(chambre);
+                    chambrView.getItems().remove(chambre);
+                } catch (SQLException e) {
+                    throw new RuntimeException(e);
+                }
+            }
+        } else {
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.setTitle("Aucune sélection");
+            alert.setHeaderText(null);
+            alert.setContentText("Veuillez sélectionner une chambre à supprimer.");
+            alert.showAndWait();
+        }
     }
 
 

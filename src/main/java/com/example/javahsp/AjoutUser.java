@@ -4,10 +4,13 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import modele.User;
+import java.util.regex.Pattern;
 
 import java.sql.SQLException;
 
 public class AjoutUser {
+
+    private static final String SPECIAL_CHARS = "!@#$%^&*()_-+=[]{}|\\:;\"'<>,.?/";
 
     @FXML
     private SplitMenuButton choix;
@@ -65,18 +68,19 @@ public class AjoutUser {
         User nouveauUser = new User(nom, prenom, email, mdp, role);
 
 
-if (mdpUser.getText().length() > 8 ) {
-    nouveauUser.ajoutUser();
-
-
-
-}else{
-    Alert alert = new Alert(Alert.AlertType.WARNING);
-    alert.setTitle("Mots de passe trop court  !");
-    alert.setHeaderText(null);
-    alert.setContentText("Veuillez indérer un mot de passe de minimum 8 caractères !");
-    alert.showAndWait();
-}
+        if (mdpUser.getText().length() >= 12 &&
+                Pattern.compile("[A-Z]").matcher(mdpUser.getText()).find() &&
+                Pattern.compile("[a-z]").matcher(mdpUser.getText()).find() &&
+                Pattern.compile("\\d").matcher(mdpUser.getText()).find() &&
+                Pattern.compile("[" + Pattern.quote(SPECIAL_CHARS) + "]").matcher(mdpUser.getText()).find()) {
+            nouveauUser.ajoutUser();
+        } else {
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.setTitle("Mot de passe non conforme !");
+            alert.setHeaderText(null);
+            alert.setContentText("Veuillez indérer un mot de passe contenant au moins une majuscule, une minuscule, un chiffre et un caractère spécial parmi " + SPECIAL_CHARS);
+            alert.showAndWait();
+        }
 
 
         // Réinitialisation des champs de l'interface utilisateur

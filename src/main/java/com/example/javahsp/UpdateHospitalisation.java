@@ -64,7 +64,7 @@ public class UpdateHospitalisation {
 
     @FXML
     void retour(ActionEvent event) {
-        HelloApplication.changeScene("espaceMedecin");
+        HelloApplication.changeScene("espaceMedecin",new EspaceMedecin());
     }
 
 }

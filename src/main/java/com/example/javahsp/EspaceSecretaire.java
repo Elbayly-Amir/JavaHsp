@@ -139,7 +139,7 @@ public class EspaceSecretaire implements Initializable {
             Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
             alert.setTitle("Confirmation de suppression");
             alert.setHeaderText(null);
-            alert.setContentText("Êtes-vous sûr de vouloir supprimer cet utilisateur ?");
+            alert.setContentText("Êtes-vous sûr de vouloir supprimer ce dossier patient ?");
             Optional<ButtonType> result = alert.showAndWait();
             if (result.isPresent() && result.get() == ButtonType.OK) {
                 try {
@@ -153,7 +153,7 @@ public class EspaceSecretaire implements Initializable {
             Alert alert = new Alert(Alert.AlertType.WARNING);
             alert.setTitle("Aucune sélection");
             alert.setHeaderText(null);
-            alert.setContentText("Veuillez sélectionner un gestionnaire à supprimer.");
+            alert.setContentText("Veuillez sélectionner un dossier patient à supprimer.");
             alert.showAndWait();
         }
     }
@@ -165,7 +165,7 @@ public class EspaceSecretaire implements Initializable {
             Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
             alert.setTitle("Confirmation de suppression");
             alert.setHeaderText(null);
-            alert.setContentText("Êtes-vous sûr de vouloir supprimer cet utilisateur ?");
+            alert.setContentText("Êtes-vous sûr de vouloir supprimer cette fiche patient ?");
             Optional<ButtonType> result = alert.showAndWait();
             if (result.isPresent() && result.get() == ButtonType.OK) {
                 try {
@@ -179,7 +179,7 @@ public class EspaceSecretaire implements Initializable {
             Alert alert = new Alert(Alert.AlertType.WARNING);
             alert.setTitle("Aucune sélection");
             alert.setHeaderText(null);
-            alert.setContentText("Veuillez sélectionner un gestionnaire à supprimer.");
+            alert.setContentText("Veuillez sélectionner une fiche patient à supprimer.");
             alert.showAndWait();
         }
     }
@@ -199,9 +199,9 @@ public class EspaceSecretaire implements Initializable {
         // Vérifier si un utilisateur a été sélectionné
         if (doss == null) {
             Alert alert = new Alert(Alert.AlertType.WARNING);
-            alert.setTitle("Sélectionner un utilisateur");
+            alert.setTitle("Sélectionner un dossier patient");
             alert.setHeaderText(null);
-            alert.setContentText("Veuillez sélectionner un utilisateur à modifier.");
+            alert.setContentText("Veuillez sélectionner un dossier patient à modifier.");
             alert.showAndWait();
             return;
         } else {
@@ -231,9 +231,9 @@ public class EspaceSecretaire implements Initializable {
         // Vérifier si un utilisateur a été sélectionné
         if (fiche == null) {
             Alert alert = new Alert(Alert.AlertType.WARNING);
-            alert.setTitle("Sélectionner un utilisateur");
+            alert.setTitle("Sélectionner une fiche patient");
             alert.setHeaderText(null);
-            alert.setContentText("Veuillez sélectionner un utilisateur à modifier.");
+            alert.setContentText("Veuillez sélectionner une fiche patient à modifier.");
             alert.showAndWait();
             return;
         } else {

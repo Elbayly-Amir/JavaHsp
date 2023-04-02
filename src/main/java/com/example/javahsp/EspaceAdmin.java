@@ -253,7 +253,7 @@ public class EspaceAdmin implements Initializable {
             Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
             alert.setTitle("Confirmation de modification");
             alert.setHeaderText(null);
-            alert.setContentText("Êtes-vous sûr de vouloir modifier l'occupation de cette chambre ?");
+            alert.setContentText("Êtes-vous sûr de vouloir libérer cette chambre ?");
             Optional<ButtonType> result = alert.showAndWait();
             if (result.isPresent() && result.get() == ButtonType.OK) {
                 try {
@@ -266,7 +266,7 @@ public class EspaceAdmin implements Initializable {
             Alert alert = new Alert(Alert.AlertType.WARNING);
             alert.setTitle("Aucune sélection");
             alert.setHeaderText(null);
-            alert.setContentText("Veuillez sélectionner une chambre à mofifier.");
+            alert.setContentText("Veuillez sélectionner une chambre à libérer.");
             alert.showAndWait();
         }
     }

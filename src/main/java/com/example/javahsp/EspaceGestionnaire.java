@@ -99,7 +99,7 @@ public class EspaceGestionnaire implements Initializable {
                 // Vérifier si un utilisateur a été sélectionné
                 if (produit == null) {
                         Alert alert = new Alert(Alert.AlertType.WARNING);
-                        alert.setTitle("Sélectionner un utilisateur");
+                        alert.setTitle("Sélectionner un produit");
                         alert.setHeaderText(null);
                         alert.setContentText("Veuillez sélectionner un produit à modifier.");
                         alert.showAndWait();
@@ -134,7 +134,7 @@ public class EspaceGestionnaire implements Initializable {
                 Alert alert = new Alert(Alert.AlertType.WARNING);
                 alert.setTitle("Aucune sélection");
                 alert.setHeaderText(null);
-                alert.setContentText("Veuillez sélectionner un produit à valider.");
+                alert.setContentText("Veuillez sélectionner une demande à valider.");
                 alert.showAndWait();
             }
         }
@@ -159,7 +159,7 @@ public class EspaceGestionnaire implements Initializable {
                 Alert alert = new Alert(Alert.AlertType.WARNING);
                 alert.setTitle("Aucune sélection");
                 alert.setHeaderText(null);
-                alert.setContentText("Veuillez sélectionner un produit à supprimer.");
+                alert.setContentText("Veuillez sélectionner une demande à refuser.");
                 alert.showAndWait();
             }
         }

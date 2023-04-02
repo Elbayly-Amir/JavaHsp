@@ -14,18 +14,14 @@ public class FicheSortit {
     private String raisonDemande;
     private String nomProduit;
     private int quantiteProduit;
-    private int ref_produit;
+    private String etat;
 
     public FicheSortit() {
-        this.id_fichesorti = id_fichesorti;
-        this.raisonDemande = raisonDemande;
-        this.nomProduit = nomProduit;
-        this.quantiteProduit = quantiteProduit;
-        this.ref_produit = ref_produit;
     }
 
-    public FicheSortit(String text, String text1, int parseInt) {
 
+
+    public FicheSortit(String text, String text1, int parseInt) {
         this.raisonDemande=text;
         this.nomProduit=text1;
         this.quantiteProduit=parseInt;
@@ -38,14 +34,24 @@ public class FicheSortit {
         this.quantiteProduit = quantiteProduit;
     }
 
+    public FicheSortit(int idFichesorti, String raisonDemande, String nomProduit, int quantiteProduit, String etat) {
+
+        this.id_fichesorti = idFichesorti;
+        this.raisonDemande = raisonDemande;
+        this.nomProduit = nomProduit;
+        this.quantiteProduit = quantiteProduit;
+
+        this.etat = etat;
+    }
 
     public int ajoutFicheSortit(int id_user)  throws SQLException {
         BDD mabdd = new BDD();
-        PreparedStatement maRequete = mabdd.getBDD().prepareStatement("INSERT INTO fichesorti (raisonDemande,nomProduit,quantiteProduit) VALUES (?,?,?)", Statement.RETURN_GENERATED_KEYS);
+        PreparedStatement maRequete = mabdd.getBDD().prepareStatement("INSERT INTO fichesorti (raisonDemande,nomProduit,quantiteProduit,etat) VALUES (?,?,?,?)", Statement.RETURN_GENERATED_KEYS);
 
         maRequete.setString(1, raisonDemande);
         maRequete.setString(2, nomProduit);
         maRequete.setInt(3, quantiteProduit);
+        maRequete.setString(4, "En cours");
         int mesResultats = maRequete.executeUpdate();
 
         ResultSet generatedKeys = maRequete.getGeneratedKeys();
@@ -67,16 +73,22 @@ public class FicheSortit {
 
     }
 
-    public void updateFicheSortit() throws SQLException{
+    public void updateFicheSortitValidation(FicheSortit ficheSortit) throws SQLException{
         BDD mabdd = new BDD();
-        PreparedStatement maRequete = mabdd.getBDD().prepareStatement("UPDATE fichesorti SET `raisonDemande`=?,`nomProduit`=?,`quantiteProduit`=?,`ref_produit`=? WHERE id_fichesorti=?");
-        maRequete.setString(1, raisonDemande);
-        maRequete.setString(2, nomProduit);
-        maRequete.setInt(3, quantiteProduit);
-        maRequete.setInt(4, ref_produit);
-        maRequete.setInt(5, id_fichesorti);
+        PreparedStatement maRequete = mabdd.getBDD().prepareStatement("UPDATE fichesorti SET `etat`=? WHERE id_fichesorti=?");
+        maRequete.setString(1, "Valider");
+        maRequete.setInt(2, id_fichesorti);
         maRequete.executeUpdate();
     }
+
+    public void updateFicheSortitRefus(FicheSortit ficheSorti) throws SQLException{
+        BDD mabdd = new BDD();
+        PreparedStatement maRequete = mabdd.getBDD().prepareStatement("UPDATE fichesorti SET `etat`=? WHERE id_fichesorti=?");
+        maRequete.setString(1, "Refuser");
+        maRequete.setInt(2, id_fichesorti);
+        maRequete.executeUpdate();
+    }
+
     public ArrayList<FicheSortit> getFicheSortit() throws SQLException {
         ArrayList<FicheSortit> fichesortit = new ArrayList<FicheSortit>();
         FicheSortit f;
@@ -86,7 +98,7 @@ public class FicheSortit {
 
         try {
             while (mesResultats.next()) {
-                f = new FicheSortit(mesResultats.getInt("id_fichesorti"), mesResultats.getString("raisonDemande"), mesResultats.getString("nomProduit"), mesResultats.getInt("quantiteProduit"));
+                f = new FicheSortit(mesResultats.getInt("id_fichesorti"), mesResultats.getString("raisonDemande"), mesResultats.getString("nomProduit"), mesResultats.getInt("quantiteProduit"),mesResultats.getString("etat"));
                 fichesortit.add(f);
             }
         } catch (SQLException e) {
@@ -147,11 +159,11 @@ public class FicheSortit {
         this.quantiteProduit = quantiteProduit;
     }
 
-    public int getRef_produit() {
-        return ref_produit;
+    public String getEtat() {
+        return etat;
     }
 
-    public void setRef_produit(int ref_produit) {
-        this.ref_produit = ref_produit;
+    public void setEtat(String etat) {
+        this.etat = etat;
     }
 }

@@ -11,7 +11,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<Pane fx:id="pane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" >
+<Pane fx:id="pane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <Text fx:id="text" layoutX="193.0" layoutY="66.0" strokeType="OUTSIDE" strokeWidth="0.0" text="GESTIONNAIRE DE STOCK">
          <font>
@@ -54,6 +54,8 @@
       <MenuButton fx:id="modif" layoutX="251.0" layoutY="115.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="108.0" text="Modification">
         <items>
           <MenuItem mnemonicParsing="false" onAction="#modifProduit" text="Produit" />
+            <MenuItem mnemonicParsing="false" onAction="#refusFiche" text="Refuser la Fiche" />
+            <MenuItem mnemonicParsing="false" onAction="#validerFiche" text="Valider la Fiche" />
         </items>
       </MenuButton>
    </children>

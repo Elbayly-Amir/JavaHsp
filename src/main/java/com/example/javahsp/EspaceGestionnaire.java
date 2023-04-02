@@ -50,10 +50,10 @@ public class EspaceGestionnaire implements Initializable {
         @Override
         public void initialize(URL url, ResourceBundle resourceBundle) {
                 String[][] colonne = {
-                        {"ID", "id_fichesorti"},
                         {"RaisonDemande", "raisonDemande"},
                         {"NomProduit", "nomProduit"},
                         {"QuantiteProduit", "QuantiteProduit"},
+                        {"Etat", "etat"},
                 };
                 for (int i = 0; i < colonne.length; i++) {
                         TableColumn<FicheSortit, String> myTble = new TableColumn<>(colonne[i][0]);
@@ -68,7 +68,6 @@ public class EspaceGestionnaire implements Initializable {
                 });
 
                 String[][] colonnee = {
-                        {"Id", "id_produit"},
                         {"Libelle", "libelle"},
                         {"Description", "description"},
                         {"NivDanger", "nivDanger"},
@@ -113,6 +112,56 @@ public class EspaceGestionnaire implements Initializable {
                         UpdateProduit updateProduit = new UpdateProduit(produitId);
                         HelloApplication.changeScene("updateProduit", new UpdateProduit(produitId));
                 }
+        }
+
+        @FXML
+        void validerFiche(ActionEvent event) {
+            FicheSortit ficheSortit = viewDemande.getSelectionModel().getSelectedItem();
+            if (ficheSortit != null) {
+                Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+                alert.setTitle("Confirmation de validation");
+                alert.setHeaderText(null);
+                alert.setContentText("Êtes-vous sûr de vouloir valider cette demande ?");
+                Optional<ButtonType> result = alert.showAndWait();
+                if (result.isPresent() && result.get() == ButtonType.OK) {
+                    try {
+                        ficheSortit.updateFicheSortitValidation(ficheSortit);
+                    } catch (SQLException e) {
+                        throw new RuntimeException(e);
+                    }
+                }
+            } else {
+                Alert alert = new Alert(Alert.AlertType.WARNING);
+                alert.setTitle("Aucune sélection");
+                alert.setHeaderText(null);
+                alert.setContentText("Veuillez sélectionner un produit à valider.");
+                alert.showAndWait();
+            }
+        }
+
+        @FXML
+        void refusFiche(ActionEvent event) {
+            FicheSortit ficheSorti = viewDemande.getSelectionModel().getSelectedItem();
+            if (ficheSorti != null) {
+                Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+                alert.setTitle("Confirmation de refus");
+                alert.setHeaderText(null);
+                alert.setContentText("Êtes-vous sûr de vouloir refuser cette demande ?");
+                Optional<ButtonType> result = alert.showAndWait();
+                if (result.isPresent() && result.get() == ButtonType.OK) {
+                    try {
+                        ficheSorti.updateFicheSortitRefus(ficheSorti);
+                    } catch (SQLException e) {
+                        throw new RuntimeException(e);
+                    }
+                }
+            } else {
+                Alert alert = new Alert(Alert.AlertType.WARNING);
+                alert.setTitle("Aucune sélection");
+                alert.setHeaderText(null);
+                alert.setContentText("Veuillez sélectionner un produit à supprimer.");
+                alert.showAndWait();
+            }
         }
 
         @FXML

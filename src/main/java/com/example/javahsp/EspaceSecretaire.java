@@ -66,7 +66,6 @@ public class EspaceSecretaire implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         String[][] colonne = {
-                {"ID", "id_fichepatient"},
                 {"Nom", "nom"},
                 {"Prenom", "prenom"},
                 {"SecuriteSocial", "securiteSocial"},
@@ -89,7 +88,6 @@ public class EspaceSecretaire implements Initializable {
         });
 
         String[][] colonn = {
-                {"ID", "id_dossier"},
                 {"DateDossier", "dateDossier"},
                 {"Description", "description"},
                 {"NivGravite", "nivGravite"},

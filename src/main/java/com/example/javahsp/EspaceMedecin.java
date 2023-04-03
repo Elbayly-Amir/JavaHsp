@@ -56,7 +56,7 @@ public class EspaceMedecin implements Initializable{
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         String[][] colonnes = {
-                {"ID", "id_hospitalisation"},
+
                 {"Date Hospitalisation", "date_hospitalisation"},
                 {"Description de la maladie", "descriptionMaladie"},
                 {"Chambre", "ref_chambre"},

@@ -75,7 +75,7 @@ public class UpdateProduit {
 
     @FXML
     void retour(ActionEvent event) {
-        HelloApplication.changeScene("espaceGestionnaire");
+        HelloApplication.changeScene("espaceGestionnaire", new EspaceGestionnaire());
     }
 
 }

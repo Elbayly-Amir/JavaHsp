@@ -71,7 +71,7 @@ public class UpdateFichePatient {
 
     @FXML
     void retour(ActionEvent event) {
-        HelloApplication.changeScene("espaceSecretaire");
+        HelloApplication.changeScene("espaceSecretaire", new EspaceSecretaire());
     }
 
 }

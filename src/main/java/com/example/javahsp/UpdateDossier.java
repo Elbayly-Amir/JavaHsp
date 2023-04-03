@@ -64,7 +64,7 @@ public class UpdateDossier {
 
     @FXML
     void retour(ActionEvent event) {
-        HelloApplication.changeScene("espaceSecretaire");
+        HelloApplication.changeScene("espaceSecretaire",new EspaceSecretaire());
     }
 
     @FXML

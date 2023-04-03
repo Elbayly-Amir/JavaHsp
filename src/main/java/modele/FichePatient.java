@@ -25,6 +25,7 @@ public class FichePatient {
         this.id_fichepatient = id_fichepatient;
         this.nom= nom;
         this.prenom=prenom;
+        this.email = email;
         this.securiteSocial= securiteSocial;
         this.rue=rue;
         this.cp=cp;
@@ -118,7 +119,7 @@ public class FichePatient {
              PreparedStatement maRequete = madd.getBDD().prepareStatement("SELECT * FROM fichepatient");
              ResultSet mesResultats = maRequete.executeQuery()) {
             while (mesResultats.next()) {
-                f = new FichePatient(mesResultats.getInt("id_fichepatient"), mesResultats.getString("nom"), mesResultats.getString("prenom"), mesResultats.getInt("securiteSocial"), mesResultats.getString("email"), mesResultats.getString("rue"), mesResultats.getInt("cp"), mesResultats.getString("ville"));
+                f = new FichePatient(mesResultats.getInt("id_fichepatient"), mesResultats.getString("nom"), mesResultats.getString("prenom"),  mesResultats.getInt("securiteSocial"),mesResultats.getString("email"), mesResultats.getString("rue"), mesResultats.getInt("cp"), mesResultats.getString("ville"));
                 fichePatients.add(f);
             }
         } catch (Exception  e) {

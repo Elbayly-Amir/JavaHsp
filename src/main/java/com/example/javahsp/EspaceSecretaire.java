@@ -68,6 +68,7 @@ public class EspaceSecretaire implements Initializable {
         String[][] colonne = {
                 {"Nom", "nom"},
                 {"Prenom", "prenom"},
+                {"Email", "email"},
                 {"SecuriteSocial", "securiteSocial"},
                 {"Email", "email"},
                 {"Rue", "rue"},

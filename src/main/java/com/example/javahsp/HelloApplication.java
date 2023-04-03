@@ -49,7 +49,7 @@ public class HelloApplication extends Application {
 
             fxmlLoader.setController(controller);
             scene = new Scene(fxmlLoader.load());
-            stage.setTitle("Inscription");
+            stage.setTitle("HSP");
             stage.setScene(scene);
             stage.show();
         } catch (IOException e) {

@@ -59,7 +59,7 @@ public class EspaceMedecin implements Initializable{
 
                 {"Date Hospitalisation", "date_hospitalisation"},
                 {"Description de la maladie", "descriptionMaladie"},
-                {"Chambre", "ref_chambre"},
+                {"Numéro de Chambre", "ref_chambre"},
 
         };
         for (int i = 0; i < colonnes.length; i++) {
@@ -97,7 +97,7 @@ public class EspaceMedecin implements Initializable{
                 {"Date Dossier", "dateDossier"},
                 {"Description de la maladie", "description"},
                 {"Gravité", "nivGravite"},
-                {"FichePatient", "ref_fichepatient"},
+                {"Numéro de Fiche Patient", "ref_fichepatient"},
 
         };
         for (int i = 0; i < colonn.length; i++) {

@@ -92,7 +92,7 @@ public class EspaceSecretaire implements Initializable {
                 {"DateDossier", "dateDossier"},
                 {"Description", "description"},
                 {"NivGravite", "nivGravite"},
-                {"RefFichePatient", "ref_fichepatient"},
+                {"Numéro de fiche patient", "ref_fichepatient"},
 
         };
 

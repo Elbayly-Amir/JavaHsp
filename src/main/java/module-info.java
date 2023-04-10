@@ -18,4 +18,8 @@ module com.example.javahsp {
     requires java.mail;
     requires activation;
 
+    exports modele;
+    // autres déclarations du module
 }
+
+
